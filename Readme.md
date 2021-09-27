@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть»
 
-* Студент: [Arthur Litovko](https://up.htmlacademy.ru/react/8/user/6927).
-* Наставник: `Неизвестно`.
+* Студент: [Arthur Litovko](https://htmlacademy.ru//profile/id6927).
+* Наставник: [Евгений Казаков](https://htmlacademy.ru/profile/id343981).
 
 ---
 
