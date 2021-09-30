@@ -1,0 +1,57 @@
+.card {
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  transition: 0.2s transform;
+
+  &:hover,
+  &:focus-within {
+    z-index: 3;
+    transform: scale(1.2);
+  }
+
+  img {
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__image {
+    position: relative;
+    z-index: 1;
+    height: 175px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+
+      background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 25%,
+        rgba(0, 0, 0, 0.63) 97%
+      );
+    }
+  }
+
+  &__title {
+    position: absolute;
+    z-index: 2;
+    inset: auto 0 0 0;
+
+    padding: 10px 15px;
+    margin: 0;
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: 500;
+  }
+
+  &__link {
+    display: inline-block;
+    vertical-align: top;
+    text-decoration: none;
+    color: inherit;
+  }
+}
