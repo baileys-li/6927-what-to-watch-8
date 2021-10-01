@@ -16,8 +16,8 @@
   transition: color 0.2s, border-color 0.2s;
 
   &[href]:hover,
-  &[href]:focus {
-    border-color: rgba(84, 80, 62, 0.36);
+  &[href]:focus-visible {
+    background-color: #fff4b8;
     color: #54503e;
   }
 
@@ -26,7 +26,8 @@
     color: #54503e;
 
     &[href]:hover,
-    &[href]:focus {
+    &[href]:focus-visible {
+      background-color: transparent;
       border-color: rgba(223, 207, 119, 0.36);
       color: #d9cd8d;
     }
