@@ -1,4 +1,4 @@
-import Logo from '../logo/logo';
+import Footer from '../footer/footer';
 import PromoFilm from '../promo-film/promo-film';
 
 import SmallFilmCard from '../small-film-card/small-film-card';
@@ -9,7 +9,7 @@ type MainPageType = {
 };
 
 function MainPage({ list }: MainPageType): JSX.Element {
-  const currentYear: number = new Date().getFullYear();
+
   return (
     <>
       <PromoFilm
@@ -93,13 +93,8 @@ function MainPage({ list }: MainPageType): JSX.Element {
           </div>
         </section>
 
-        <footer className='page-footer'>
-          <Logo isLight />
+        <Footer />
 
-          <div className='copyright'>
-            <p>© {currentYear} What to watch Ltd.</p>
-          </div>
-        </footer>
       </div>
     </>
   );

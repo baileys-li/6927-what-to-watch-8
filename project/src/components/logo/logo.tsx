@@ -3,12 +3,12 @@ import style from './logo.module.scss';
 const LOGO_LETTERS: Array<string> = ['W', 'T', 'W'];
 
 type LogoType = {
-  isLight?: boolean;
+  light?: boolean;
 };
 
-function Logo({ isLight = false }: LogoType): JSX.Element {
+function Logo({ light = false }: LogoType): JSX.Element {
   return (
-    <a className={`${style.link} ${isLight && style['link--light']} `}>
+    <a className={`${style.link} ${light && style['link--light']} `}>
       {LOGO_LETTERS.map((letter) => (
         <span className={style.letter} key={letter}>
           {letter}

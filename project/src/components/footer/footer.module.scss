@@ -1,0 +1,17 @@
+.page-footer {
+  display: grid;
+  justify-items: center;
+  gap: 24px;
+}
+
+.copyright {
+  text-align: center;
+
+  color: #54503e;
+  margin: 0;
+
+  small {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}
