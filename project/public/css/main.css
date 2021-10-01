@@ -452,40 +452,7 @@ main {
   .breadcrumbs__link[href]:hover {
     color: #DFCF77; }
 
-.btn {
-  display: inline-block;
-  vertical-align: top;
-  padding: 0;
-  text-decoration: none;
-  border: 0;
-  background: none;
-  cursor: pointer;
-  background: rgba(0, 0, 0, 0.26);
-  border-radius: 8px;
-  color: #EEE5B5;
-  font-size: 17px;
-  line-height: 20px;
-  padding: 13px 30px;
-  -webkit-transition: 0.2s background-color, 0.2s -webkit-transform;
-  transition: 0.2s background-color, 0.2s -webkit-transform;
-  transition: 0.2s background-color, 0.2s transform;
-  transition: 0.2s background-color, 0.2s transform, 0.2s -webkit-transform;
-  will-change: transform;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  min-width: 128px; }
-  .btn:hover {
-    background: rgba(0, 0, 0, 0.51);
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1); }
-  .btn img,
-  .btn svg {
-    vertical-align: top;
-    margin-right: 9px; }
+
 
 .catalog {
   margin-bottom: 115px;
@@ -1047,45 +1014,6 @@ main {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   width: 200px; }
-
-.user-block {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  list-style-type: none; }
-
-.user-block__item:not(:last-child) {
-  margin-right: 15px;
-}
-
-.user-block__avatar {
-  width: 63px;
-  height: 63px;
-  overflow: hidden;
-  border-radius: 50%; }
-  .user-block__avatar img {
-    vertical-align: top;
-    width: 100%;
-    height: 100%;
-    -o-object-fit: cover;
-       font-family: "object-fit:cover";
-       object-fit: cover; }
-
-.user-block__link {
-  display: block;
-  font-size: 20px;
-  line-height: 24px;
-  color: #DFCF77;
-  font-weight: bold;
-  text-decoration: none;
-  -webkit-transition: color 0.2s;
-  transition: color 0.2s; }
-  .user-block__link:hover {
-    color: #C9B37E; }
-
-.user-block__avatar,
-.user-block__link {
-  cursor: pointer; }
 
 .user-page {
   background-image: -webkit-gradient(linear, left top, left bottom, from(#170202), to(#0c0101));
