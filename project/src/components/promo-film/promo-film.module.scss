@@ -6,6 +6,11 @@
   background-size: cover;
   background-position: center top;
 
+  &--full {
+    padding-bottom: 45px;
+    min-height: 100vh;
+  }
+
   &::after {
     content: '';
     position: absolute;
@@ -17,17 +22,10 @@
   * {
     z-index: 1;
   }
-
 }
 
 .head {
   margin-bottom: 40px;
-}
-
-
-.film-card--full {
-  padding-bottom: 45px;
-  min-height: 100vh;
 }
 
 .film-card__hero {
@@ -36,8 +34,6 @@
   min-height: 555px;
   padding-bottom: 210px;
 }
-
-
 
 .film-card__wrap {
   max-width: 1300px;

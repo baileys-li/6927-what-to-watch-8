@@ -3,7 +3,9 @@
   overflow: hidden;
   position: relative;
   transition: 0.2s transform;
-  height: 175px;
+  // height: 175px;
+
+  aspect-ratio: 56 / 35;
 
   &:hover,
   &:focus-within {

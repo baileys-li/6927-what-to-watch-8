@@ -25,7 +25,6 @@ function PromoFilm({
         backgroundImage: `url(${background})`,
       }}
     >
-      <h1 className='visually-hidden'>What to Watch</h1>
       <Header headline='What to Watch' className={style.head} hiddenHeadline />
       <div className={style['film-card__wrap']}>
         <div className={style['film-card__info']}>
