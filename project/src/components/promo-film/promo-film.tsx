@@ -1,7 +1,6 @@
-import Logo from '../logo/logo';
 import Button from '../button/button';
 import SpriteIcon from '../sprite-icon/sprite-icon';
-import UserBlock from '../user-block/user-block';
+import Header from '../header/header';
 import style from './promo-film.module.scss';
 
 type PromoFilmType = {
@@ -27,12 +26,7 @@ function PromoFilm({
       }}
     >
       <h1 className='visually-hidden'>What to Watch</h1>
-
-      <header className={`page-header ${style.head}`}>
-        <Logo />
-        <UserBlock authenticated />
-      </header>
-
+      <Header headline='What to Watch' className={style.head} hiddenHeadline />
       <div className={style['film-card__wrap']}>
         <div className={style['film-card__info']}>
           <div className={style['film-card__poster']}>

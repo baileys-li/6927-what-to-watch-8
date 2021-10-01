@@ -333,7 +333,7 @@ body {
   color: #000000;
   background-color: #ffffff;
   margin: 0;
-  min-width: 1000px;
+  /* min-width: 1000px; */
   position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -418,41 +418,6 @@ main {
 .add-review__btn:disabled {
   cursor: default;
 }
-
-.breadcrumbs {
-  margin: 0 20px; }
-
-.breadcrumbs__list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex; }
-
-.breadcrumbs__item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex; }
-  .breadcrumbs__item:not(:last-child)::after {
-    content: '/';
-    margin-left: 5px;
-    margin-right: 5px;
-    font-size: 17px;
-    line-height: 20px; }
-
-.breadcrumbs__link {
-  display: block;
-  text-decoration: none;
-  color: #EEE5B5;
-  font-size: 17px;
-  line-height: 20px;
-  -webkit-transition: color 0.2s;
-  transition: color 0.2s; }
-  .breadcrumbs__link[href]:hover {
-    color: #DFCF77; }
-
-
 
 .catalog {
   margin-bottom: 115px;
@@ -634,18 +599,6 @@ main {
   color: #C9B37E;
   padding: 15px;
   padding-bottom: 70px; }
-
-.page-header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  max-width: 1300px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 22px 75px; }
 
 .page-title {
   margin: 0;
