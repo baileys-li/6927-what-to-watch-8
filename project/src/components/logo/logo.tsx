@@ -8,7 +8,7 @@ type LogoType = {
 
 function Logo({ isLight = false }: LogoType): JSX.Element {
   return (
-    <a className={`${style.link} ${isLight && style.light} `}>
+    <a className={`${style.link} ${isLight && style['link--light']} `}>
       {LOGO_LETTERS.map((letter) => (
         <span className={style.letter} key={letter}>
           {letter}
