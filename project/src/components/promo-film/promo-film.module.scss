@@ -116,17 +116,11 @@
   margin-right: 4px;
 }
 
-.film-card__buttons {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.film-card__button {
-  margin-right: 14px;
-}
-.film-card__button:last-child {
-  margin-right: 0;
+.buttons {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: 14px;
 }
 
 .film-card__translate-top {
