@@ -9,6 +9,7 @@ type MainPageType = {
 };
 
 function MainPage({ list }: MainPageType): JSX.Element {
+  const currentYear: number = new Date().getFullYear();
   return (
     <>
       <PromoFilm
@@ -96,7 +97,7 @@ function MainPage({ list }: MainPageType): JSX.Element {
           <Logo isLight />
 
           <div className='copyright'>
-            <p>© 2019 What to watch Ltd.</p>
+            <p>© {currentYear} What to watch Ltd.</p>
           </div>
         </footer>
       </div>
