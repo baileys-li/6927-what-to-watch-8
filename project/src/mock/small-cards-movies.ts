@@ -1,4 +1,6 @@
-const MOVIES = [
+import type SmallFilmCardType from '../types/small-fim-card-type';
+
+const MOVIES: Array<SmallFilmCardType> = [
   {
     title: 'Fantastic Beasts: The Crimes of Grindelwald',
     imageSource: 'img/fantastic-beasts-the-crimes-of-grindelwald.jpg',

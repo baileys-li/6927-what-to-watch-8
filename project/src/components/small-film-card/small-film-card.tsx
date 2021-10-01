@@ -1,14 +1,7 @@
 import s from './small-film-card.module.scss';
+import SmallFilmCardType from '../../types/small-fim-card-type';
 
-type SmallFilmCardProps = {
-  title: string;
-  imageSource: string;
-};
-
-function SmallFilmCard({
-  title,
-  imageSource,
-}: SmallFilmCardProps): JSX.Element {
+function SmallFilmCard({ title, imageSource }: SmallFilmCardType): JSX.Element {
   return (
     <article className={`${s.card} catalog__films-card`}>
       <img
