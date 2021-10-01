@@ -23,11 +23,7 @@ function Catalog({ list, genres }: CatalogType): JSX.Element {
 
       <div className={style['catalog__films-list']}>
         {list.map((movie) => (
-          <SmallFilmCard
-            movie={movie}
-            className={style['catalog__films-card']}
-            key={movie.title}
-          />
+          <SmallFilmCard movie={movie} key={movie.title} />
         ))}
       </div>
 

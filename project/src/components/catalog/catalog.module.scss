@@ -54,18 +54,15 @@
   }
 
   &__films-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin: -22px -5px 38px;
+    display: grid;
+    align-items: start;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 55px 10px;
+    margin-bottom: 60px;
 
     &:last-child {
-      margin-bottom: -23px;
+      margin-bottom: 0;
     }
-  }
-
-  &__films-card {
-    margin: 22px 5px 23px;
-    flex: 1 1 250px;
   }
 
   &__button {
