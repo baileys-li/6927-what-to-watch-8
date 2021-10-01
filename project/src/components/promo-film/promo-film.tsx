@@ -1,5 +1,6 @@
 import Logo from '../logo/logo';
 import Button from '../button/button';
+import SpriteIcon from '../sprite-icon/sprite-icon';
 import style from './promo-film.module.scss';
 
 type PromoFilmType = {
@@ -61,15 +62,11 @@ function PromoFilm({
 
             <div className={style.buttons}>
               <Button>
-                <svg viewBox='0 0 19 19' width='19' height='19'>
-                  <use href='sprite.svg#play-s'></use>
-                </svg>
+                <SpriteIcon id='play-s' width={19} />
                 Play
               </Button>
               <Button>
-                <svg viewBox='0 0 19 20' width='19' height='20'>
-                  <use href='sprite.svg#add'></use>
-                </svg>
+                <SpriteIcon id='add' width='19' height='20' />
                 My list
               </Button>
             </div>
