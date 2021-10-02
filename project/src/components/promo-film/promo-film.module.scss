@@ -87,6 +87,7 @@
     margin-right: auto;
     -webkit-transform: translateY(40px);
     transform: translateY(40px);
+    position: relative;
   }
   & img {
     vertical-align: top;
@@ -216,4 +217,16 @@
 
 .film-card__header {
   position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  * {
+    z-index: 1;
+  }
 }

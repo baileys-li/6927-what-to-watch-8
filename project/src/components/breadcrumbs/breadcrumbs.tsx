@@ -5,7 +5,7 @@ function Breadcrumbs(): JSX.Element {
     <nav className={style.breadcrumbs}>
       <ul className={style.breadcrumbs__list}>
         <li className={style.breadcrumbs__item}>
-          <a href='film-page.html' className={style.breadcrumbs__link}>
+          <a href='/films' className={style.breadcrumbs__link}>
             The Grand Budapest Hotel
           </a>
         </li>

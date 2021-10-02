@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import style from './button.module.scss';
 
 type ButtonType = {
@@ -10,9 +11,9 @@ function Button({ href, children, className }: ButtonType): JSX.Element {
   const classes = `${style.button} ${className}`;
 
   return href ? (
-    <a href={href} className={classes}>
+    <Link to={href} className={classes}>
       {children}
-    </a>
+    </Link>
   ) : (
     <button className={classes} type='button'>
       {children}

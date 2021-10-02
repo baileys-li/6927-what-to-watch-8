@@ -4,6 +4,7 @@ import MainPage from '../pages/main-page/main-page';
 import MyList from '../pages/my-list/my-list';
 import MoviePage from '../pages/movie-page/movie-page';
 import Login from '../pages/login/login';
+import ReviewPage from '../pages/review-page/review-page';
 
 import MOVIES from '../../mock/small-cards-movies';
 import GENRES from '../../mock/genres';
@@ -24,6 +25,10 @@ function App(): JSX.Element {
 
         <Route path='/films'>
           <MoviePage list={MOVIES.slice(0, 4)} promo={PROMO} />
+        </Route>
+
+        <Route path='/review' component={ReviewPage}>
+          <ReviewPage promo={PROMO} />
         </Route>
 
         <Route path='/mylist'>

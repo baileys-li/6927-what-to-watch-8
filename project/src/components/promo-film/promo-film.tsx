@@ -1,6 +1,7 @@
 import Button from '../button/button';
 import SpriteIcon from '../sprite-icon/sprite-icon';
 import Header from '../header/header';
+import ReviewForm from '../review-form/review-form';
 import style from './promo-film.module.scss';
 
 import type PromoFilmType from '../../types/promo-film-type';
@@ -8,11 +9,16 @@ import type PromoFilmType from '../../types/promo-film-type';
 type PromoFilmProps = {
   movie: PromoFilmType;
   full?: boolean;
+  review?: boolean;
 };
 
 const NAV_ITEMS = ['Overview', 'Details', 'Reviews'];
 
-function PromoFilm({ movie, full = false }: PromoFilmProps): JSX.Element {
+function PromoFilm({
+  movie,
+  full = false,
+  review = false,
+}: PromoFilmProps): JSX.Element {
   const description = (
     <div className={style['film-card__desc']}>
       <h2 className={style['film-card__title']}>{movie.title}</h2>
@@ -30,15 +36,16 @@ function PromoFilm({ movie, full = false }: PromoFilmProps): JSX.Element {
           <SpriteIcon id='add' width='19' height='20' />
           My list
         </Button>
-        {full && <Button href='add-review.html'>Add review</Button>}
+        {full && <Button href='/review'>Add review</Button>}
       </div>
     </div>
   );
 
   const poster = (
     <div
-      className={`${style['film-card__poster']} ${
-        full && style['film-card__poster--big']
+      className={`${style['film-card__poster']}
+        ${full && style['film-card__poster--big']}
+        ${review && style['film-card__poster--small']}
       }`}
     >
       <img src={movie.poster} alt='Poster' width='218' height='327' />
@@ -47,9 +54,32 @@ function PromoFilm({ movie, full = false }: PromoFilmProps): JSX.Element {
 
   return (
     <section
-      className={`${style.wrapper} ${full && style['wrapper--full']}`}
-      style={full ? {} : { backgroundImage: `url(${movie.background})` }}
+      className={`${style.wrapper} ${
+        (full || review) && style['wrapper--full']
+      }`}
+      style={
+        full || review ? {} : { backgroundImage: `url(${movie.background})` }
+      }
     >
+      {review && (
+        <>
+          <div
+            className={style['film-card__header']}
+            style={{
+              backgroundImage: `url(${movie.background})`,
+            }}
+          >
+            <Header
+              headline='What to Watch'
+              className={style.head}
+              breadcrumbs
+              hiddenHeadline
+            />
+            {poster}
+          </div>
+          <ReviewForm />
+        </>
+      )}
       {full && (
         <>
           <div
@@ -117,7 +147,7 @@ function PromoFilm({ movie, full = false }: PromoFilmProps): JSX.Element {
         </>
       )}
 
-      {!full && (
+      {!(full || review) && (
         <>
           <Header
             headline='What to Watch'
