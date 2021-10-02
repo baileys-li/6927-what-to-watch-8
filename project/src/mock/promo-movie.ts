@@ -5,7 +5,7 @@ const PROMO: MovieType = {
   name: 'The Grand Budapest Hotel',
   poster: 'img/the-grand-budapest-hotel-poster.jpg',
   preview: 'img/the-grand-budapest-hotel.jpg',
-  background: 'img/the-grand-budapest-hotel-bg.jpg',
+  background: 'img/bg-the-grand-budapest-hotel.jpg',
   backColor: '#ffffff',
   videoLink: 'https://some-link',
   previewVideoLink: 'https://some-link',
