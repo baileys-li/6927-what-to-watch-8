@@ -28,7 +28,7 @@ function PromoFilm({
       </p>
 
       <div className={style.buttons}>
-        <Button>
+        <Button href='/player'>
           <SpriteIcon id='play-s' width={19} />
           Play
         </Button>
