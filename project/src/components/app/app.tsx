@@ -2,6 +2,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 
 import MainPage from '../pages/main-page/main-page';
 import MyList from '../pages/my-list/my-list';
+import MoviePage from '../pages/movie-page/movie-page';
 import Login from '../pages/login/login';
 
 import MOVIES from '../../mock/small-cards-movies';
@@ -19,6 +20,10 @@ function App(): JSX.Element {
       <Switch>
         <Route exact path='/'>
           <MainPage catalog={CATALOG} promo={PROMO} />
+        </Route>
+
+        <Route path='/films'>
+          <MoviePage list={MOVIES.slice(0, 4)} promo={PROMO} />
         </Route>
 
         <Route path='/mylist'>

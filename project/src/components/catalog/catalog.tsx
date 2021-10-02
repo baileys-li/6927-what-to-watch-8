@@ -2,10 +2,16 @@ import style from './catalog.module.scss';
 import SmallFilmCard from '../small-film-card/small-film-card';
 import CatalogType from '../../types/catalog-type';
 
-function Catalog({ list, genres }: CatalogType): JSX.Element {
+function Catalog({ list, genres, similar = false }: CatalogType): JSX.Element {
   return (
-    <section className={style.catalog}>
-      <h2 className={`${style.catalog__title} visually-hidden`}>Catalog</h2>
+    <section
+      className={`${style.catalog} ${similar && style['catalog--like-this']}`}
+    >
+      <h2
+        className={`${style.catalog__title} ${!similar && 'visually-hidden'} `}
+      >
+        {similar ? 'More like this' : 'Catalog'}
+      </h2>
 
       {genres && (
         <ul className={style['catalog__genres-list']}>

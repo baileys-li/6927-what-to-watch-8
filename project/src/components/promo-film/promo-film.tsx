@@ -7,43 +7,132 @@ import type PromoFilmType from '../../types/promo-film-type';
 
 type PromoFilmProps = {
   movie: PromoFilmType;
+  full?: boolean;
 };
 
-function PromoFilm({ movie }: PromoFilmProps): JSX.Element {
+const NAV_ITEMS = ['Overview', 'Details', 'Reviews'];
+
+function PromoFilm({ movie, full = false }: PromoFilmProps): JSX.Element {
+  const description = (
+    <div className={style['film-card__desc']}>
+      <h2 className={style['film-card__title']}>{movie.title}</h2>
+      <p className={style['film-card__meta']}>
+        <span className={style['film-card__genre']}>{movie.genre}</span>
+        <span className={style['film-card__year']}>{movie.year}</span>
+      </p>
+
+      <div className={style.buttons}>
+        <Button>
+          <SpriteIcon id='play-s' width={19} />
+          Play
+        </Button>
+        <Button>
+          <SpriteIcon id='add' width='19' height='20' />
+          My list
+        </Button>
+        {full && <Button href='add-review.html'>Add review</Button>}
+      </div>
+    </div>
+  );
+
+  const poster = (
+    <div
+      className={`${style['film-card__poster']} ${
+        full && style['film-card__poster--big']
+      }`}
+    >
+      <img src={movie.poster} alt='Poster' width='218' height='327' />
+    </div>
+  );
+
   return (
     <section
-      className={style.wrapper}
-      style={{
-        backgroundImage: `url(${movie.background})`,
-      }}
+      className={`${style.wrapper} ${full && style['wrapper--full']}`}
+      style={full ? {} : { backgroundImage: `url(${movie.background})` }}
     >
-      <Header headline='What to Watch' className={style.head} hiddenHeadline />
-      <div className={style['film-card__wrap']}>
-        <div className={style['film-card__info']}>
-          <div className={style['film-card__poster']}>
-            <img src={movie.poster} alt='Poster' width='218' height='327' />
+      {full && (
+        <>
+          <div
+            className={style.hero}
+            style={{
+              backgroundImage: `url(${movie.background})`,
+            }}
+          >
+            <Header
+              headline='What to Watch'
+              className={style.head}
+              hiddenHeadline
+            />
+            <div className={style['film-card__wrap']}>{description}</div>
           </div>
+          <div
+            className={`${style['film-card__wrap']} ${style['film-card__translate-top']}`}
+          >
+            <div className={style['film-card__info']}>
+              {poster}
+              <div className={style['film-card__desc']}>
+                <nav className={`film-nav ${style['film-card__nav']}`}>
+                  <ul className='film-nav__list'>
+                    {NAV_ITEMS.map((nav, index) => (
+                      <li
+                        className={`film-nav__item ${
+                          index === 0 && 'film-nav__item--active'
+                        } `}
+                        key={nav}
+                      >
+                        <a href='#' className='film-nav__link'>
+                          {nav}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
 
-          <div className={style['film-card__desc']}>
-            <h2 className={style['film-card__title']}>{movie.title}</h2>
-            <p className={style['film-card__meta']}>
-              <span className={style['film-card__genre']}>{movie.genre}</span>
-              <span className={style['film-card__year']}>{movie.year}</span>
-            </p>
+                <div className='film-rating'>
+                  <div className='film-rating__score'>8,9</div>
+                  <p className='film-rating__meta'>
+                    <span className='film-rating__level'>Very good</span>
+                    <span className='film-rating__count'>240 ratings</span>
+                  </p>
+                </div>
 
-            <div className={style.buttons}>
-              <Button>
-                <SpriteIcon id='play-s' width={19} />
-                Play
-              </Button>
-              <Button>
-                <SpriteIcon id='add' width='19' height='20' />
-                My list
-              </Button>
+                <div className={style['film-card__text']}>
+                  {movie.description.map((text) => (
+                    <p key={text}>{text}</p>
+                  ))}
+                  <p className={style['film-card__director']}>
+                    <strong>Director: Wes Anderson</strong>
+                  </p>
+
+                  <p className={style['film-card__starring']}>
+                    <strong>
+                      Starring: Bill Murray, Edward Norton, Jude Law, Willem
+                      Dafoe and other
+                    </strong>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
+
+      {!full && (
+        <>
+          <Header
+            headline='What to Watch'
+            className={style.head}
+            hiddenHeadline
+          />
+          <div className={style['film-card__wrap']}>
+            <div className={style['film-card__info']}>
+              {poster}
+
+              {description}
+            </div>
+          </div>
+        </>
+      )}
     </section>
   );
 }
