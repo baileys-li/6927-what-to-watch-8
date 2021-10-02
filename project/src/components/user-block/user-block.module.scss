@@ -10,7 +10,6 @@
   gap: 15px;
   grid-template-columns: 63px auto;
 
-  .avatar,
   .link {
     cursor: pointer;
   }
@@ -20,6 +19,13 @@
   height: 63px;
   overflow: hidden;
   border-radius: 50%;
+
+  transition: transform 0.2s;
+
+  &:focus-visible {
+    box-shadow: 0 0 4px 5px transparentize(#dfcf77, 0.7);
+    transform: scale(1.2);
+  }
 
   img {
     vertical-align: top;
