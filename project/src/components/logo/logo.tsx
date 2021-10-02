@@ -1,8 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 
 import style from './logo.module.scss';
-
-const LOGO_LETTERS: Array<string> = ['W', 'T', 'W'];
 const linkTitle = 'Go to Main Page';
 
 type LogoType = {
@@ -12,9 +10,9 @@ type LogoType = {
 function Logo({ light = false }: LogoType): JSX.Element {
   const classes = `${style.link} ${light && style['link--light']}`;
 
-  const lettersMarkup = LOGO_LETTERS.map((letter) => (
-    <span className={style.letter} key={letter}>
-      {letter}
+  const lettersMarkup = [0,1,2].map((index) => (
+    <span className={style.letter} key={index}>
+      {index === 1 ? 'T' : 'W'}
     </span>
   ));
   const { pathname } = useLocation();
@@ -24,7 +22,7 @@ function Logo({ light = false }: LogoType): JSX.Element {
       className={classes}
       role='img'
       aria-label='Logotype'
-      title='What to Watchs'
+      title='What to Watch'
     >
       {lettersMarkup}
     </abbr>
