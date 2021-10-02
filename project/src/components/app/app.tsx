@@ -7,33 +7,38 @@ import Login from '../pages/login/login';
 import ReviewPage from '../pages/review-page/review-page';
 import Player from '../pages/player/player';
 
-import MOVIES from '../../mock/small-cards-movies';
-import GENRES from '../../mock/genres';
-import PROMO from '../../mock/promo-movie';
+import type SmallFilmCardType from '../../types/small-fim-card-type';
+import type PromoFilmType from '../../types/promo-film-type';
 
-const CATALOG = {
-  list: MOVIES,
-  genres: GENRES,
+type AppProps = {
+  movies: Array<SmallFilmCardType>;
+  genres: Array<string>;
+  promo: PromoFilmType;
 };
 
-function App(): JSX.Element {
+function App({ movies, genres, promo }: AppProps): JSX.Element {
+  const CATALOG = {
+    list: movies,
+    genres: genres,
+  };
+
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path='/'>
-          <MainPage catalog={CATALOG} promo={PROMO} />
+          <MainPage catalog={CATALOG} promo={promo} />
         </Route>
 
         <Route path='/films'>
-          <MoviePage list={MOVIES.slice(0, 4)} promo={PROMO} />
+          <MoviePage list={movies.slice(0, 4)} promo={promo} />
         </Route>
 
         <Route path='/review' component={ReviewPage}>
-          <ReviewPage promo={PROMO} />
+          <ReviewPage promo={promo} />
         </Route>
 
         <Route path='/mylist'>
-          <MyList list={MOVIES.slice(0, 9)} />
+          <MyList list={movies.slice(0, 9)} />
         </Route>
         <Route path='/player' component={Player} />
         <Route path='/login' component={Login} />
