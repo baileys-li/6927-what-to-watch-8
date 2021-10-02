@@ -8,12 +8,12 @@ import ReviewPage from '../pages/review-page/review-page';
 import Player from '../pages/player/player';
 
 import type SmallFilmCardType from '../../types/small-fim-card-type';
-import type PromoFilmType from '../../types/promo-film-type';
+import type MovieType from '../../types/movie-type';
 
 type AppProps = {
   movies: Array<SmallFilmCardType>;
   genres: Array<string>;
-  promo: PromoFilmType;
+  promo: MovieType;
 };
 
 function App({ movies, genres, promo }: AppProps): JSX.Element {

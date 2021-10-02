@@ -3,10 +3,10 @@ import PromoFilm from '../../promo-film/promo-film';
 import Catalog from '../../catalog/catalog';
 
 import type CatalogType from '../../../types/catalog-type';
-import type PromoFilmType from '../../../types/promo-film-type';
+import type MovieType from '../../../types/movie-type';
 
 type MainPageType = {
-  promo: PromoFilmType;
+  promo: MovieType;
   catalog: CatalogType;
 };
 

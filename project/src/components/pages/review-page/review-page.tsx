@@ -1,9 +1,9 @@
 import PromoFilm from '../../promo-film/promo-film';
 
-import type PromoFilmType from '../../../types/promo-film-type';
+import type MovieType from '../../../types/movie-type';
 
 type ReviewPageType = {
-  promo: PromoFilmType;
+  promo: MovieType;
 };
 
 function ReviewPage({ promo }: ReviewPageType): JSX.Element {

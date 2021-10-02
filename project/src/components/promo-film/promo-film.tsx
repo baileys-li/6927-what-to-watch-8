@@ -4,10 +4,10 @@ import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import style from './promo-film.module.scss';
 
-import type PromoFilmType from '../../types/promo-film-type';
+import type MovieType from '../../types/movie-type';
 
 type PromoFilmProps = {
-  movie: PromoFilmType;
+  movie: MovieType;
   full?: boolean;
   review?: boolean;
 };
@@ -21,10 +21,10 @@ function PromoFilm({
 }: PromoFilmProps): JSX.Element {
   const description = (
     <div className={style['film-card__desc']}>
-      <h2 className={style['film-card__title']}>{movie.title}</h2>
+      <h2 className={style['film-card__title']}>{movie.name}</h2>
       <p className={style['film-card__meta']}>
         <span className={style['film-card__genre']}>{movie.genre}</span>
-        <span className={style['film-card__year']}>{movie.year}</span>
+        <span className={style['film-card__year']}>{movie.released}</span>
       </p>
 
       <div className={style.buttons}>
@@ -119,25 +119,30 @@ function PromoFilm({
                 </nav>
 
                 <div className='film-rating'>
-                  <div className='film-rating__score'>8,9</div>
+                  <div className='film-rating__score'>{movie.rating}</div>
                   <p className='film-rating__meta'>
                     <span className='film-rating__level'>Very good</span>
-                    <span className='film-rating__count'>240 ratings</span>
+                    <span className='film-rating__count'>
+                      {movie.scoresCount} rsatings
+                    </span>
                   </p>
                 </div>
 
                 <div className={style['film-card__text']}>
-                  {movie.description.map((text) => (
-                    <p key={text}>{text}</p>
-                  ))}
+                  {typeof movie.description === 'string' ? (
+                    <p>{movie.description}</p>
+                  ) : (
+                    movie.description.map((text) => <p key={text}>{text}</p>)
+                  )}
+
                   <p className={style['film-card__director']}>
-                    <strong>Director: Wes Anderson</strong>
+                    <strong>Director: {movie.director}</strong>
                   </p>
 
                   <p className={style['film-card__starring']}>
                     <strong>
-                      Starring: Bill Murray, Edward Norton, Jude Law, Willem
-                      Dafoe and other
+                      Starring: {movie.starring.slice(0, 4).join(', ')}
+                      {movie.starring.length > 4 && ' and other'}
                     </strong>
                   </p>
                 </div>

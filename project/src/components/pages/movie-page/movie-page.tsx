@@ -2,11 +2,11 @@ import Footer from '../../footer/footer';
 import PromoFilm from '../../promo-film/promo-film';
 import Catalog from '../../catalog/catalog';
 
-import SmallFilmCardType from '../../../types/small-fim-card-type';
-import type PromoFilmType from '../../../types/promo-film-type';
+import type SmallFilmCardType from '../../../types/small-fim-card-type';
+import type MovieType from '../../../types/movie-type';
 
 type MainPageType = {
-  promo: PromoFilmType;
+  promo: MovieType;
   list: Array<SmallFilmCardType>;
 };
 
