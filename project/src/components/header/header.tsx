@@ -9,6 +9,8 @@ type HeaderType = {
   breadcrumbs?: boolean;
   headline: string;
   hiddenHeadline?: boolean;
+  authenticated?: boolean;
+  hideAuth?: boolean;
 };
 
 function Header({
@@ -16,6 +18,8 @@ function Header({
   breadcrumbs,
   headline,
   hiddenHeadline = false,
+  authenticated = true,
+  hideAuth = false,
 }: HeaderType): JSX.Element {
   const headlineClass = hiddenHeadline
     ? 'visually-hidden'
@@ -26,7 +30,8 @@ function Header({
       {breadcrumbs && <Breadcrumbs />}
 
       <h1 className={headlineClass}>{headline}</h1>
-      <UserBlock authenticated />
+
+      {!hideAuth && <UserBlock authenticated={authenticated} />}
     </header>
   );
 }
