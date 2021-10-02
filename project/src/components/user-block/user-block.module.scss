@@ -1,0 +1,58 @@
+.wrapper {
+  display: grid;
+  align-items: center;
+
+  // TODO: separate this style
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-left: auto;
+
+  gap: 15px;
+  grid-template-columns: 63px auto;
+
+  .link {
+    cursor: pointer;
+  }
+}
+
+.avatar {
+  height: 63px;
+  overflow: hidden;
+  border-radius: 50%;
+
+  transition: transform 0.2s;
+
+  &:focus-visible {
+    box-shadow: 0 0 4px 5px transparentize(#dfcf77, 0.7);
+    transform: scale(1.2);
+  }
+
+  img {
+    vertical-align: top;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.link {
+  display: block;
+  font-size: 20px;
+  line-height: 24px;
+  color: #dfcf77;
+  font-weight: bold;
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+
+  &:hover,
+  &:focus-visible {
+    color: #c9b37e;
+  }
+
+  &:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 0.3em;
+    border-radius: 0.1em;
+  }
+}
