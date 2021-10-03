@@ -1,10 +1,7 @@
 .wrapper {
-  position: relative;
   color: #eee5b5;
   padding-bottom: 78px;
   background-color: #e1b0b2;
-  background-size: cover;
-  background-position: center top;
 
   &--full {
     padding-bottom: 45px;
@@ -13,7 +10,12 @@
       display: none;
     }
   }
+}
 
+.overlay {
+  position: relative;
+  background-size: cover;
+  background-position: center top;
   &::after {
     content: '';
     position: absolute;
@@ -40,16 +42,6 @@
   min-height: 555px;
   padding-bottom: 210px;
   background-size: cover;
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  * {
-    z-index: 2;
-  }
 }
 
 .film-card__wrap {
@@ -106,7 +98,7 @@
 }
 
 .film-card__title {
-  font-family: 'Arial Black', sans-serif;
+  font-weight: 800;
   font-size: 32px;
   line-height: 45px;
   margin: 0 0 7px;
@@ -204,18 +196,3 @@
   margin-right: 0;
 }
 
-.film-card__header {
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  * {
-    z-index: 1;
-  }
-}

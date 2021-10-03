@@ -24,7 +24,7 @@ function DebugPage(): JSX.Element {
       <ul>
         {Object.keys(MARKUP).map((href, index) => (
           <li key={href}>
-            <a href={`${href}.html`} target='_blank'>
+            <a href={`${href}.html`} target='_blank' rel="noreferrer">
               {MARKUP[href]}
             </a>
           </li>

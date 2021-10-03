@@ -59,7 +59,7 @@ function PromoFilm({
 
   return (
     <section
-      className={`${style.wrapper} ${
+      className={`${style.wrapper} ${style.overlay} ${
         (full || review) && style['wrapper--full']
       }`}
       style={
@@ -69,7 +69,7 @@ function PromoFilm({
       {review && (
         <>
           <div
-            className={style['film-card__header']}
+            className={style.overlay}
             style={{
               backgroundImage: `url(${movie.background})`,
             }}
@@ -88,7 +88,7 @@ function PromoFilm({
       {full && (
         <>
           <div
-            className={style.hero}
+            className={`${style.hero} ${style.overlay}`}
             style={{
               backgroundImage: `url(${movie.background})`,
             }}
