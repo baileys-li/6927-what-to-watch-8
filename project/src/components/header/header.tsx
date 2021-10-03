@@ -23,12 +23,13 @@ function Header({
   authenticated = true,
   hideAuth = false,
 }: HeaderType): JSX.Element {
-  const headlineClass = hiddenHeadline ? 'visually-hidden' : style['title'];
   return (
     <header className={`${style.wrapper} ${className}`}>
       {breadcrumbs ? <Breadcrumbs links={breadcrumbs} /> : <Logo />}
 
-      <h1 className={headlineClass}>{headline}</h1>
+      <h1 className={hiddenHeadline ? 'visually-hidden' : style['title']}>
+        {headline}
+      </h1>
 
       {!hideAuth && <UserBlock authenticated={authenticated} />}
     </header>
