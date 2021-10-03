@@ -4,9 +4,11 @@ import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 
 import style from './header.module.scss';
 
+import type LinkType from '../../types/link';
+
 type HeaderType = {
   className?: string;
-  breadcrumbs?: boolean;
+  breadcrumbs?: Array<LinkType>;
   headline: string;
   hiddenHeadline?: boolean;
   authenticated?: boolean;
@@ -24,7 +26,7 @@ function Header({
   const headlineClass = hiddenHeadline ? 'visually-hidden' : style['title'];
   return (
     <header className={`${style.wrapper} ${className}`}>
-      {breadcrumbs ? <Breadcrumbs /> : <Logo />}
+      {breadcrumbs ? <Breadcrumbs links={breadcrumbs} /> : <Logo />}
 
       <h1 className={headlineClass}>{headline}</h1>
 

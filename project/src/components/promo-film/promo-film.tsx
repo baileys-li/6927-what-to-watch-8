@@ -5,6 +5,7 @@ import ReviewForm from '../review-form/review-form';
 import style from './promo-film.module.scss';
 
 import type MovieType from '../../types/movie-type';
+import LinkType from '../../types/link';
 
 type PromoFilmProps = {
   movie: MovieType;
@@ -19,6 +20,10 @@ function PromoFilm({
   full = false,
   review = false,
 }: PromoFilmProps): JSX.Element {
+  const breadcrumbs: Array<LinkType> = [
+    { href: '/films', text: movie.name },
+    { text: 'Add review' },
+  ];
   const description = (
     <div className={style['film-card__desc']}>
       <h2 className={style['film-card__title']}>{movie.name}</h2>
@@ -72,7 +77,7 @@ function PromoFilm({
             <Header
               headline='What to Watch'
               className={style.head}
-              breadcrumbs
+              breadcrumbs={breadcrumbs}
               hiddenHeadline
             />
             {poster}
