@@ -21,13 +21,10 @@ function Header({
   authenticated = true,
   hideAuth = false,
 }: HeaderType): JSX.Element {
-  const headlineClass = hiddenHeadline
-    ? 'visually-hidden'
-    : 'page-title user-page__title';
+  const headlineClass = hiddenHeadline ? 'visually-hidden' : style['title'];
   return (
     <header className={`${style.wrapper} ${className}`}>
-      <Logo />
-      {breadcrumbs && <Breadcrumbs />}
+      {breadcrumbs ? <Breadcrumbs /> : <Logo />}
 
       <h1 className={headlineClass}>{headline}</h1>
 

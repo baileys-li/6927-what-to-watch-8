@@ -1,9 +1,18 @@
 .wrapper {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
-  flex-wrap: wrap;
   max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
   padding: 22px 75px;
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+  font-size: 30px;
+  line-height: 36px;
+  color: #dfcf77;
+  font-weight: 300;
 }
