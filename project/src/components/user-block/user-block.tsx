@@ -23,7 +23,9 @@ function UserBlock({ authenticated = false }: UserBlockType): JSX.Element {
         ))}
 
       {authenticated ? (
-        <a className={style.link}>Sign out</a>
+        <Link to='/login' className={style.link}>
+          Sign out
+        </Link>
       ) : (
         <a href='sign-in.html' className={style.link}>
           Sign in

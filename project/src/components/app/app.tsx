@@ -6,6 +6,7 @@ import MoviePage from '../pages/movie-page/movie-page';
 import Login from '../pages/login/login';
 import ReviewPage from '../pages/review-page/review-page';
 import Player from '../pages/player/player';
+import DebugPage from '../pages/debug-page/debug-page';
 
 import type SmallFilmCardType from '../../types/small-fim-card-type';
 import type MovieType from '../../types/movie-type';
@@ -44,6 +45,8 @@ function App({ movies, genres, promo }: AppProps): JSX.Element {
         </Route>
         <Route path='/player' component={Player} />
         <Route path='/login' component={Login} />
+
+        <Route path='/debug' component={DebugPage} />
       </Switch>
     </BrowserRouter>
   );
