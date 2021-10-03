@@ -10,6 +10,8 @@ import Player from '../pages/player/player';
 import type SmallFilmCardType from '../../types/small-fim-card-type';
 import type MovieType from '../../types/movie-type';
 
+import 'modern-normalize/modern-normalize.css';
+
 type AppProps = {
   movies: Array<SmallFilmCardType>;
   genres: Array<string>;
