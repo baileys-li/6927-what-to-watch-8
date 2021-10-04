@@ -6,6 +6,8 @@ export const enum AppRoute {
   AddReview = '/films/:id/review',
   Player = '/player/:id',
 
+  NoMatch = '/404',
+
   Debug = '/debug',
 }
 

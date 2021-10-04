@@ -1,4 +1,4 @@
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 
 import MainPage from '../pages/main-page/main-page';
@@ -8,6 +8,7 @@ import Login from '../pages/login/login';
 import ReviewPage from '../pages/review-page/review-page';
 import Player from '../pages/player/player';
 import DebugPage from '../pages/debug-page/debug-page';
+import Page404 from '../pages/page404/page404';
 
 import { AppRoute, AuthorizationStatus } from '../../const';
 
@@ -55,6 +56,11 @@ function App({ movies, genres, promo }: AppProps): JSX.Element {
         <Route path={AppRoute.SignIn} component={Login} />
 
         <Route path={AppRoute.Debug} component={DebugPage} />
+
+        <Route path={AppRoute.NoMatch} component={Page404} />
+        <Route>
+          <Redirect to={AppRoute.NoMatch} />
+        </Route>
       </Switch>
     </BrowserRouter>
   );
