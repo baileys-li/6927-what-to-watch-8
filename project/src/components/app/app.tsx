@@ -46,9 +46,9 @@ function App({ movies, genres, promo }: AppProps): JSX.Element {
         <PrivateRoute
           exact
           path={AppRoute.MyList}
-          render={() => <MyList list={movies.slice(0, 9)} />}
-          authorizationStatus={AuthorizationStatus.NoAuth}
+          authorizationStatus={AuthorizationStatus.Auth}
         >
+          <MyList list={movies.slice(0, 9)} />
         </PrivateRoute>
 
         <Route path={AppRoute.Player} component={Player} />
