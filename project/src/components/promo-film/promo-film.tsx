@@ -2,10 +2,12 @@ import Button from '../button/button';
 import SpriteIcon from '../sprite-icon/sprite-icon';
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
+import Overview from './overview';
+import MovieRating from './movie-rating/movie-rating';
 import style from './promo-film.module.scss';
 
 import type MovieType from '../../types/movie-type';
-import LinkType from '../../types/link';
+import type LinkType from '../../types/link';
 
 type PromoFilmProps = {
   movie: MovieType;
@@ -122,35 +124,16 @@ function PromoFilm({
                     ))}
                   </ul>
                 </nav>
+                <MovieRating
+                  rating={movie.rating}
+                  scoresCount={movie.scoresCount}
+                />
 
-                <div className='film-rating'>
-                  <div className='film-rating__score'>{movie.rating}</div>
-                  <p className='film-rating__meta'>
-                    <span className='film-rating__level'>Very good</span>
-                    <span className='film-rating__count'>
-                      {movie.scoresCount} rsatings
-                    </span>
-                  </p>
-                </div>
-
-                <div className={style['film-card__text']}>
-                  {typeof movie.description === 'string' ? (
-                    <p>{movie.description}</p>
-                  ) : (
-                    movie.description.map((text) => <p key={text}>{text}</p>)
-                  )}
-
-                  <p className={style['film-card__director']}>
-                    <strong>Director: {movie.director}</strong>
-                  </p>
-
-                  <p className={style['film-card__starring']}>
-                    <strong>
-                      Starring: {movie.starring.slice(0, 4).join(', ')}
-                      {movie.starring.length > 4 && ' and other'}
-                    </strong>
-                  </p>
-                </div>
+                <Overview
+                  description={movie.description}
+                  starring={movie.starring}
+                  director={movie.director}
+                />
               </div>
             </div>
           </div>
