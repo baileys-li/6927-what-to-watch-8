@@ -24,8 +24,15 @@ function Header({
   hideAuth = false,
 }: HeaderType): JSX.Element {
   return (
-    <header className={`${style.wrapper} ${className}`}>
-      {breadcrumbs ? <Breadcrumbs links={breadcrumbs} className={style.breadcrumbs} /> : <Logo />}
+    <header
+      className={`${style.wrapper} ${className}
+    ${hideAuth && style['wrapper--full']}`}
+    >
+      {breadcrumbs ? (
+        <Breadcrumbs links={breadcrumbs} className={style.breadcrumbs} />
+      ) : (
+        <Logo />
+      )}
 
       <h1 className={hiddenHeadline ? 'visually-hidden' : style['title']}>
         {headline}
