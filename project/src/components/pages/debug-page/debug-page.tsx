@@ -18,14 +18,14 @@ function DebugPage(): JSX.Element {
   return (
     <>
       <h1>Page for Debuging</h1>
-      <a href='/' target='_blank'>
+      <a href='/' target='_blank' rel='noreferrer'>
         App
       </a>
       <ul>
         {Object.keys(MARKUP).map((href, index) => (
           <li key={href}>
-            <a href={`${href}.html`} target='_blank' rel="noreferrer">
-              {MARKUP[href]}
+            <a href={`${href}.html`} target='_blank' rel='noreferrer'>
+              {Object.values(MARKUP)[index]}
             </a>
           </li>
         ))}

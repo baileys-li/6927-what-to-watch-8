@@ -4,6 +4,9 @@ import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import Overview from './overview';
 import MovieRating from './movie-rating/movie-rating';
+
+import { AppRoute } from '../../const';
+
 import style from './promo-film.module.scss';
 
 import type MovieType from '../../types/movie-type';
@@ -35,7 +38,7 @@ function PromoFilm({
       </p>
 
       <div className={style.buttons}>
-        <Button href='/player'>
+        <Button href={AppRoute.Player}>
           <SpriteIcon id='play-s' width={19} />
           Play
         </Button>
@@ -43,7 +46,7 @@ function PromoFilm({
           <SpriteIcon id='add' width='19' height='20' />
           My list
         </Button>
-        {full && <Button href='/review'>Add review</Button>}
+        {full && <Button href={AppRoute.AddReview}>Add review</Button>}
       </div>
     </div>
   );

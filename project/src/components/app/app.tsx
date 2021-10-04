@@ -8,6 +8,8 @@ import ReviewPage from '../pages/review-page/review-page';
 import Player from '../pages/player/player';
 import DebugPage from '../pages/debug-page/debug-page';
 
+import { AppRoute } from '../../const';
+
 import type SmallFilmCardType from '../../types/small-fim-card-type';
 import type MovieType from '../../types/movie-type';
 
@@ -28,25 +30,25 @@ function App({ movies, genres, promo }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/'>
+        <Route exact path={AppRoute.Main}>
           <MainPage catalog={CATALOG} promo={promo} />
         </Route>
 
-        <Route path='/films'>
+        <Route path={AppRoute.Film}>
           <MoviePage list={movies.slice(0, 4)} promo={promo} />
         </Route>
 
-        <Route path='/review' component={ReviewPage}>
+        <Route path={AppRoute.AddReview}>
           <ReviewPage promo={promo} />
         </Route>
 
-        <Route path='/mylist'>
+        <Route path={AppRoute.MyList}>
           <MyList list={movies.slice(0, 9)} />
         </Route>
-        <Route path='/player' component={Player} />
-        <Route path='/login' component={Login} />
+        <Route path={AppRoute.Player} component={Player} />
+        <Route path={AppRoute.SignIn} component={Login} />
 
-        <Route path='/debug' component={DebugPage} />
+        <Route path={AppRoute.Debug} component={DebugPage} />
       </Switch>
     </BrowserRouter>
   );

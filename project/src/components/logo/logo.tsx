@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { AppRoute } from '../../const';
 
 import style from './logo.module.scss';
 const linkTitle = 'Go to Main Page';
@@ -27,7 +28,7 @@ function Logo({ light = false }: LogoType): JSX.Element {
       {lettersMarkup}
     </abbr>
   ) : (
-    <Link to='/' className={classes} aria-label={linkTitle} title={linkTitle}>
+    <Link to={AppRoute.Main} className={classes} aria-label={linkTitle} title={linkTitle}>
       {lettersMarkup}
     </Link>
   );
