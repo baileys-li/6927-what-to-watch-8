@@ -25,7 +25,7 @@ function Header({
 }: HeaderType): JSX.Element {
   return (
     <header className={`${style.wrapper} ${className}`}>
-      {breadcrumbs ? <Breadcrumbs links={breadcrumbs} /> : <Logo />}
+      {breadcrumbs ? <Breadcrumbs links={breadcrumbs} className={style.breadcrumbs} /> : <Logo />}
 
       <h1 className={hiddenHeadline ? 'visually-hidden' : style['title']}>
         {headline}

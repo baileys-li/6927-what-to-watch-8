@@ -6,11 +6,12 @@ import type LinkType from '../../types/link';
 
 type BreadcrumbsType = {
   links: Array<LinkType>;
+  className?: string;
 };
 
-function Breadcrumbs({ links }: BreadcrumbsType): JSX.Element {
+function Breadcrumbs({ links, className }: BreadcrumbsType): JSX.Element {
   return (
-    <nav className={style.nav}>
+    <nav className={`${style.nav} ${className}`}>
       <ul className={style.list}>
         <li className={style.logo}>
           <Logo />

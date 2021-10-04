@@ -35,7 +35,7 @@ function App({ movies, genres, promo }: AppProps): JSX.Element {
           <MainPage catalog={CATALOG} promo={promo} />
         </Route>
 
-        <Route path={AppRoute.Film}>
+        <Route exact path={AppRoute.Film}>
           <MoviePage list={movies.slice(0, 4)} promo={promo} />
         </Route>
 
