@@ -8,3 +8,9 @@ export const enum AppRoute {
 
   Debug = '/debug',
 }
+
+export const enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}

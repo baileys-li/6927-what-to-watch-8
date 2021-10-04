@@ -1,4 +1,5 @@
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import PrivateRoute from '../private-route/private-route';
 
 import MainPage from '../pages/main-page/main-page';
 import MyList from '../pages/my-list/my-list';
@@ -8,7 +9,7 @@ import ReviewPage from '../pages/review-page/review-page';
 import Player from '../pages/player/player';
 import DebugPage from '../pages/debug-page/debug-page';
 
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 import type SmallFilmCardType from '../../types/small-fim-card-type';
 import type MovieType from '../../types/movie-type';
@@ -42,9 +43,14 @@ function App({ movies, genres, promo }: AppProps): JSX.Element {
           <ReviewPage promo={promo} />
         </Route>
 
-        <Route path={AppRoute.MyList}>
-          <MyList list={movies.slice(0, 9)} />
-        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.MyList}
+          render={() => <MyList list={movies.slice(0, 9)} />}
+          authorizationStatus={AuthorizationStatus.NoAuth}
+        >
+        </PrivateRoute>
+
         <Route path={AppRoute.Player} component={Player} />
         <Route path={AppRoute.SignIn} component={Login} />
 
