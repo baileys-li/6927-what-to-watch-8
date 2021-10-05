@@ -1,9 +1,29 @@
 .wrapper {
-  display: flex;
+  display: grid;
+  // grid-auto-flow: column;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   align-items: center;
-  flex-wrap: wrap;
   max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
   padding: 22px 75px;
+
+  &--full::after {
+    content: '';
+  }
+}
+
+.breadcrumbs {
+  grid-column-end: span 2;
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+  font-size: 30px;
+  line-height: 36px;
+  color: #dfcf77;
+  font-weight: 300;
+
+
 }

@@ -4,9 +4,11 @@ import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 
 import style from './header.module.scss';
 
+import type LinkType from '../../types/link';
+
 type HeaderType = {
   className?: string;
-  breadcrumbs?: boolean;
+  breadcrumbs?: Array<LinkType>;
   headline: string;
   hiddenHeadline?: boolean;
   authenticated?: boolean;
@@ -21,15 +23,20 @@ function Header({
   authenticated = true,
   hideAuth = false,
 }: HeaderType): JSX.Element {
-  const headlineClass = hiddenHeadline
-    ? 'visually-hidden'
-    : 'page-title user-page__title';
   return (
-    <header className={`${style.wrapper} ${className}`}>
-      <Logo />
-      {breadcrumbs && <Breadcrumbs />}
+    <header
+      className={`${style.wrapper} ${className}
+    ${hideAuth && style['wrapper--full']}`}
+    >
+      {breadcrumbs ? (
+        <Breadcrumbs links={breadcrumbs} className={style.breadcrumbs} />
+      ) : (
+        <Logo />
+      )}
 
-      <h1 className={headlineClass}>{headline}</h1>
+      <h1 className={hiddenHeadline ? 'visually-hidden' : style['title']}>
+        {headline}
+      </h1>
 
       {!hideAuth && <UserBlock authenticated={authenticated} />}
     </header>

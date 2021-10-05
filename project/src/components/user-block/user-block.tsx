@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import style from './user-block.module.scss';
 
 type UserBlockType = {
@@ -14,20 +15,22 @@ function UserBlock({ authenticated = false }: UserBlockType): JSX.Element {
   return (
     <div className={style.wrapper}>
       {authenticated &&
-        (pathname === '/mylist' ? (
+        (pathname === AppRoute.MyList ? (
           <picture className={style.avatar}>{avatar}</picture>
         ) : (
-          <Link to='/mylist' className={style.avatar}>
+          <Link to={AppRoute.MyList} className={style.avatar}>
             {avatar}
           </Link>
         ))}
 
       {authenticated ? (
-        <a className={style.link}>Sign out</a>
+        <Link to={AppRoute.SignIn} className={style.link}>
+          Sign out
+        </Link>
       ) : (
-        <a href='sign-in.html' className={style.link}>
+        <Link to={AppRoute.SignIn} className={style.link}>
           Sign in
-        </a>
+        </Link>
       )}
     </div>
   );

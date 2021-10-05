@@ -1,10 +1,7 @@
 .wrapper {
-  position: relative;
   color: #eee5b5;
   padding-bottom: 78px;
   background-color: #e1b0b2;
-  background-size: cover;
-  background-position: center top;
 
   &--full {
     padding-bottom: 45px;
@@ -13,12 +10,20 @@
       display: none;
     }
   }
+}
 
+.overlay {
+  position: relative;
+  background-size: cover;
+  background-position: center top;
   &::after {
     content: '';
     position: absolute;
     z-index: 0;
-    inset: 0;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0.4);
   }
 
@@ -37,16 +42,6 @@
   min-height: 555px;
   padding-bottom: 210px;
   background-size: cover;
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-  * {
-    z-index: 2;
-  }
 }
 
 .film-card__wrap {
@@ -103,7 +98,7 @@
 }
 
 .film-card__title {
-  font-family: 'Arial Black', sans-serif;
+  font-weight: 800;
   font-size: 32px;
   line-height: 45px;
   margin: 0 0 7px;
@@ -111,9 +106,6 @@
 }
 
 .film-card__meta {
-  margin: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   font-size: 17px;
   line-height: 20px;
@@ -141,21 +133,14 @@
 
 .film-card__nav {
   height: 170px;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
   justify-content: flex-end;
 }
 
 .film-card__text {
   color: #252525;
-  width: 635px;
+  max-width: 635px;
   font-size: 19px;
   line-height: 27px;
 }
@@ -171,11 +156,7 @@
 }
 
 .film-card__row {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
 }
 
@@ -215,18 +196,3 @@
   margin-right: 0;
 }
 
-.film-card__header {
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  * {
-    z-index: 1;
-  }
-}

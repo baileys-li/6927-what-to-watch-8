@@ -1,17 +1,32 @@
+import Logo from '../logo/logo';
+import { Link } from 'react-router-dom';
 import style from './breadcrumbs.module.scss';
 
-function Breadcrumbs(): JSX.Element {
+import type LinkType from '../../types/link';
+
+type BreadcrumbsType = {
+  links: Array<LinkType>;
+  className?: string;
+};
+
+function Breadcrumbs({ links, className }: BreadcrumbsType): JSX.Element {
   return (
-    <nav className={style.breadcrumbs}>
-      <ul className={style.breadcrumbs__list}>
-        <li className={style.breadcrumbs__item}>
-          <a href='/films' className={style.breadcrumbs__link}>
-            The Grand Budapest Hotel
-          </a>
+    <nav className={`${style.nav} ${className}`}>
+      <ul className={style.list}>
+        <li className={style.logo}>
+          <Logo />
         </li>
-        <li className={style.breadcrumbs__item}>
-          <a className={style.breadcrumbs__link}>Add review</a>
-        </li>
+        {links.map((link) => (
+          <li className={style.item} key={link.text}>
+            {link.href ? (
+              <Link to={link.href} className={style.link}>
+                {link.text}
+              </Link>
+            ) : (
+              <span className={style.link}>{link.text}</span>
+            )}
+          </li>
+        ))}
       </ul>
     </nav>
   );

@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../../const';
 
 function Player(): JSX.Element {
   return (
     <div className='player'>
       <video src='#' className='player__video' poster='img/player-poster.jpg' />
 
-      <Link to='/' className='player__exit' style={{ textDecoration: 'none' }}>
+      <Link to={AppRoute.Main} className='player__exit' style={{ textDecoration: 'none' }}>
         Exit
       </Link>
 

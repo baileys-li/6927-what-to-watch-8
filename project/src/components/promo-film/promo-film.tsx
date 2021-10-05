@@ -2,9 +2,15 @@ import Button from '../button/button';
 import SpriteIcon from '../sprite-icon/sprite-icon';
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
+import Overview from './overview';
+import MovieRating from './movie-rating/movie-rating';
+
+import { AppRoute } from '../../const';
+
 import style from './promo-film.module.scss';
 
 import type MovieType from '../../types/movie-type';
+import type LinkType from '../../types/link';
 
 type PromoFilmProps = {
   movie: MovieType;
@@ -19,6 +25,10 @@ function PromoFilm({
   full = false,
   review = false,
 }: PromoFilmProps): JSX.Element {
+  const breadcrumbs: Array<LinkType> = [
+    { href: '/films', text: movie.name },
+    { text: 'Add review' },
+  ];
   const description = (
     <div className={style['film-card__desc']}>
       <h2 className={style['film-card__title']}>{movie.name}</h2>
@@ -28,7 +38,7 @@ function PromoFilm({
       </p>
 
       <div className={style.buttons}>
-        <Button href='/player'>
+        <Button href={AppRoute.Player}>
           <SpriteIcon id='play-s' width={19} />
           Play
         </Button>
@@ -36,7 +46,7 @@ function PromoFilm({
           <SpriteIcon id='add' width='19' height='20' />
           My list
         </Button>
-        {full && <Button href='/review'>Add review</Button>}
+        {full && <Button href={AppRoute.AddReview}>Add review</Button>}
       </div>
     </div>
   );
@@ -54,7 +64,7 @@ function PromoFilm({
 
   return (
     <section
-      className={`${style.wrapper} ${
+      className={`${style.wrapper} ${style.overlay} ${
         (full || review) && style['wrapper--full']
       }`}
       style={
@@ -64,7 +74,7 @@ function PromoFilm({
       {review && (
         <>
           <div
-            className={style['film-card__header']}
+            className={style.overlay}
             style={{
               backgroundImage: `url(${movie.background})`,
             }}
@@ -72,7 +82,7 @@ function PromoFilm({
             <Header
               headline='What to Watch'
               className={style.head}
-              breadcrumbs
+              breadcrumbs={breadcrumbs}
               hiddenHeadline
             />
             {poster}
@@ -83,7 +93,7 @@ function PromoFilm({
       {full && (
         <>
           <div
-            className={style.hero}
+            className={`${style.hero} ${style.overlay}`}
             style={{
               backgroundImage: `url(${movie.background})`,
             }}
@@ -117,35 +127,16 @@ function PromoFilm({
                     ))}
                   </ul>
                 </nav>
+                <MovieRating
+                  rating={movie.rating}
+                  scoresCount={movie.scoresCount}
+                />
 
-                <div className='film-rating'>
-                  <div className='film-rating__score'>{movie.rating}</div>
-                  <p className='film-rating__meta'>
-                    <span className='film-rating__level'>Very good</span>
-                    <span className='film-rating__count'>
-                      {movie.scoresCount} rsatings
-                    </span>
-                  </p>
-                </div>
-
-                <div className={style['film-card__text']}>
-                  {typeof movie.description === 'string' ? (
-                    <p>{movie.description}</p>
-                  ) : (
-                    movie.description.map((text) => <p key={text}>{text}</p>)
-                  )}
-
-                  <p className={style['film-card__director']}>
-                    <strong>Director: {movie.director}</strong>
-                  </p>
-
-                  <p className={style['film-card__starring']}>
-                    <strong>
-                      Starring: {movie.starring.slice(0, 4).join(', ')}
-                      {movie.starring.length > 4 && ' and other'}
-                    </strong>
-                  </p>
-                </div>
+                <Overview
+                  description={movie.description}
+                  starring={movie.starring}
+                  director={movie.director}
+                />
               </div>
             </div>
           </div>
