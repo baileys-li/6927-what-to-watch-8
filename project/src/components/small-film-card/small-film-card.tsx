@@ -1,14 +1,18 @@
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
 import s from './small-film-card.module.scss';
 import type SmallFilmCardType from '../../types/small-fim-card-type';
 
 type SmallFilmCardProps = {
   movie: SmallFilmCardType;
   className?: string;
+  id: number;
 };
 
-function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
+function SmallFilmCard({
+  movie,
+  className,
+  id,
+}: SmallFilmCardProps): JSX.Element {
   return (
     <article className={`${s.card} ${className}`}>
       <img
@@ -19,7 +23,7 @@ function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
         height='175'
       />
       <h3 className={s.card__title}>
-        <Link to={AppRoute.Film}className={s.card__link}>
+        <Link to={`/films/${id}`} className={s.card__link}>
           {movie.title}
         </Link>
       </h3>

@@ -30,8 +30,8 @@ function Catalog({ list, genres, similar = false }: CatalogType): JSX.Element {
       )}
 
       <div className={style['catalog__films-list']}>
-        {list.map((movie) => (
-          <SmallFilmCard movie={movie} key={movie.title} />
+        {list.map((movie, index) => (
+          <SmallFilmCard id={index} movie={movie} key={movie.title} />
         ))}
       </div>
 
