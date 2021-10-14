@@ -1,4 +1,5 @@
 import { ReactElement, useState, KeyboardEvent, useRef } from 'react';
+import { normalizeTextToID } from '../../utils/utils';
 
 import style from './tabs.module.scss';
 
@@ -9,10 +10,7 @@ type TabsType = {
 };
 
 function Tabs({ children, navigation, className }: TabsType): JSX.Element {
-  const normalizedNav = navigation.map((text) =>
-    text.toLowerCase().replace(' ', '_'),
-  );
-
+  const normalizedNav = navigation.map(normalizeTextToID);
   const selectedPanel = useRef<HTMLElement | null>(null);
 
   const navigationRef = useRef<HTMLUListElement | null>(null);
