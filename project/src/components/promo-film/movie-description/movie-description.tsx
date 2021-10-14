@@ -15,7 +15,7 @@ type MovieDescriptionType = {
 function MovieDescription({
   className,
   movie,
-  review,
+  review = false,
 }: MovieDescriptionType): JSX.Element {
   return (
     <div className={className}>

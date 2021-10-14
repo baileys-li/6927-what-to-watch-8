@@ -22,15 +22,14 @@ function usePromo(): (boolean | undefined | MovieType | ErrorType | null)[] {
             Object.entries(result).map(([key, val]) => [transformSnakeToCamelCase(key), val]),
           );
 
-
-          setIsLoaded(true);
-
           setPromo(adaptedObject);
+          setIsLoaded(true);
         },
 
         (err) => {
-          setIsLoaded(true);
+
           setError(err);
+          setIsLoaded(true);
         },
       );
   }, []);

@@ -13,17 +13,15 @@ import Page404 from '../pages/page404/page404';
 import { AppRoute, AuthorizationStatus } from '../../const';
 
 import type SmallFilmCardType from '../../types/small-fim-card-type';
-import type MovieType from '../../types/movie-type';
 
 import '../../sass/global.scss';
 
 type AppProps = {
   movies: Array<SmallFilmCardType>;
   genres: Array<string>;
-  promo: MovieType;
 };
 
-function App({ movies, genres, promo }: AppProps): JSX.Element {
+function App({ movies, genres }: AppProps): JSX.Element {
   const CATALOG = {
     list: movies,
     genres: genres,
@@ -33,15 +31,15 @@ function App({ movies, genres, promo }: AppProps): JSX.Element {
     <BrowserRouter>
       <Switch>
         <Route exact path={AppRoute.Main}>
-          <MainPage catalog={CATALOG} promo={promo} />
+          <MainPage catalog={CATALOG} />
         </Route>
 
         <Route exact path={AppRoute.Film}>
-          <MoviePage list={movies.slice(0, 4)} promo={promo} />
+          <MoviePage list={movies.slice(0, 4)} />
         </Route>
 
         <Route path={AppRoute.AddReview}>
-          <ReviewPage promo={promo} />
+          <ReviewPage />
         </Route>
 
         <PrivateRoute

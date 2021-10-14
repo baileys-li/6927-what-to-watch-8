@@ -97,34 +97,6 @@
   z-index: 2;
 }
 
-.film-card__title {
-  font-weight: 800;
-  font-size: 32px;
-  line-height: 45px;
-  margin: 0 0 7px;
-  position: relative;
-}
-
-.film-card__meta {
-  display: flex;
-  font-size: 17px;
-  line-height: 20px;
-  margin: 0 0 20px;
-}
-
-.film-card__genre::after {
-  content: '·';
-  margin-left: 4px;
-  margin-right: 4px;
-}
-
-.buttons {
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: start;
-  gap: 14px;
-}
-
 .film-card__translate-top {
   margin-top: -170px;
   position: relative;

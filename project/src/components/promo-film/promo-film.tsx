@@ -1,3 +1,4 @@
+import usePromo from '../../hooks/usePromo';
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import Overview from './overview';
@@ -12,7 +13,6 @@ import type MovieType from '../../types/movie-type';
 import type LinkType from '../../types/link';
 
 type PromoFilmProps = {
-  movie: MovieType;
   full?: boolean;
   review?: boolean;
 };
@@ -20,17 +20,29 @@ type PromoFilmProps = {
 const NAV_ITEMS = ['Overview', 'Details', 'Reviews'];
 
 function PromoFilm({
-  movie,
   full = false,
   review = false,
 }: PromoFilmProps): JSX.Element {
+  const [isLoaded, error, promo] = usePromo();
+
+  console.log(isLoaded, error, promo);
+
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
   const breadcrumbs: Array<LinkType> = [
-    { href: '/films', text: movie.name },
+    { href: '/films', text: promo.name },
     { text: 'Add review' },
   ];
   const description = (
     <MovieDescription
-      movie={movie}
+      movie={promo}
       className={style['film-card__desc']}
       review={full}
     />
@@ -43,7 +55,12 @@ function PromoFilm({
         ${review && style['film-card__poster--small']}
       }`}
     >
-      <img src={movie.posterImage} alt='Poster' width='218' height='327' />
+      <img
+        src={promo.posterImage.replace('7.', '8.')}
+        alt='Poster'
+        width='218'
+        height='327'
+      />
     </div>
   );
 
@@ -55,7 +72,12 @@ function PromoFilm({
       style={
         full || review
           ? {}
-          : { backgroundImage: `url(${movie.backgroundImage})` }
+          : {
+            backgroundImage: `url(${promo?.backgroundImage?.replace(
+              '7.',
+              '8.',
+            )})`,
+          }
       }
     >
       {review && (
@@ -63,7 +85,10 @@ function PromoFilm({
           <div
             className={style.overlay}
             style={{
-              backgroundImage: `url(${movie.backgroundImage})`,
+              backgroundImage: `url(${promo?.backgroundImage?.replace(
+                '7.',
+                '8.',
+              )})`,
             }}
           >
             <Header
@@ -82,7 +107,10 @@ function PromoFilm({
           <div
             className={`${style.hero} ${style.overlay}`}
             style={{
-              backgroundImage: `url(${movie.backgroundImage})`,
+              backgroundImage: `url(${promo?.backgroundImage?.replace(
+                '7.',
+                '8.',
+              )})`,
             }}
           >
             <Header
@@ -104,14 +132,14 @@ function PromoFilm({
                 >
                   <>
                     <MovieRating
-                      rating={movie.rating}
-                      scoresCount={movie.scoresCount}
+                      rating={promo.rating}
+                      scoresCount={promo.scoresCount}
                     />
 
                     <Overview
-                      description={movie.description}
-                      starring={movie.starring}
-                      director={movie.director}
+                      description={promo.description}
+                      starring={promo.starring}
+                      director={promo.director}
                     />
                   </>
                   <div
@@ -123,7 +151,7 @@ function PromoFilm({
                           Director
                         </strong>
                         <span className={style['film-card__details-value']}>
-                          {movie.director}
+                          {promo.director}
                         </span>
                       </p>
                       <p className={style['film-card__details-item']}>
@@ -131,7 +159,7 @@ function PromoFilm({
                           Starring
                         </strong>
                         <span className={style['film-card__details-value']}>
-                          {movie.starring.map((actor, index) => (
+                          {promo.starring.map((actor, index) => (
                             <>
                               {actor} <br />
                             </>
@@ -146,7 +174,7 @@ function PromoFilm({
                           Run Time
                         </strong>
                         <span className={style['film-card__details-value']}>
-                          {movie.runTime}m
+                          {promo.runTime}m
                         </span>
                       </p>
                       <p className={style['film-card__details-item']}>
@@ -154,7 +182,7 @@ function PromoFilm({
                           Genre
                         </strong>
                         <span className={style['film-card__details-value']}>
-                          {movie.genre}
+                          {promo.genre}
                         </span>
                       </p>
                       <p className={style['film-card__details-item']}>
@@ -162,7 +190,7 @@ function PromoFilm({
                           Released
                         </strong>
                         <span className={style['film-card__details-value']}>
-                          {movie.released}
+                          {promo.released}
                         </span>
                       </p>
                     </div>
