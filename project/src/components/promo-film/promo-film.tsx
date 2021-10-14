@@ -128,35 +128,61 @@ function PromoFilm({
                       director={movie.director}
                     />
                   </>
-                  <div>Second</div>
+                  <div
+                    className={`${style['film-card__text']} ${style['film-card__row']}`}
+                  >
+                    <div className={style['film-card__text-col']}>
+                      <p className={style['film-card__details-item']}>
+                        <strong className={style['film-card__details-name']}>
+                          Director
+                        </strong>
+                        <span className={style['film-card__details-value']}>
+                          {movie.director}
+                        </span>
+                      </p>
+                      <p className={style['film-card__details-item']}>
+                        <strong className={style['film-card__details-name']}>
+                          Starring
+                        </strong>
+                        <span className={style['film-card__details-value']}>
+                          {movie.starring.map((actor, index) => (
+                            <>
+                              {actor} <br />
+                            </>
+                          ))}
+                        </span>
+                      </p>
+                    </div>
+
+                    <div className={style['film-card__text-col']}>
+                      <p className={style['film-card__details-item']}>
+                        <strong className={style['film-card__details-name']}>
+                          Run Time
+                        </strong>
+                        <span className={style['film-card__details-value']}>
+                          {movie.runTime}m
+                        </span>
+                      </p>
+                      <p className={style['film-card__details-item']}>
+                        <strong className={style['film-card__details-name']}>
+                          Genre
+                        </strong>
+                        <span className={style['film-card__details-value']}>
+                          {movie.genre}
+                        </span>
+                      </p>
+                      <p className={style['film-card__details-item']}>
+                        <strong className={style['film-card__details-name']}>
+                          Released
+                        </strong>
+                        <span className={style['film-card__details-value']}>
+                          {movie.released}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
                   <div>Third</div>
                 </Tabs>
-                {/*  <nav className={`film-nav ${style['film-card__nav']}`}>
-                  <ul className='film-nav__list'>
-                    {NAV_ITEMS.map((nav, index) => (
-                      <li
-                        className={`film-nav__item ${
-                          index === 0 && 'film-nav__item--active'
-                        } `}
-                        key={nav}
-                      >
-                        <a href='#' className='film-nav__link'>
-                          {nav}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-                <MovieRating
-                  rating={movie.rating}
-                  scoresCount={movie.scoresCount}
-                />
-
-                <Overview
-                  description={movie.description}
-                  starring={movie.starring}
-                  director={movie.director}
-                /> */}
               </div>
             </div>
           </div>
