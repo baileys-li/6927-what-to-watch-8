@@ -1,32 +1,27 @@
 
 import { useState, useEffect } from 'react';
-
+import { adaptFromSnakeToCamel } from '../utils/adapter';
 import { EndPoint } from '../const';
-import { transformSnakeToCamelCase } from '../utils/utils';
 
-import type MovieType from '../types/movie-type';
 import type ErrorType from '../types/error-type';
 import type FetchedDataType from '../types/fetched-data-type';
 
-type FetchedMovie = FetchedDataType & {
-  movie: MovieType | undefined;
+
+type FetchedResponse<T> = FetchedDataType & {
+  response?: T;
 }
 
-function useMovie(target: string): FetchedMovie {
+function useData<T>(target: string): FetchedResponse<T> {
   const [error, setError] = useState<ErrorType | null>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [movie, setMovie] = useState<MovieType | never>();
+  const [response, setResponse] = useState<T>();
 
   useEffect(() => {
     fetch(EndPoint.Base + target)
       .then((res) => res.json())
       .then(
         (result) => {
-          const adaptedObject: any = Object.fromEntries(
-            Object.entries(result).map(([key, val]) => [transformSnakeToCamelCase(key), val]),
-          );
-
-          setMovie(adaptedObject);
+          setResponse(adaptFromSnakeToCamel(result));
           setIsLoaded(true);
         },
 
@@ -36,12 +31,12 @@ function useMovie(target: string): FetchedMovie {
           setIsLoaded(true);
         },
       );
-  }, []);
+  }, [target]);
 
 
-  return { isLoaded, error, movie };
+  return { isLoaded, error, response };
 
 }
 
 
-export default useMovie;
+export default useData;

@@ -1,5 +1,6 @@
-import usePromo from '../../hooks/useMovie';
 import { useParams } from 'react-router';
+import useData from '../../hooks/useData';
+
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import Overview from './overview';
@@ -11,6 +12,8 @@ import MovieDescription from './movie-description/movie-description';
 import style from './promo-film.module.scss';
 
 import type LinkType from '../../types/link';
+import type MovieType from '../../types/movie-type';
+
 import { EndPoint } from '../../const';
 
 type PromoFilmProps = {
@@ -32,7 +35,7 @@ function PromoFilm({
 
   const target = id === undefined ? EndPoint.Promo : `/films/${id}`;
 
-  const { isLoaded, error, movie } = usePromo(target);
+  const { isLoaded, error, response: movie } = useData<MovieType>(target);
 
   if (error) {
     return <div>Error: {error.message}</div>;
