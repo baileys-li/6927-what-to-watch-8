@@ -12,13 +12,13 @@ type FetchedMovie = FetchedDataType & {
   movie: MovieType | undefined;
 }
 
-function usePromo(): FetchedMovie {
+function useMovie(target: string): FetchedMovie {
   const [error, setError] = useState<ErrorType | null>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
   const [movie, setMovie] = useState<MovieType | never>();
 
   useEffect(() => {
-    fetch(EndPoint.Base + EndPoint.Promo)
+    fetch(EndPoint.Base + target)
       .then((res) => res.json())
       .then(
         (result) => {
@@ -44,4 +44,4 @@ function usePromo(): FetchedMovie {
 }
 
 
-export default usePromo;
+export default useMovie;

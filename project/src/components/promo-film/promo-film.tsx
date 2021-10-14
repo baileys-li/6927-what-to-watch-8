@@ -1,4 +1,5 @@
-import usePromo from '../../hooks/usePromo';
+import usePromo from '../../hooks/useMovie';
+import { useParams } from 'react-router';
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import Overview from './overview';
@@ -10,10 +11,15 @@ import MovieDescription from './movie-description/movie-description';
 import style from './promo-film.module.scss';
 
 import type LinkType from '../../types/link';
+import { EndPoint } from '../../const';
 
 type PromoFilmProps = {
   full?: boolean;
   review?: boolean;
+};
+
+type RouteParams = {
+  id: string | undefined;
 };
 
 const NAV_ITEMS = ['Overview', 'Details', 'Reviews'];
@@ -22,7 +28,11 @@ function PromoFilm({
   full = false,
   review = false,
 }: PromoFilmProps): JSX.Element {
-  const { isLoaded, error, movie } = usePromo();
+  const { id } = useParams<RouteParams>();
+
+  const target = id === undefined ? EndPoint.Promo : `/films/${id}`;
+
+  const { isLoaded, error, movie } = usePromo(target);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -155,11 +165,7 @@ function PromoFilm({
                             Starring
                           </strong>
                           <span className={style['film-card__details-value']}>
-                            {movie.starring.map((actor, index) => (
-                              <>
-                                {actor} <br />
-                              </>
-                            ))}
+                            {movie.starring}
                           </span>
                         </p>
                       </div>

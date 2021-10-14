@@ -9,6 +9,7 @@ type MainPageType = {
 };
 
 function MoviePage({ list }: MainPageType): JSX.Element {
+
   return (
     <>
       <PromoFilm full />
