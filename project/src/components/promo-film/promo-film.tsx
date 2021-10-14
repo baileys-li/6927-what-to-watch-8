@@ -1,13 +1,10 @@
-import Button from '../button/button';
-import SpriteIcon from '../sprite-icon/sprite-icon';
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import Overview from './overview';
 import MovieRating from './movie-rating/movie-rating';
 import Tabs from '../tabs/tabs';
 import Review from '../review/review';
-
-import { AppRoute } from '../../const';
+import MovieDescription from './movie-description/movie-description';
 
 import style from './promo-film.module.scss';
 
@@ -32,25 +29,11 @@ function PromoFilm({
     { text: 'Add review' },
   ];
   const description = (
-    <div className={style['film-card__desc']}>
-      <h2 className={style['film-card__title']}>{movie.name}</h2>
-      <p className={style['film-card__meta']}>
-        <span className={style['film-card__genre']}>{movie.genre}</span>
-        <span className={style['film-card__year']}>{movie.released}</span>
-      </p>
-
-      <div className={style.buttons}>
-        <Button href={AppRoute.Player}>
-          <SpriteIcon id='play-s' width={19} />
-          Play
-        </Button>
-        <Button>
-          <SpriteIcon id='add' width='19' height='20' />
-          My list
-        </Button>
-        {full && <Button href={AppRoute.AddReview}>Add review</Button>}
-      </div>
-    </div>
+    <MovieDescription
+      movie={movie}
+      className={style['film-card__desc']}
+      review={full}
+    />
   );
 
   const poster = (
@@ -60,7 +43,7 @@ function PromoFilm({
         ${review && style['film-card__poster--small']}
       }`}
     >
-      <img src={movie.poster} alt='Poster' width='218' height='327' />
+      <img src={movie.posterImage} alt='Poster' width='218' height='327' />
     </div>
   );
 
@@ -70,7 +53,9 @@ function PromoFilm({
         (full || review) && style['wrapper--full']
       }`}
       style={
-        full || review ? {} : { backgroundImage: `url(${movie.background})` }
+        full || review
+          ? {}
+          : { backgroundImage: `url(${movie.backgroundImage})` }
       }
     >
       {review && (
@@ -78,7 +63,7 @@ function PromoFilm({
           <div
             className={style.overlay}
             style={{
-              backgroundImage: `url(${movie.background})`,
+              backgroundImage: `url(${movie.backgroundImage})`,
             }}
           >
             <Header
@@ -97,7 +82,7 @@ function PromoFilm({
           <div
             className={`${style.hero} ${style.overlay}`}
             style={{
-              backgroundImage: `url(${movie.background})`,
+              backgroundImage: `url(${movie.backgroundImage})`,
             }}
           >
             <Header
