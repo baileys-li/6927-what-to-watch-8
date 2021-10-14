@@ -11,10 +11,15 @@ import style from './promo-film.module.scss';
 
 import type MovieType from '../../types/movie-type';
 import type LinkType from '../../types/link';
+import type FetchedDataType from '../../types/fetched-data-type';
 
 type PromoFilmProps = {
   full?: boolean;
   review?: boolean;
+};
+
+type PromoFetchedDataType = FetchedDataType & {
+  movie: MovieType;
 };
 
 const NAV_ITEMS = ['Overview', 'Details', 'Reviews'];
@@ -23,10 +28,7 @@ function PromoFilm({
   full = false,
   review = false,
 }: PromoFilmProps): JSX.Element {
-  const [isLoaded, error, promo] = usePromo();
-
-  console.log(isLoaded, error, promo);
-
+  const { isLoaded, error, movie } = usePromo<PromoFetchedDataType>();
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -37,12 +39,12 @@ function PromoFilm({
   }
 
   const breadcrumbs: Array<LinkType> = [
-    { href: '/films', text: promo.name },
+    { href: '/films', text: movie.name },
     { text: 'Add review' },
   ];
   const description = (
     <MovieDescription
-      movie={promo}
+      movie={movie}
       className={style['film-card__desc']}
       review={full}
     />
@@ -56,7 +58,7 @@ function PromoFilm({
       }`}
     >
       <img
-        src={promo.posterImage.replace('7.', '8.')}
+        src={movie.posterImage.replace('7.', '8.')}
         alt='Poster'
         width='218'
         height='327'
@@ -73,7 +75,7 @@ function PromoFilm({
         full || review
           ? {}
           : {
-            backgroundImage: `url(${promo?.backgroundImage?.replace(
+            backgroundImage: `url(${movie?.backgroundImage?.replace(
               '7.',
               '8.',
             )})`,
@@ -85,7 +87,7 @@ function PromoFilm({
           <div
             className={style.overlay}
             style={{
-              backgroundImage: `url(${promo?.backgroundImage?.replace(
+              backgroundImage: `url(${movie?.backgroundImage?.replace(
                 '7.',
                 '8.',
               )})`,
@@ -107,7 +109,7 @@ function PromoFilm({
           <div
             className={`${style.hero} ${style.overlay}`}
             style={{
-              backgroundImage: `url(${promo?.backgroundImage?.replace(
+              backgroundImage: `url(${movie?.backgroundImage?.replace(
                 '7.',
                 '8.',
               )})`,
@@ -132,14 +134,14 @@ function PromoFilm({
                 >
                   <>
                     <MovieRating
-                      rating={promo.rating}
-                      scoresCount={promo.scoresCount}
+                      rating={movie.rating}
+                      scoresCount={movie.scoresCount}
                     />
 
                     <Overview
-                      description={promo.description}
-                      starring={promo.starring}
-                      director={promo.director}
+                      description={movie.description}
+                      starring={movie.starring}
+                      director={movie.director}
                     />
                   </>
                   <div
@@ -151,7 +153,7 @@ function PromoFilm({
                           Director
                         </strong>
                         <span className={style['film-card__details-value']}>
-                          {promo.director}
+                          {movie.director}
                         </span>
                       </p>
                       <p className={style['film-card__details-item']}>
@@ -159,7 +161,7 @@ function PromoFilm({
                           Starring
                         </strong>
                         <span className={style['film-card__details-value']}>
-                          {promo.starring.map((actor, index) => (
+                          {movie.starring.map((actor, index) => (
                             <>
                               {actor} <br />
                             </>
@@ -174,7 +176,7 @@ function PromoFilm({
                           Run Time
                         </strong>
                         <span className={style['film-card__details-value']}>
-                          {promo.runTime}m
+                          {movie.runTime}m
                         </span>
                       </p>
                       <p className={style['film-card__details-item']}>
@@ -182,7 +184,7 @@ function PromoFilm({
                           Genre
                         </strong>
                         <span className={style['film-card__details-value']}>
-                          {promo.genre}
+                          {movie.genre}
                         </span>
                       </p>
                       <p className={style['film-card__details-item']}>
@@ -190,7 +192,7 @@ function PromoFilm({
                           Released
                         </strong>
                         <span className={style['film-card__details-value']}>
-                          {promo.released}
+                          {movie.released}
                         </span>
                       </p>
                     </div>

@@ -6,12 +6,16 @@ import { transformSnakeToCamelCase } from '../utils/utils';
 
 import type MovieType from '../types/movie-type';
 import type ErrorType from '../types/error-type';
+import type FetchedDataType from '../types/fetched-data-type';
 
+type FetchedMovie = FetchedDataType & {
+  movie: MovieType | undefined;
+}
 
-function usePromo(): (boolean | undefined | MovieType | ErrorType | null)[] {
+function usePromo(): FetchedMovie {
   const [error, setError] = useState<ErrorType | null>(null);
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
-  const [promo, setPromo] = useState<MovieType | never>();
+  const [movie, setMovie] = useState<MovieType | never>();
 
   useEffect(() => {
     fetch(EndPoint.Base + EndPoint.Promo)
@@ -22,7 +26,7 @@ function usePromo(): (boolean | undefined | MovieType | ErrorType | null)[] {
             Object.entries(result).map(([key, val]) => [transformSnakeToCamelCase(key), val]),
           );
 
-          setPromo(adaptedObject);
+          setMovie(adaptedObject);
           setIsLoaded(true);
         },
 
@@ -35,7 +39,7 @@ function usePromo(): (boolean | undefined | MovieType | ErrorType | null)[] {
   }, []);
 
 
-  return [isLoaded, error, promo];
+  return { isLoaded, error, movie };
 
 }
 

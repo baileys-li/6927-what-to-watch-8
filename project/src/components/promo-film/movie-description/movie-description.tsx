@@ -2,7 +2,6 @@ import style from './movie-description.module.scss';
 
 import Button from '../../button/button';
 import SpriteIcon from '../../sprite-icon/sprite-icon';
-import { AppRoute } from '../../../const';
 
 import type MovieType from '../../../types/movie-type';
 
@@ -26,7 +25,7 @@ function MovieDescription({
       </p>
 
       <div className={style.buttons}>
-        <Button href={AppRoute.Player}>
+        <Button href={`/player/${movie.id}`}>
           <SpriteIcon id='play-s' width={19} />
           Play
         </Button>
@@ -34,7 +33,9 @@ function MovieDescription({
           <SpriteIcon id='add' width='19' height='20' />
           My list
         </Button>
-        {review && <Button href={AppRoute.AddReview}>Add review</Button>}
+        {review && (
+          <Button href={`/films/${movie.id}/review`}>Add review</Button>
+        )}
       </div>
     </div>
   );
