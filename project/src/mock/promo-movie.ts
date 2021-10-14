@@ -3,10 +3,10 @@ import type MovieType from '../types/movie-type';
 const PROMO: MovieType = {
   id: 1,
   name: 'The Grand Budapest Hotel',
-  poster: 'img/the-grand-budapest-hotel-poster.jpg',
-  preview: 'img/the-grand-budapest-hotel.jpg',
-  background: 'img/bg-the-grand-budapest-hotel.jpg',
-  backColor: '#ffffff',
+  posterImage: 'img/the-grand-budapest-hotel-poster.jpg',
+  previewImage: 'img/the-grand-budapest-hotel.jpg',
+  backgroundImage: 'img/bg-the-grand-budapest-hotel.jpg',
+  backgroundColor: '#ffffff',
   videoLink: 'https://some-link',
   previewVideoLink: 'https://some-link',
   description: [
@@ -33,7 +33,7 @@ const PROMO: MovieType = {
   runTime: 99,
   genre: 'Comedy',
   released: 2014,
-  favorite: false,
+  isFavorite: false,
 };
 
 export default PROMO;
