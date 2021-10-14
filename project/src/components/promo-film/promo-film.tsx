@@ -4,6 +4,7 @@ import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import Overview from './overview';
 import MovieRating from './movie-rating/movie-rating';
+import Tabs from '../tabs/tabs';
 
 import { AppRoute } from '../../const';
 
@@ -111,7 +112,26 @@ function PromoFilm({
             <div className={style['film-card__info']}>
               {poster}
               <div className={style['film-card__desc']}>
-                <nav className={`film-nav ${style['film-card__nav']}`}>
+                <Tabs
+                  navigation={NAV_ITEMS}
+                  className={style['film-card__nav']}
+                >
+                  <>
+                    <MovieRating
+                      rating={movie.rating}
+                      scoresCount={movie.scoresCount}
+                    />
+
+                    <Overview
+                      description={movie.description}
+                      starring={movie.starring}
+                      director={movie.director}
+                    />
+                  </>
+                  <div>Second</div>
+                  <div>Third</div>
+                </Tabs>
+                {/*  <nav className={`film-nav ${style['film-card__nav']}`}>
                   <ul className='film-nav__list'>
                     {NAV_ITEMS.map((nav, index) => (
                       <li
@@ -136,7 +156,7 @@ function PromoFilm({
                   description={movie.description}
                   starring={movie.starring}
                   director={movie.director}
-                />
+                /> */}
               </div>
             </div>
           </div>

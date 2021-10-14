@@ -203,53 +203,6 @@ body {
   border-color: rgba(217, 202, 116, 0.5);
 }
 
-.film-nav__list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-
-.film-nav__item {
-  margin-right: 35px;
-}
-.film-nav__item--active .film-nav__link {
-  font-weight: bold;
-}
-.film-nav__item--active .film-nav__link::after {
-  display: block;
-}
-.film-nav__item:last-child {
-  margin-right: 0;
-}
-
-.film-nav__link {
-  display: block;
-  color: #eee5b5;
-  text-decoration: none;
-  position: relative;
-  padding-bottom: 19px;
-}
-.film-nav__link::after {
-  content: '';
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  right: 0;
-  height: 4px;
-  bottom: 0;
-  background: #eee5b5;
-  display: none;
-}
-.film-nav__link:hover::after {
-  display: block;
-}
-
-
 .page-content {
   background-image: -webkit-gradient(
     linear,

@@ -1,13 +1,14 @@
 import { ReactElement, useState, KeyboardEvent, useRef } from 'react';
 
-import './tabs.module.scss';
+import style from './tabs.module.scss';
 
 type TabsType = {
   children: Array<ReactElement>;
   navigation: Array<string>;
+  className?: string;
 };
 
-function Tabs({ children, navigation }: TabsType): JSX.Element {
+function Tabs({ children, navigation, className }: TabsType): JSX.Element {
   const normalizedNav = navigation.map((text) =>
     text.toLowerCase().replace(' ', '_'),
   );
@@ -50,8 +51,8 @@ function Tabs({ children, navigation }: TabsType): JSX.Element {
   }
 
   return (
-    <article className='tabs'>
-      <ul role='tablist' ref={navigationRef}>
+    <article className={className}>
+      <ul role='tablist' ref={navigationRef} className={style.nav}>
         {normalizedNav.map((tab, index) => (
           <li key={tab} role='presentation'>
             <button
@@ -62,6 +63,7 @@ function Tabs({ children, navigation }: TabsType): JSX.Element {
               onClick={() => setSelected(index)}
               onKeyDown={navigateByKeys}
               tabIndex={index === selected ? 0 : -1}
+              className={style.link}
             >
               {navigation[index]}
             </button>

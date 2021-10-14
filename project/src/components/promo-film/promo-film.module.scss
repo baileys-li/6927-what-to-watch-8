@@ -132,10 +132,7 @@
 }
 
 .film-card__nav {
-  height: 170px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  margin-top: 129px;
 }
 
 .film-card__text {
@@ -195,4 +192,3 @@
 .film-card__reviews-col:last-child {
   margin-right: 0;
 }
-
