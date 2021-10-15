@@ -1,22 +1,21 @@
+import type ReviewType from '../../types/review-type';
 import { normalizeDateTime } from '../../utils/utils';
 import style from './review.module.scss';
 
-type ReviewType = {
-  text: string;
-  author: string;
-  date: string;
-  rating: number;
+type ReviewProps = {
+  content: ReviewType;
 };
 
-function Review({ text, author, date, rating }: ReviewType): JSX.Element {
+function Review({ content }: ReviewProps): JSX.Element {
+  const { rating, user, date, comment } = content;
+
   return (
     <figure className={style.review}>
       <blockquote className={style.quote}>
-        <p className={style.text}>{text}</p>
+        <p className={style.text}>{comment}</p>
       </blockquote>
-
       <figcaption className={style.details}>
-        <p className={style.author}>{author}</p>
+        <p className={style.author}>{user.name}</p>
         <time className={style.date} dateTime={date}>
           {normalizeDateTime(date)}
         </time>

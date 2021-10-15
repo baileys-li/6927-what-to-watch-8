@@ -6,9 +6,9 @@ import ReviewForm from '../review-form/review-form';
 import Overview from './overview';
 import MovieRating from './movie-rating/movie-rating';
 import Tabs from '../tabs/tabs';
-import Review from '../review/review';
 import MovieDescription from './movie-description/movie-description';
 import MovieDetails from './movie-details/movie-details';
+import MovieReviews from './movie-reviews/movie-reviews';
 
 import style from './promo-film.module.scss';
 
@@ -151,67 +151,8 @@ function PromoFilm({
                       />
                     </>
                     <MovieDetails movie={movie} />
-                    <div
-                      className={`${style['film-card__reviews']} ${style['film-card__row']}`}
-                    >
-                      <div className={style['film-card__reviews-col']}>
-                        <Review
-                          author='Kate Muir'
-                          text={`Discerning travellers and Wes Anderson fans will
-                              luxuriate in the glorious Mittel-European kitsch of
-                              one of the director's funniest and most exquisitely
-                              designed films in years.`}
-                          date='2016-12-24'
-                          rating={8.9}
-                        />
-                        <Review
-                          author='Bill Goodykoontz'
-                          text={`Anderson's films are too precious for some, but for
-                          those of us willing to lose ourselves in them,
-                          they're a delight. "The Grand Budapest Hotel" is no
-                          different, except that he has added a hint of
-                          gravitas to the mix, improving the recipe.`}
-                          date='2015-11-18'
-                          rating={8.0}
-                        />
-                        <Review
-                          author='Amanda Greever'
-                          text={`I didn't find it amusing, and while I can appreciate
-                          the creativity, it's an hour and 40 minutes I wish I
-                          could take back.`}
-                          date='2015-11-18'
-                          rating={8.0}
-                        />
-                      </div>
-                      <div className={style['film-card__reviews-col']}>
-                        <Review
-                          author='Matthew Lickona'
-                          text={`The mannered, madcap proceedings are often
-                          delightful, occasionally silly, and here and there,
-                          gruesome and/or heartbreaking.`}
-                          date='2016-12-20'
-                          rating={7.2}
-                        />
 
-                        <Review
-                          author='Paula Fleri-Soler'
-                          text={`It is certainly a magical and childlike way of
-                          storytelling, even if the content is a little more
-                          adult.`}
-                          date='2016-12-20'
-                          rating={7.6}
-                        />
-
-                        <Review
-                          author='Paula Fleri-Soler'
-                          text={`It is certainly a magical and childlike way of
-                          storytelling, even if the content is a little more
-                          adult.`}
-                          date='2016-12-20'
-                          rating={7.6}
-                        />
-                      </div>
-                    </div>
+                    <MovieReviews id={movie.id} />
                   </Tabs>
                 </div>
               </div>
