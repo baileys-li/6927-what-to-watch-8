@@ -11,11 +11,9 @@ function Catalog({ genres, similar = false, path }: CatalogType): JSX.Element {
     return <div>Error: {error.message}</div>;
   }
 
-  if (!isLoaded) {
+  if (!isLoaded || list === undefined) {
     return <div>Loading...</div>;
-  }
-
-  if (list) {
+  } else {
     return (
       <section
         className={`${style.catalog} ${similar && style['catalog--like-this']}`}
@@ -59,7 +57,5 @@ function Catalog({ genres, similar = false, path }: CatalogType): JSX.Element {
       </section>
     );
   }
-
-  return <p>Test</p>;
 }
 export default Catalog;
