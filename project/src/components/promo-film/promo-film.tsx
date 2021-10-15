@@ -8,15 +8,16 @@ import MovieRating from './movie-rating/movie-rating';
 import Tabs from '../tabs/tabs';
 import Review from '../review/review';
 import MovieDescription from './movie-description/movie-description';
+import MovieDetails from './movie-details/movie-details';
 
 import style from './promo-film.module.scss';
 
 import type LinkType from '../../types/link';
 import type MovieType from '../../types/movie-type';
+import type RouteParams from '../../types/route-params-type';
 
 import { EndPoint } from '../../const';
 import { adaptFromSnakeToCamel } from '../../utils/adapter';
-import type RouteParams from '../../types/route-params-type';
 
 type PromoFilmProps = {
   full?: boolean;
@@ -149,55 +150,7 @@ function PromoFilm({
                         director={movie.director}
                       />
                     </>
-                    <div
-                      className={`${style['film-card__text']} ${style['film-card__row']}`}
-                    >
-                      <div className={style['film-card__text-col']}>
-                        <p className={style['film-card__details-item']}>
-                          <strong className={style['film-card__details-name']}>
-                            Director
-                          </strong>
-                          <span className={style['film-card__details-value']}>
-                            {movie.director}
-                          </span>
-                        </p>
-                        <p className={style['film-card__details-item']}>
-                          <strong className={style['film-card__details-name']}>
-                            Starring
-                          </strong>
-                          <span className={style['film-card__details-value']}>
-                            {movie.starring}
-                          </span>
-                        </p>
-                      </div>
-
-                      <div className={style['film-card__text-col']}>
-                        <p className={style['film-card__details-item']}>
-                          <strong className={style['film-card__details-name']}>
-                            Run Time
-                          </strong>
-                          <span className={style['film-card__details-value']}>
-                            {movie.runTime}m
-                          </span>
-                        </p>
-                        <p className={style['film-card__details-item']}>
-                          <strong className={style['film-card__details-name']}>
-                            Genre
-                          </strong>
-                          <span className={style['film-card__details-value']}>
-                            {movie.genre}
-                          </span>
-                        </p>
-                        <p className={style['film-card__details-item']}>
-                          <strong className={style['film-card__details-name']}>
-                            Released
-                          </strong>
-                          <span className={style['film-card__details-value']}>
-                            {movie.released}
-                          </span>
-                        </p>
-                      </div>
-                    </div>
+                    <MovieDetails movie={movie} />
                     <div
                       className={`${style['film-card__reviews']} ${style['film-card__row']}`}
                     >

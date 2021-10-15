@@ -18,3 +18,12 @@ export function transformSnakeToCamelCase(snake: string): string {
 
   return camel;
 }
+
+
+export function formatRunTime(time: number): string {
+  const hours = Math.floor(time / 60);
+  let result = hours ? `${hours}h ` : '';
+  result += `${time % 60}m`;
+
+  return result;
+}

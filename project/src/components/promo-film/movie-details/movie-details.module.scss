@@ -1,0 +1,31 @@
+.wrapper {
+  color: #252525;
+  font-size: 19px;
+  line-height: 1.58;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 155px;
+  gap: 35px;
+  margin: 1em 0;
+}
+
+.col {
+  display: grid;
+  align-content: start;
+  gap: 1em;
+}
+
+.item {
+  dt {
+    font-weight: bold;
+  }
+
+  dd {
+    color: #131313;
+    margin: 0;
+
+    &:not(:last-child)::after {
+      content: ',';
+    }
+  }
+}
