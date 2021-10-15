@@ -1,7 +1,7 @@
 .wrapper {
   color: #eee5b5;
   padding-bottom: 78px;
-  background-color: #e1b0b2;
+  background-color: var(--back-color);
 
   &--full {
     padding-bottom: 45px;
@@ -14,8 +14,10 @@
 
 .overlay {
   position: relative;
+  background-image: var(--back-image);
+  background-color: var(--back-color);
   background-size: cover;
-  background-position: center top;
+  background-position: center;
   &::after {
     content: '';
     position: absolute;
@@ -152,17 +154,3 @@
   color: #131313;
 }
 
-.film-card__reviews {
-  padding-top: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(246px, 1fr));
-
-  align-items: start;
-  align-content: start;
-  gap: 10px 60px;
-}
-
-.film-card__reviews-col {
-  display: grid;
-  gap: 10px;
-}

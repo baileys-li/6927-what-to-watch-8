@@ -69,24 +69,20 @@ function PromoFilm({
 
     return (
       <section
-        className={`${style.wrapper} ${style.overlay} ${
-          (full || review) && style['wrapper--full']
+        className={`${style.wrapper} ${
+          full || review ? style['wrapper--full'] : style.overlay
         }`}
         style={
-          full || review
-            ? {}
-            : {
-              backgroundImage: `url(${movie.backgroundImage})`,
-            }
+          {
+            '--back-image': `url(${movie.backgroundImage})`,
+            '--back-color': `${movie.backgroundColor}`,
+          } as React.CSSProperties
         }
       >
         {review && (
           <>
             <div
               className={style.overlay}
-              style={{
-                backgroundImage: `url(${movie.backgroundImage})`,
-              }}
             >
               <Header
                 headline='What to Watch'
@@ -103,9 +99,6 @@ function PromoFilm({
           <>
             <div
               className={`${style.hero} ${style.overlay}`}
-              style={{
-                backgroundImage: `url(${movie.backgroundImage})`,
-              }}
             >
               <Header
                 headline='What to Watch'
