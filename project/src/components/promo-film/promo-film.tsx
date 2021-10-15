@@ -46,7 +46,7 @@ function PromoFilm({
     const movie = adaptFromSnakeToCamel(response);
 
     const breadcrumbs: Array<LinkType> = [
-      { href: '/films', text: movie.name },
+      { href: `/films/${movie.id}`, text: movie.name },
       { text: 'Add review' },
     ];
     const description = (

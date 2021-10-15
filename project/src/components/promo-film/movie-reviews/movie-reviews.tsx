@@ -31,13 +31,15 @@ function MovieReviews({ id }: MovieReviewsProps): JSX.Element {
 
     return (
       <div className={style.wrapper}>
-        {reviews.map((column) => (
-          <div className={style.column} key={column[0].id}>
-            {column.map((review) => (
-              <Review key={review.id} content={review} />
-            ))}
-          </div>
-        ))}
+        {response.length === 0
+          ? 'No reviews'
+          : reviews.map((column) => (
+            <div className={style.column} key={column[0].id}>
+              {column.map((review) => (
+                <Review key={review.id} content={review} />
+              ))}
+            </div>
+          ))}
       </div>
     );
   }
