@@ -106,33 +106,27 @@ function PromoFilm({
               <div className={style['film-card__wrap']}>{description}</div>
             </div>
             <div
-              className={`${style['film-card__wrap']} ${style['film-card__translate-top']}`}
+              className={`${style['film-card__wrap']} ${style['film-card__wrap--full']}`}
             >
-              <div className={style['film-card__info']}>
-                {poster}
-                <div className={style['film-card__desc']}>
-                  <Tabs
-                    navigation={NAV_ITEMS}
-                    className={style['film-card__nav']}
-                  >
-                    <>
-                      <MovieRating
-                        rating={movie.rating}
-                        scoresCount={movie.scoresCount}
-                      />
+              {poster}
 
-                      <Overview
-                        description={movie.description}
-                        starring={movie.starring}
-                        director={movie.director}
-                      />
-                    </>
-                    <MovieDetails movie={movie} />
+              <Tabs navigation={NAV_ITEMS}>
+                <>
+                  <MovieRating
+                    rating={movie.rating}
+                    scoresCount={movie.scoresCount}
+                  />
 
-                    <MovieReviews id={movie.id} />
-                  </Tabs>
-                </div>
-              </div>
+                  <Overview
+                    description={movie.description}
+                    starring={movie.starring}
+                    director={movie.director}
+                  />
+                </>
+                <MovieDetails movie={movie} />
+
+                <MovieReviews id={movie.id} />
+              </Tabs>
             </div>
           </>
         )}
@@ -144,9 +138,7 @@ function PromoFilm({
               className={style.head}
               hiddenHeadline
             />
-            <div
-              className={`${style['film-card__wrap']} ${style['film-card__wrap--promo']}`}
-            >
+            <div className={style['film-card__wrap']}>
               {poster}
 
               {description}
