@@ -15,7 +15,7 @@ function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
     <article className={`${s.card} ${className}`}>
       <img
         className={s.card__image}
-        src={previewImage.replace('7.', '8.')}
+        src={previewImage}
         alt='Poster of movie'
         width='280'
         height='175'

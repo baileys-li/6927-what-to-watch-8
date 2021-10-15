@@ -63,12 +63,7 @@ function PromoFilm({
           ${review && style['film-card__poster--small']}
         }`}
       >
-        <img
-          src={movie.posterImage.replace('7.', '8.')}
-          alt='Poster'
-          width='218'
-          height='327'
-        />
+        <img src={movie.posterImage} alt='Poster' width='218' height='327' />
       </div>
     );
 
@@ -81,10 +76,7 @@ function PromoFilm({
           full || review
             ? {}
             : {
-              backgroundImage: `url(${movie.backgroundImage.replace(
-                '7.',
-                '8.',
-              )})`,
+              backgroundImage: `url(${movie.backgroundImage})`,
             }
         }
       >
@@ -93,10 +85,7 @@ function PromoFilm({
             <div
               className={style.overlay}
               style={{
-                backgroundImage: `url(${movie?.backgroundImage?.replace(
-                  '7.',
-                  '8.',
-                )})`,
+                backgroundImage: `url(${movie.backgroundImage})`,
               }}
             >
               <Header
@@ -115,10 +104,7 @@ function PromoFilm({
             <div
               className={`${style.hero} ${style.overlay}`}
               style={{
-                backgroundImage: `url(${movie?.backgroundImage?.replace(
-                  '7.',
-                  '8.',
-                )})`,
+                backgroundImage: `url(${movie.backgroundImage})`,
               }}
             >
               <Header
