@@ -4,8 +4,8 @@ import CatalogType from '../../types/catalog-type';
 import useData from '../../hooks/useData';
 import MovieType from '../../types/movie-type';
 
-function Catalog({ genres, similar = false }: CatalogType): JSX.Element {
-  const { isLoaded, error, response: list } = useData<MovieType[]>('/films');
+function Catalog({ genres, similar = false, path }: CatalogType): JSX.Element {
+  const { isLoaded, error, response: list } = useData<MovieType[]>(path);
 
   if (error) {
     return <div>Error: {error.message}</div>;

@@ -16,14 +16,11 @@ import type MovieType from '../../types/movie-type';
 
 import { EndPoint } from '../../const';
 import { adaptFromSnakeToCamel } from '../../utils/adapter';
+import type RouteParams from '../../types/route-params-type';
 
 type PromoFilmProps = {
   full?: boolean;
   review?: boolean;
-};
-
-type RouteParams = {
-  id: string | undefined;
 };
 
 const NAV_ITEMS = ['Overview', 'Details', 'Reviews'];
