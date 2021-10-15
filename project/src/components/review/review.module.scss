@@ -5,7 +5,7 @@
   line-height: 24px;
   padding-top: 20px;
   padding-bottom: 20px;
-  padding-right: 75px;
+  padding-right: var(--side-offset);
   position: relative;
   margin: 0;
 }

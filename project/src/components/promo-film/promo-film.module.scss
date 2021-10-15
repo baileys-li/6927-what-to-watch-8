@@ -50,7 +50,7 @@
   max-width: 1300px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 75px;
+  padding: 0 var(--side-offset);
 }
 
 .film-card__info {
