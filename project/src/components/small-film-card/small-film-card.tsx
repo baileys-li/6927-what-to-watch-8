@@ -1,30 +1,28 @@
 import { Link } from 'react-router-dom';
 import s from './small-film-card.module.scss';
-import type SmallFilmCardType from '../../types/small-fim-card-type';
+import { adaptFromSnakeToCamel } from '../../utils/adapter';
+import type MovieType from '../../types/movie-type';
 
 type SmallFilmCardProps = {
-  movie: SmallFilmCardType;
+  movie: Pick<MovieType, 'name' | 'id' | 'previewImage'>;
   className?: string;
-  id: number;
 };
 
-function SmallFilmCard({
-  movie,
-  className,
-  id,
-}: SmallFilmCardProps): JSX.Element {
+function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
+  const { name, previewImage, id }: MovieType = adaptFromSnakeToCamel(movie);
+
   return (
     <article className={`${s.card} ${className}`}>
       <img
         className={s.card__image}
-        src={movie.imageSource}
+        src={previewImage}
         alt='Poster of movie'
         width='280'
         height='175'
       />
       <h3 className={s.card__title}>
         <Link to={`/films/${id}`} className={s.card__link}>
-          {movie.title}
+          {name}
         </Link>
       </h3>
     </article>

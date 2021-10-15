@@ -16,3 +16,12 @@ export const enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+
+export const enum EndPoint {
+  Base = 'https://8.react.pages.academy/wtw',
+  Films = '/films',
+  Promo = '/promo',
+  Favorite = '/favorite',
+
+}

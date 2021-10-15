@@ -1,0 +1,29 @@
+.nav {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 35px;
+}
+
+.link {
+  background-color: transparent;
+  border: 0;
+  color: #eee5b5;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0 0 15px;
+  border-bottom: 4px solid transparent;
+
+  &:focus-within,
+  &:hover,
+  &[aria-selected='true'] {
+    border-color: currentColor;
+  }
+
+  &[aria-selected='true'] {
+    font-weight: bold;
+  }
+}

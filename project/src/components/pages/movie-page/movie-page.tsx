@@ -2,20 +2,17 @@ import Footer from '../../footer/footer';
 import PromoFilm from '../../promo-film/promo-film';
 import Catalog from '../../catalog/catalog';
 
-import type SmallFilmCardType from '../../../types/small-fim-card-type';
-import type MovieType from '../../../types/movie-type';
+import { useParams } from 'react-router';
+import type RouteParams from '../../../types/route-params-type';
 
-type MainPageType = {
-  promo: MovieType;
-  list: Array<SmallFilmCardType>;
-};
+function MoviePage(): JSX.Element {
+  const { id } = useParams<RouteParams>();
 
-function MoviePage({ list, promo }: MainPageType): JSX.Element {
   return (
     <>
-      <PromoFilm movie={promo} full />
+      <PromoFilm full />
       <div className='page-content'>
-        <Catalog list={list} similar />
+        <Catalog path={`/films/${id}/similar`} similar />
         <Footer />
       </div>
     </>

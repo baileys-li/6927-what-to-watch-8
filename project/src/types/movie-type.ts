@@ -1,10 +1,10 @@
 type MovieType = {
   id: number,
   name: string,
-  poster: string,
-  preview: string,
-  background: string,
-  backColor: string,
+  posterImage: string,
+  previewImage: string,
+  backgroundImage: string,
+  backgroundColor: string,
   videoLink: string,
   previewVideoLink: string,
   description: string | Array<string>,
@@ -15,7 +15,7 @@ type MovieType = {
   runTime: number,
   genre: string,
   released: number,
-  favorite: boolean
+  isFavorite: boolean
 }
 export default MovieType;
 

@@ -2,20 +2,14 @@ import Footer from '../../footer/footer';
 import PromoFilm from '../../promo-film/promo-film';
 import Catalog from '../../catalog/catalog';
 
-import type CatalogType from '../../../types/catalog-type';
-import type MovieType from '../../../types/movie-type';
+import GENRES from '../../../mock/genres';
 
-type MainPageType = {
-  promo: MovieType;
-  catalog: CatalogType;
-};
-
-function MainPage({ catalog, promo }: MainPageType): JSX.Element {
+function MainPage(): JSX.Element {
   return (
     <>
-      <PromoFilm movie={promo} />
+      <PromoFilm />
       <div className='page-content'>
-        <Catalog list={catalog.list} genres={catalog.genres} />
+        <Catalog genres={GENRES} path='/films' />
         <Footer />
       </div>
     </>
