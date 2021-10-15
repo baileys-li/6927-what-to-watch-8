@@ -51,27 +51,32 @@
   margin-left: auto;
   margin-right: auto;
   padding: 0 var(--side-offset);
+
+  &--promo {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px 40px;
+  }
+
+  @media (max-width: 600px) {
+    &--promo {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+  }
 }
 
 .film-card__info {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
 }
 
-.film-card__poster {
+.poster {
   border-radius: 5px;
-  overflow: hidden;
-  -webkit-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.4);
-  width: 218px;
-  height: 327px;
-  margin-right: 40px;
-  -ms-flex-negative: 0;
   flex-shrink: 0;
+  display: block;
+  object-fit: cover;
 
   &--big {
     width: 273px;
@@ -82,15 +87,8 @@
     height: 198px;
     margin-left: auto;
     margin-right: auto;
-    -webkit-transform: translateY(40px);
     transform: translateY(40px);
     position: relative;
-  }
-  & img {
-    vertical-align: top;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
   }
 }
 
@@ -153,4 +151,3 @@
 .film-card__details-value {
   color: #131313;
 }
-

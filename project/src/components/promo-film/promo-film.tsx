@@ -57,14 +57,16 @@ function PromoFilm({
       />
     );
     const poster = (
-      <div
-        className={`${style['film-card__poster']}
-          ${full && style['film-card__poster--big']}
-          ${review && style['film-card__poster--small']}
-        }`}
-      >
-        <img src={movie.posterImage} alt='Poster' width='218' height='327' />
-      </div>
+      <img
+        src={movie.posterImage}
+        alt='Poster'
+        width='218'
+        height='327'
+        className={`${style.poster}
+      ${full ? style['poster--big'] : ''}
+      ${review ? style['poster--small'] : ''}
+    `}
+      />
     );
 
     return (
@@ -81,9 +83,7 @@ function PromoFilm({
       >
         {review && (
           <>
-            <div
-              className={style.overlay}
-            >
+            <div className={style.overlay}>
               <Header
                 headline='What to Watch'
                 className={style.head}
@@ -97,9 +97,7 @@ function PromoFilm({
         )}
         {full && (
           <>
-            <div
-              className={`${style.hero} ${style.overlay}`}
-            >
+            <div className={`${style.hero} ${style.overlay}`}>
               <Header
                 headline='What to Watch'
                 className={style.head}
@@ -146,12 +144,12 @@ function PromoFilm({
               className={style.head}
               hiddenHeadline
             />
-            <div className={style['film-card__wrap']}>
-              <div className={style['film-card__info']}>
-                {poster}
+            <div
+              className={`${style['film-card__wrap']} ${style['film-card__wrap--promo']}`}
+            >
+              {poster}
 
-                {description}
-              </div>
+              {description}
             </div>
           </>
         )}
