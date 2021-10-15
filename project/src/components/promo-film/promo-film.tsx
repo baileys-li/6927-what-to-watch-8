@@ -15,6 +15,7 @@ import type LinkType from '../../types/link';
 import type MovieType from '../../types/movie-type';
 
 import { EndPoint } from '../../const';
+import { adaptFromSnakeToCamel } from '../../utils/adapter';
 
 type PromoFilmProps = {
   full?: boolean;
@@ -35,7 +36,7 @@ function PromoFilm({
 
   const target = id === undefined ? EndPoint.Promo : `/films/${id}`;
 
-  const { isLoaded, error, response: movie } = useData<MovieType>(target);
+  const { isLoaded, error, response } = useData<MovieType>(target);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -43,9 +44,9 @@ function PromoFilm({
 
   if (!isLoaded) {
     return <div>Loading...</div>;
-  }
+  } else {
+    const movie = adaptFromSnakeToCamel(response);
 
-  if (movie !== undefined) {
     const breadcrumbs: Array<LinkType> = [
       { href: '/films', text: movie.name },
       { text: 'Add review' },
@@ -287,7 +288,6 @@ function PromoFilm({
       </section>
     );
   }
-  return <p>Stupid sting, because TypeScript fuck my brains :C</p>;
 }
 
 export default PromoFilm;

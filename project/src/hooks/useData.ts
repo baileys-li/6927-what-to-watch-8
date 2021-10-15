@@ -1,6 +1,5 @@
 
 import { useState, useEffect } from 'react';
-import { adaptFromSnakeToCamel } from '../utils/adapter';
 import { EndPoint } from '../const';
 
 import type ErrorType from '../types/error-type';
@@ -21,7 +20,7 @@ function useData<T>(target: string): FetchedResponse<T> {
       .then((res) => res.json())
       .then(
         (result) => {
-          setResponse(adaptFromSnakeToCamel(result));
+          setResponse(result);
           setIsLoaded(true);
         },
 
