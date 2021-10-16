@@ -17,34 +17,35 @@ function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setPlaying] = useState<boolean>(false);
+  const [timer, setTimer] = useState<
+    boolean | number | ReturnType<typeof setTimeout>
+  >(false);
 
   useEffect(() => {
-    const timer = setTimeout(playVideo, 1000);
-
-    if (!isPlaying) {
-      stopVideo();
-      clearTimeout(timer);
+    if (isPlaying) {
+      const timeout = setTimeout(() => videoRef.current?.play(), 1000);
+      setTimer(timeout);
+    } else {
+      videoRef.current?.load();
+      timer && clearTimeout(timer as number);
     }
   }, [isPlaying]);
 
-  function changeState() {
-    setPlaying((currentState) => !currentState);
-  }
   function playVideo() {
-    videoRef.current?.play();
+    setPlaying(true);
   }
 
   function stopVideo() {
-    videoRef.current?.load();
+    setPlaying(false);
   }
 
   return (
     <article
       className={`${s.wrapper} ${className}`}
-      onMouseEnter={changeState}
-      onMouseLeave={changeState}
-      onFocus={changeState}
-      onBlur={changeState}
+      onMouseEnter={playVideo}
+      onMouseLeave={stopVideo}
+      onFocus={playVideo}
+      onBlur={stopVideo}
     >
       <video
         className={s.image}
