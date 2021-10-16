@@ -17,18 +17,15 @@ function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setPlaying] = useState<boolean>(false);
-  const [timer, setTimer] = useState<
-    boolean | number | ReturnType<typeof setTimeout>
-  >(false);
 
   useEffect(() => {
-    if (isPlaying) {
-      const timeout = setTimeout(() => videoRef.current?.play(), 1000);
-      setTimer(timeout);
-    } else {
-      videoRef.current?.load();
-      timer && clearTimeout(timer as number);
-    }
+    const timer = isPlaying && setTimeout(() => videoRef.current?.play(), 1000);
+
+    !isPlaying && videoRef.current?.load();
+
+    return () => {
+      timer && clearTimeout(timer);
+    };
   }, [isPlaying]);
 
   function playVideo() {
