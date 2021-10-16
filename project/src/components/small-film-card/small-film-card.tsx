@@ -1,8 +1,10 @@
+import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import s from './small-film-card.module.scss';
 import { adaptFromSnakeToCamel } from '../../utils/adapter';
+
+import s from './small-film-card.module.scss';
+
 import type MovieType from '../../types/movie-type';
-import { createRef } from 'react';
 
 type SmallFilmCardProps = {
   movie: Pick<MovieType, 'name' | 'id' | 'previewImage' | 'previewVideoLink'>;
@@ -13,8 +15,21 @@ function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
   const { id, name, previewImage, previewVideoLink }: MovieType =
     adaptFromSnakeToCamel(movie);
 
-  const videoRef = createRef<HTMLVideoElement>();
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [isPlaying, setPlaying] = useState<boolean>(false);
 
+  useEffect(() => {
+    const timer = setTimeout(playVideo, 1000);
+
+    if (!isPlaying) {
+      stopVideo();
+      clearTimeout(timer);
+    }
+  }, [isPlaying]);
+
+  function changeState() {
+    setPlaying((currentState) => !currentState);
+  }
   function playVideo() {
     videoRef.current?.play();
   }
@@ -26,10 +41,10 @@ function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
   return (
     <article
       className={`${s.wrapper} ${className}`}
-      onMouseEnter={playVideo}
-      onMouseLeave={stopVideo}
-      onFocus={playVideo}
-      onBlur={stopVideo}
+      onMouseEnter={changeState}
+      onMouseLeave={changeState}
+      onFocus={changeState}
+      onBlur={changeState}
     >
       <video
         className={s.image}
