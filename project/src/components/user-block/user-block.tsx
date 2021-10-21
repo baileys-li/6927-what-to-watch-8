@@ -1,19 +1,25 @@
 import { Link, useLocation } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import useTypedSelector from '../../hooks/useTypedSelector';
+
 import style from './user-block.module.scss';
 
-type UserBlockType = {
-  authenticated?: boolean;
+type UserBlockProps = {
+  className?: string;
 };
 
-function UserBlock({ authenticated = false }: UserBlockType): JSX.Element {
+function UserBlock({ className }: UserBlockProps): JSX.Element {
   const avatar = (
     <img src='img/avatar.jpg' alt='User avatar' width='63' height='63' />
   );
   const { pathname } = useLocation();
 
+  const { user } = useTypedSelector((state) => state);
+
+  const authenticated = user.status === AuthorizationStatus.Auth;
+
   return (
-    <div className={style.wrapper}>
+    <div className={[style.wrapper, className].join(' ')}>
       {authenticated &&
         (pathname === AppRoute.MyList ? (
           <picture className={style.avatar}>{avatar}</picture>

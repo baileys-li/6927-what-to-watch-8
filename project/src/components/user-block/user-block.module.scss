@@ -2,17 +2,11 @@
   display: grid;
   align-items: center;
 
-  // TODO: separate this style
   margin-block-start: 1em;
   margin-block-end: 1em;
-  margin-left: auto;
 
   gap: 15px;
   grid-template-columns: 63px auto;
-
-  .link {
-    cursor: pointer;
-  }
 }
 
 .avatar {
@@ -44,6 +38,8 @@
   text-decoration: none;
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
+  cursor: pointer;
+  grid-column: -2 / -1;
 
   &:hover,
   &:focus-visible {

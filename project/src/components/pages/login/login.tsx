@@ -7,7 +7,6 @@ function Login(): JSX.Element {
       <Header
         className='user-page__head'
         headline='Sign in'
-        authenticated={false}
         hideAuth
       />
 
