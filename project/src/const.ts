@@ -23,11 +23,25 @@ export const enum UserActionType {
   Logout = 'SIGN OUT'
 }
 
+export const enum Genre {
+  all = 'All genres',
+  comedies = 'Comedies',
+  crime = 'Crime',
+  documentary = 'Documentary',
+  dramas = 'Dramas',
+  horror = 'Horror',
+  pg = 'Kids & Family',
+  romance = 'Romance',
+  sciFi = 'Sci-Fi',
+  thrillers = 'Thrillers',
+}
+
 
 export const enum EndPoint {
   Base = 'https://8.react.pages.academy/wtw',
   Films = '/films',
   Promo = '/promo',
   Favorite = '/favorite',
-
+  Login = '/login',
+  Logout = '/logout'
 }
