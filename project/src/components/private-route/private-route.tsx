@@ -7,15 +7,13 @@ import { RootState } from '../../store/reducers';
 type PrivateRouteProps = RouteProps;
 
 function PrivateRoute({
-  exact,
-  path,
-  component,
   children,
+  ...props
 }: PrivateRouteProps): JSX.Element {
   const { status } = useSelector((state: RootState) => state.user);
 
   return (
-    <Route exact={exact} path={path} component={component}>
+    <Route {...props}>
       {status === AuthorizationStatus.Auth ? (
         children
       ) : (
