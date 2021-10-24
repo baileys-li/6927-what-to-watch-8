@@ -6,22 +6,27 @@ import LoginResponse from '../../types/loginResponse';
 import UserState from '../../types/userState';
 import { requireAuthorization, requireLogout } from './authorizationActions';
 
-export const checkAuthAction = (): ThunkActionResult =>
-  async (dispatch, _getState, api) => {
+export const checkAuthAction =
+  (): ThunkActionResult => async (dispatch, _getState, api) => {
     const { data } = await api.get<LoginResponse>(EndPoint.Login);
-    dispatch(requireAuthorization(adaptLoginResponse(data)));
-  };
-
-export const loginAction = ({ login: email, password }: AuthData): ThunkActionResult =>
-  async (dispatch, _getState, api) => {
-    const { data } = await api.post<LoginResponse>(EndPoint.Login, { email, password });
-    saveToken(data.token);
 
     dispatch(requireAuthorization(adaptLoginResponse(data)));
   };
 
-export const logoutAction = (): ThunkActionResult =>
-  async (dispatch, _getState, api) => {
+export const loginAction =
+  ({ login: email, password }: AuthData): ThunkActionResult =>
+    async (dispatch, _getState, api) => {
+      const { data } = await api.post<LoginResponse>(EndPoint.Login, {
+        email,
+        password,
+      });
+      saveToken(data.token);
+
+      dispatch(requireAuthorization(adaptLoginResponse(data)));
+    };
+
+export const logoutAction =
+  (): ThunkActionResult => async (dispatch, _getState, api) => {
     api.delete(EndPoint.Logout);
     dropToken();
     dispatch(requireLogout());
