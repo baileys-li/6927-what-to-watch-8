@@ -7,7 +7,7 @@ import { requireAuthorization } from './actions/authorizationActions';
 import { AuthorizationStatus } from '../const';
 
 const api = createAPI(
-  () => store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth)),
+  () => store.dispatch(requireAuthorization({ status: AuthorizationStatus.NoAuth })),
 );
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));

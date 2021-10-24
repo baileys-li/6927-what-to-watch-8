@@ -1,21 +1,15 @@
 import { AuthorizationStatus, UserActionType } from '../../const';
-
-type UserState = {
-  status: AuthorizationStatus
-};
-
-type UserAction = {
-  type: string;
-}
+import { Actions } from '../../types/action';
+import type UserState from '../../types/userState';
 
 const InitialState: UserState = {
   status: AuthorizationStatus.Unknown,
 };
 
-function userReducer(state = InitialState, action: UserAction): UserState {
+function userReducer(state = InitialState, action: Actions): UserState {
   switch (action.type) {
     case UserActionType.Login:
-      return { status: AuthorizationStatus.Auth };
+      return action.payload;
     case UserActionType.Logout:
       return { status: AuthorizationStatus.NoAuth };
     default:
@@ -24,3 +18,4 @@ function userReducer(state = InitialState, action: UserAction): UserState {
 }
 
 export default userReducer;
+

@@ -3,21 +3,21 @@ import { dropToken, saveToken } from '../../services/token';
 import { ThunkActionResult } from '../../types/action';
 import { AuthData } from '../../types/auth-data';
 import LoginResponse from '../../types/loginResponse';
+import UserState from '../../types/userState';
 import { requireAuthorization, requireLogout } from './authorizationActions';
 
 export const checkAuthAction = (): ThunkActionResult =>
   async (dispatch, _getState, api) => {
-    await api.get(EndPoint.Login)
-      .then(() => {
-        dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      });
+    const { data } = await api.get<LoginResponse>(EndPoint.Login);
+    dispatch(requireAuthorization(adaptLoginResponse(data)));
   };
 
 export const loginAction = ({ login: email, password }: AuthData): ThunkActionResult =>
   async (dispatch, _getState, api) => {
-    const { data: { token } } = await api.post<LoginResponse>(EndPoint.Login, { email, password });
-    saveToken(token);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    const { data } = await api.post<LoginResponse>(EndPoint.Login, { email, password });
+    saveToken(data.token);
+
+    dispatch(requireAuthorization(adaptLoginResponse(data)));
   };
 
 export const logoutAction = (): ThunkActionResult =>
@@ -26,3 +26,13 @@ export const logoutAction = (): ThunkActionResult =>
     dropToken();
     dispatch(requireLogout());
   };
+
+function adaptLoginResponse(data: LoginResponse): UserState {
+  const adaptedData: any = { ...data };
+  delete adaptedData.token;
+  adaptedData.avatarURL = data['avatar_url'];
+  delete adaptedData['avatar_url'];
+  adaptedData.status = AuthorizationStatus.Auth;
+
+  return adaptedData;
+}

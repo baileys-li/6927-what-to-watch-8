@@ -1,8 +1,9 @@
-import { AuthorizationStatus, UserActionType } from '../../const';
+import { UserActionType } from '../../const';
+import UserState from '../../types/userState';
 
-export const requireAuthorization = (authStatus: AuthorizationStatus) => ({
+export const requireAuthorization = (authData: UserState) => ({
   type: UserActionType.Login,
-  payload: authStatus,
+  payload: authData,
 } as const);
 
 export const requireLogout = () => ({

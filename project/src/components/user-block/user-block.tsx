@@ -1,7 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { checkAuthAction } from '../../store/actions/apiActions';
 import { RootState } from '../../store/reducers';
+import { UserFullState } from '../../types/userState';
 import style from './user-block.module.scss';
 
 type UserBlockProps = {
@@ -9,14 +11,20 @@ type UserBlockProps = {
 };
 
 function UserBlock({ className }: UserBlockProps): JSX.Element {
-  const avatar = (
-    <img src='img/avatar.jpg' alt='User avatar' width='63' height='63' />
-  );
   const { pathname } = useLocation();
 
-  const { status } = useSelector((state: RootState) => state.user);
+  const user = useSelector((state: RootState) => state.user as UserFullState);
 
-  const authenticated = status === AuthorizationStatus.Auth;
+  const authenticated = user.status === AuthorizationStatus.Auth;
+  const dispatch = useDispatch();
+
+  if (!authenticated) {
+    dispatch(checkAuthAction());
+  }
+
+  const avatar = (
+    <img src={user.avatarURL} alt='User avatar' width='63' height='63' />
+  );
 
   return (
     <div className={[style.wrapper, className].join(' ')}>
