@@ -1,15 +1,39 @@
 import Header from '../../header/header';
 import Footer from '../../footer/footer';
 import style from './login.module.scss';
+import { FormEvent, useRef } from 'react';
+import { useDispatch } from 'react-redux';
+import { loginAction } from '../../../store/actions/apiActions';
+import { useHistory } from 'react-router';
+import { AppRoute } from '../../../const';
 
 function Login(): JSX.Element {
-  const message = 'Please enter a valid email address';
+  const message = '';
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const loginRef = useRef<HTMLInputElement | null>(null);
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    const authData = {
+      login: loginRef.current?.value as string,
+      password: passwordRef.current?.value as string,
+    };
+
+    dispatch(loginAction(authData));
+
+    history.push(AppRoute.Main);
+  };
   return (
     <div className='user-page'>
       <Header className='user-page__head' headline='Sign in' hideAuth />
 
       <div className={`${style.wrapper} user-page__content`}>
-        <form action='#' className={style.form}>
+        <form action='' className={style.form} onSubmit={handleSubmit}>
           {message && <p className={style.message}>{message}</p>}
           <fieldset className={style.fields}>
             <legend className='visually-hidden'>Login Form</legend>
@@ -21,6 +45,7 @@ function Login(): JSX.Element {
                 placeholder='Email address'
                 name='user-email'
                 required
+                ref={loginRef}
               />
             </label>
 
@@ -32,11 +57,12 @@ function Login(): JSX.Element {
                 placeholder='Password'
                 name='user-password'
                 required
+                ref={passwordRef}
               />
             </label>
           </fieldset>
           <button className={style.submit} type='submit'>
-              Sign in
+            Sign in
           </button>
         </form>
       </div>
