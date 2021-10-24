@@ -1,8 +1,7 @@
-import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
 import { RouteProps } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { RootState } from '../../store/reducers';
+import useUserData from '../../hooks/useUserData';
 
 type PrivateRouteProps = RouteProps;
 
@@ -10,7 +9,7 @@ function PrivateRoute({
   children,
   ...props
 }: PrivateRouteProps): JSX.Element {
-  const { status } = useSelector((state: RootState) => state.user);
+  const { status } = useUserData();
 
   return (
     <Route {...props}>

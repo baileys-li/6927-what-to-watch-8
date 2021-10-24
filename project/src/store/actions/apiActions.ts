@@ -9,8 +9,9 @@ import { requireAuthorization, requireLogout } from './authorizationActions';
 export const checkAuthAction =
   (): ThunkActionResult => async (dispatch, _getState, api) => {
     const { data } = await api.get<LoginResponse>(EndPoint.Login);
-
-    dispatch(requireAuthorization(adaptLoginResponse(data)));
+    if (data) {
+      dispatch(requireAuthorization(adaptLoginResponse(data)));
+    }
   };
 
 export const loginAction =

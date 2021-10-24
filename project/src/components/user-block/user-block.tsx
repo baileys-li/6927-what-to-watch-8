@@ -1,10 +1,9 @@
 import { MouseEvent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import useUserData from '../../hooks/useUserData';
 import { checkAuthAction, logoutAction } from '../../store/actions/apiActions';
-import { RootState } from '../../store/reducers';
-import { UserFullState } from '../../types/userState';
 import style from './user-block.module.scss';
 
 type UserBlockProps = {
@@ -14,9 +13,7 @@ type UserBlockProps = {
 function UserBlock({ className }: UserBlockProps): JSX.Element {
   const { pathname } = useLocation();
   const history = useHistory();
-  const { status, avatarURL } = useSelector(
-    (state: RootState) => state.user as UserFullState,
-  );
+  const { status, avatarURL } = useUserData();
   const dispatch = useDispatch();
 
   if (status === AuthorizationStatus.Unknown) {
