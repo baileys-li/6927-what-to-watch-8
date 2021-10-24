@@ -1,7 +1,7 @@
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import useTypedSelector from '../../hooks/useTypedSelector';
-
+import { RootState } from '../../store/reducers';
 import style from './user-block.module.scss';
 
 type UserBlockProps = {
@@ -14,9 +14,9 @@ function UserBlock({ className }: UserBlockProps): JSX.Element {
   );
   const { pathname } = useLocation();
 
-  const { user } = useTypedSelector((state) => state);
+  const { status } = useSelector((state: RootState) => state.user);
 
-  const authenticated = user.status === AuthorizationStatus.Auth;
+  const authenticated = status === AuthorizationStatus.Auth;
 
   return (
     <div className={[style.wrapper, className].join(' ')}>
