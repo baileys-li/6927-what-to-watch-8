@@ -19,39 +19,7 @@
     font-weight: 400;
   }
 
-  &__genres-list {
-    padding: 15px 0 25px;
-    margin: 0 -10px;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-  }
 
-  &__genres-item {
-    margin: 10px;
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-
-  &__genres-link {
-    display: block;
-    color: #dfcf77;
-    text-decoration: none;
-
-    padding-bottom: 15px;
-    transition: font-weight;
-
-    &[aria-selected='true'] {
-      font-weight: bold;
-    }
-    &[aria-selected='true'],
-    &:hover,
-    &:focus-visible {
-      text-decoration: underline;
-      text-underline-offset: 18px;
-    }
-  }
 
   &__films-list {
     display: grid;

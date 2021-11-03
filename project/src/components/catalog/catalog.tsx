@@ -3,8 +3,9 @@ import SmallFilmCard from '../small-film-card/small-film-card';
 import CatalogType from '../../types/catalog-type';
 import useData from '../../hooks/useData';
 import MovieType from '../../types/movie-type';
+import GenresList from '../genres-list/genres-list';
 
-function Catalog({ genres, similar = false, path }: CatalogType): JSX.Element {
+function Catalog({ genres = false, similar = false, path }: CatalogType): JSX.Element {
   const { isLoaded, error, response: list } = useData<MovieType[]>(path);
 
   if (error) {
@@ -26,21 +27,7 @@ function Catalog({ genres, similar = false, path }: CatalogType): JSX.Element {
           {similar ? 'More like this' : 'Catalog'}
         </h2>
 
-        {genres && (
-          <ul className={style['catalog__genres-list']}>
-            {genres.map((genre, index) => (
-              <li className={style['catalog__genres-item']} key={genre}>
-                <a
-                  href='#'
-                  className={style['catalog__genres-link']}
-                  aria-selected={index === 0}
-                >
-                  {genre}
-                </a>
-              </li>
-            ))}
-          </ul>
-        )}
+        {genres && (<GenresList />)}
 
         <div className={style['catalog__films-list']}>
           {list.map(

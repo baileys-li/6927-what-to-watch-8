@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import useUserData from '../../hooks/useUserData';
-import { checkAuthAction, logoutAction } from '../../store/actions/apiActions';
+import { checkAuthAction, logoutAction } from '../../store/actions/authorizationActions';
 import style from './user-block.module.scss';
 
 type UserBlockProps = {
