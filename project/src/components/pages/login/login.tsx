@@ -3,7 +3,7 @@ import Footer from '../../footer/footer';
 import style from './login.module.scss';
 import { FormEvent, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginAction } from '../../../store/actions/apiActions';
+import { loginAction } from '../../../store/actions/authorizationActions';
 import { useHistory } from 'react-router';
 import { AppRoute } from '../../../const';
 
