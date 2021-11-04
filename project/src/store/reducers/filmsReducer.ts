@@ -30,7 +30,7 @@ function filmsReducer(state: FilmsState = InitialState, action: FilmsActions) : 
       return {...state, filter: action.payload};
 
     default:
-      return InitialState;
+      return state;
   }
 }
 

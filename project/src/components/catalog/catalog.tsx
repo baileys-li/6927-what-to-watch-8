@@ -1,18 +1,16 @@
 import style from './catalog.module.scss';
 import SmallFilmCard from '../small-film-card/small-film-card';
 import CatalogType from '../../types/catalog-type';
-import useData from '../../hooks/useData';
-import MovieType from '../../types/movie-type';
 import GenresList from '../genres-list/genres-list';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers';
 
 function Catalog({ genres = false, similar = false, path }: CatalogType): JSX.Element {
-  const { isLoaded, error, response: list } = useData<MovieType[]>(path);
+  // const { isLoaded, error, response: list } = useData<MovieType[]>(path);
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+  const { list, loadingList } = useSelector((state: RootState) => state.movies);
 
-  if (!isLoaded || list === undefined) {
+  if (loadingList) {
     return <div>Loading...</div>;
   } else {
     return (
@@ -30,13 +28,13 @@ function Catalog({ genres = false, similar = false, path }: CatalogType): JSX.El
         {genres && (<GenresList />)}
 
         <div className={style['catalog__films-list']}>
-          {list.map(
+          {list?.map(
             (movie, index) =>
               index < 8 && <SmallFilmCard movie={movie} key={movie.id} />,
           )}
         </div>
 
-        {list.length > 9 && (
+        {list && list.length > 9 && (
           <button className={style['catalog__button']} type='button'>
             Show more
           </button>

@@ -3,11 +3,10 @@ import { applyMiddleware, createStore } from 'redux';
 import rootReducer from './reducers';
 import thunk from 'redux-thunk';
 import { createAPI } from '../services/api';
-import { requireAuthorization } from './actions/authorizationActions';
-import { AuthorizationStatus } from '../const';
+import { requireLogout } from './actions/authorizationActions';
 
 const api = createAPI(
-  () => store.dispatch(requireAuthorization({ status: AuthorizationStatus.NoAuth })),
+  () => store.dispatch(requireLogout()),
 );
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));
