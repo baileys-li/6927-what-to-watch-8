@@ -9,13 +9,15 @@ import { adaptFromSnakeToCamel } from '../../utils/adapter';
 export const enum FilmsActionsType {
   Selected = 'SET_SELECTED_MOVIE',
   List = 'SET_MOVIE_LIST',
-  Filter = 'SET_FILTER'
+  Filter = 'SET_FILTER',
+  Genres = 'SET_GENRES',
 }
 
 export type FilmsActions =
   | ReturnType<typeof updateSelected>
   | ReturnType<typeof updateList>
-  | ReturnType<typeof updateFilter>;
+  | ReturnType<typeof updateFilter>
+  | ReturnType<typeof updateGenres>;
 
 /* Simple Actions for Reducer */
 export const updateSelected = (movie: MovieType) => ({
@@ -28,11 +30,15 @@ export const updateList = (movies: MovieType[]) => ({
   payload: movies,
 } as const);
 
-export const updateFilter = (filter: Genre) => ({
+export const updateFilter = (filter: string) => ({
   type: FilmsActionsType.Filter,
   payload: filter,
 } as const);
 
+export const updateGenres = (genres: Set<string>) => ({
+  type: FilmsActionsType.Genres,
+  payload: genres,
+} as const);
 
 /* Async Actions */
 type ThunkActionResult<R = Promise<void>> = ThunkAction<
@@ -47,7 +53,13 @@ export const getAllMovies =
   (): ThunkActionResult => async (dispatch, _getState, api) => {
     await api.get<ServerResponseMovieType[]>(EndPoint.Films).then(({data}) => {
       const newArray : MovieType[] = [];
-      data.map((movie) => newArray.push(adaptFromSnakeToCamel(movie)));
+      const genres : Set<string> = new Set([Genre.all]);
+      data.map((movie) => {
+        genres.add(movie.genre);
+        return newArray.push(adaptFromSnakeToCamel(movie));
+      });
+
       dispatch(updateList(newArray));
+      dispatch(updateGenres(genres));
     });
   };

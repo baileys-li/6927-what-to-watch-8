@@ -5,9 +5,10 @@ import { FilmsActions, FilmsActionsType } from '../actions/filmsActions';
 type FilmsState = {
   selected: MovieType | null,
   list: Array<MovieType> | null;
-  filter: Genre;
+  filter: string;
   loadingSelected: boolean;
   loadingList: boolean;
+  genres: Set<string> | null
 }
 
 const InitialState = {
@@ -16,6 +17,7 @@ const InitialState = {
   filter: Genre.all,
   loadingSelected: true,
   loadingList: true,
+  genres: null,
 };
 
 function filmsReducer(state: FilmsState = InitialState, action: FilmsActions) : FilmsState {
@@ -28,6 +30,8 @@ function filmsReducer(state: FilmsState = InitialState, action: FilmsActions) : 
 
     case FilmsActionsType.Filter:
       return {...state, filter: action.payload};
+    case FilmsActionsType.Genres:
+      return {...state, genres: action.payload};
 
     default:
       return state;
