@@ -18,6 +18,7 @@ function Catalog({
   );
 
   const [filteredList, setFilteredList] = useState<MovieType[] | null>(null);
+  const [max, setMax] = useState<number>(8);
 
   useEffect(() => {
     list &&
@@ -33,10 +34,10 @@ function Catalog({
   } else {
     return (
       <section
-        className={`${style.catalog} ${similar && style['catalog--like-this']}`}
+        className={`${style.root} ${similar ? style['root--like-this'] : ''}`}
       >
         <h2
-          className={`${style.catalog__title} ${!similar && 'visually-hidden'
+          className={`${style.title} ${!similar && 'visually-hidden'
           } `}
         >
           {similar ? 'More like this' : 'Catalog'}
@@ -44,15 +45,17 @@ function Catalog({
 
         {genres && <GenresList />}
 
-        <div className={style['catalog__films-list']}>
+        <div className={style.list}>
           {filteredList?.map(
             (movie, index) =>
-              index < 8 && <SmallFilmCard movie={movie} key={movie.id} />,
+              index < max && <SmallFilmCard movie={movie} key={movie.id} />,
           )}
         </div>
 
-        {filteredList && filteredList.length > 9 && (
-          <button className={style['catalog__button']} type='button'>
+        {filteredList && filteredList.length >= max + 1 && (
+          <button className={style.button} type='button'
+            onClick={() => setMax(() => max + 8)}
+          >
             Show more
           </button>
         )}
