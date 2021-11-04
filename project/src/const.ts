@@ -24,16 +24,7 @@ export const enum UserActionType {
 }
 
 export const enum Genre {
-  all = 'All genres',
-  comedies = 'Comedies',
-  crime = 'Crime',
-  documentary = 'Documentary',
-  dramas = 'Dramas',
-  horror = 'Horror',
-  pg = 'Kids & Family',
-  romance = 'Romance',
-  sciFi = 'Sci-Fi',
-  thrillers = 'Thrillers',
+  Initial = 'All genres',
 }
 
 

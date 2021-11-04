@@ -4,9 +4,7 @@ import { AuthorizationStatus, EndPoint } from '../../const';
 import { dropToken, saveToken } from '../../services/token';
 import { AuthData } from '../../types/auth-data';
 import LoginResponse from '../../types/loginResponse';
-import { ThunkAction } from 'redux-thunk'; //ThunkDispatch
-import { State } from '../../types/state';
-import { AxiosInstance } from 'axios';
+import { ThunkActionResult } from '../../types/thunk-action';
 
 export type UserActions =
   | ReturnType<typeof requireAuthorization>
@@ -24,13 +22,6 @@ export const requireLogout = () =>
   } as const);
 
 /* Async Actions */
-type ThunkActionResult<R = Promise<void>> = ThunkAction<
-  R,
-  State,
-  AxiosInstance,
-  UserActions
->;
-
 export const checkAuthAction =
   (): ThunkActionResult => async (dispatch, _getState, api) => {
     await api.get<LoginResponse>(EndPoint.Login).then((response) => {

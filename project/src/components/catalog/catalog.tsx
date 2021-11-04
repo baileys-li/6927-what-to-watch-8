@@ -23,7 +23,7 @@ function Catalog({
   useEffect(() => {
     list &&
       setFilteredList(
-        filter === Genre.all
+        filter === Genre.Initial
           ? list
           : list.filter((movie) => movie.genre === filter),
       );

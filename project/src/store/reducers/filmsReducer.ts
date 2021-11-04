@@ -1,4 +1,5 @@
 import { Genre } from '../../const';
+import { GenresType } from '../../types/genre-type';
 import MovieType from '../../types/movie-type';
 import { FilmsActions, FilmsActionsType } from '../actions/filmsActions';
 
@@ -8,13 +9,13 @@ type FilmsState = {
   filter: string;
   loadingSelected: boolean;
   loadingList: boolean;
-  genres: Set<string> | null
+  genres: GenresType | null
 }
 
 const InitialState = {
   selected: null,
   list: null,
-  filter: Genre.all,
+  filter: Genre.Initial,
   loadingSelected: true,
   loadingList: true,
   genres: null,

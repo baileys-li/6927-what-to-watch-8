@@ -1,8 +1,7 @@
-import { AxiosInstance } from 'axios';
-import { State } from 'history';
-import { ThunkAction } from 'redux-thunk';
 import { EndPoint, Genre } from '../../const';
+import { GenresType } from '../../types/genre-type';
 import MovieType, { ServerResponseMovieType } from '../../types/movie-type';
+import { ThunkActionResult } from '../../types/thunk-action';
 import { adaptFromSnakeToCamel } from '../../utils/adapter';
 
 /* TypeScript Requirements */
@@ -35,25 +34,17 @@ export const updateFilter = (filter: string) => ({
   payload: filter,
 } as const);
 
-export const updateGenres = (genres: Set<string>) => ({
+export const updateGenres = (genres: GenresType) => ({
   type: FilmsActionsType.Genres,
   payload: genres,
 } as const);
 
 /* Async Actions */
-type ThunkActionResult<R = Promise<void>> = ThunkAction<
-  R,
-  State,
-  AxiosInstance,
-  FilmsActions
->;
-
-
 export const getAllMovies =
   (): ThunkActionResult => async (dispatch, _getState, api) => {
     await api.get<ServerResponseMovieType[]>(EndPoint.Films).then(({data}) => {
-      const newArray : MovieType[] = [];
-      const genres : Set<string> = new Set([Genre.all]);
+      const newArray: MovieType[] = [];
+      const genres: GenresType = new Set([Genre.Initial]);
       data.map((movie) => {
         genres.add(movie.genre);
         return newArray.push(adaptFromSnakeToCamel(movie));
