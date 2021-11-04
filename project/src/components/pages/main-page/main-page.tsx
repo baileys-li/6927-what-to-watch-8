@@ -12,7 +12,7 @@ function MainPage(): JSX.Element {
     <>
       <PromoFilm />
       <div className='page-content'>
-        <Catalog genres path='/films' />
+        <Catalog genres />
         <Footer />
       </div>
     </>

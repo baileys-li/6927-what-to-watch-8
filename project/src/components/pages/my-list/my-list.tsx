@@ -7,7 +7,7 @@ function MyList(): JSX.Element {
   return (
     <div className='user-page'>
       <Header className='user-page__head' headline='My list' />
-      <Catalog path='/favorite' />
+      <Catalog />
       <Footer />
     </div>
   );

@@ -11,7 +11,6 @@ import { Genre } from '../../const';
 function Catalog({
   genres = false,
   similar = false,
-  path,
 }: CatalogType): JSX.Element {
   const { list, loadingList, filter } = useSelector(
     (state: RootState) => state.movies,
@@ -36,10 +35,7 @@ function Catalog({
       <section
         className={`${style.root} ${similar ? style['root--like-this'] : ''}`}
       >
-        <h2
-          className={`${style.title} ${!similar && 'visually-hidden'
-          } `}
-        >
+        <h2 className={`${style.title} ${!similar && 'visually-hidden'} `}>
           {similar ? 'More like this' : 'Catalog'}
         </h2>
 
@@ -53,7 +49,9 @@ function Catalog({
         </div>
 
         {filteredList && filteredList.length >= max + 1 && (
-          <button className={style.button} type='button'
+          <button
+            className={style.button}
+            type='button'
             onClick={() => setMax(() => max + 8)}
           >
             Show more

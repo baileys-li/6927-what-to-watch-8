@@ -12,7 +12,7 @@ function MoviePage(): JSX.Element {
     <>
       <PromoFilm full />
       <div className='page-content'>
-        <Catalog path={`/films/${id}/similar`} similar />
+        <Catalog similar />
         <Footer />
       </div>
     </>
