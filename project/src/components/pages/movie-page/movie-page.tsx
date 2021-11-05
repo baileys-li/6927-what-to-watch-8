@@ -2,11 +2,11 @@ import Footer from '../../footer/footer';
 import PromoFilm from '../../promo-film/promo-film';
 import Catalog from '../../catalog/catalog';
 
-import { useParams } from 'react-router';
-import type RouteParams from '../../../types/route-params-type';
+// import { useParams } from 'react-router';
+// import type RouteParams from '../../../types/route-params-type';
 
 function MoviePage(): JSX.Element {
-  const { id } = useParams<RouteParams>();
+  // const { id } = useParams<RouteParams>();
 
   return (
     <>
