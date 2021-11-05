@@ -1,5 +1,5 @@
 import style from './catalog.module.scss';
-import SmallFilmCard from '../small-film-card/small-film-card';
+import SmallFilmCard, { SmallFilmCardSkeleton } from '../small-film-card';
 import CatalogType from '../../types/catalog-type';
 import GenresList from '../genres-list/genres-list';
 import { useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ function Catalog({
   genres = false,
   similar = false,
 }: CatalogType): JSX.Element {
-  const { list, loadingList, filter } = useSelector(
+  const { list, filter } = useSelector(
     (state: RootState) => state.movies,
   );
 
@@ -28,37 +28,37 @@ function Catalog({
       );
   }, [filter, list]);
 
-  if (loadingList) {
-    return <div>Loading...</div>;
-  } else {
-    return (
-      <section
-        className={`${style.root} ${similar ? style['root--like-this'] : ''}`}
-      >
-        <h2 className={`${style.title} ${!similar && 'visually-hidden'} `}>
-          {similar ? 'More like this' : 'Catalog'}
-        </h2>
 
-        {genres && <GenresList />}
+  return (
+    <section
+      className={`${style.root} ${similar ? style['root--like-this'] : ''}`}
+    >
+      <h2 className={`${style.title} ${!similar && 'visually-hidden'} `}>
+        {similar ? 'More like this' : 'Catalog'}
+      </h2>
 
-        <div className={style.list}>
-          {filteredList?.map(
+      {genres && <GenresList />}
+
+      <div className={style.list}>
+        {filteredList ?
+          filteredList.map(
             (movie, index) =>
               index < max && <SmallFilmCard movie={movie} key={movie.id} />,
-          )}
-        </div>
+          ) :
+          [...Array(4).keys()].map((key) => <SmallFilmCardSkeleton key={key} />)}
+      </div>
 
-        {filteredList && filteredList.length >= max + 1 && (
-          <button
-            className={style.button}
-            type='button'
-            onClick={() => setMax(() => max + 8)}
-          >
-            Show more
-          </button>
-        )}
-      </section>
-    );
-  }
+      {filteredList && filteredList.length >= max + 1 && (
+        <button
+          className={style.button}
+          type='button'
+          onClick={() => setMax(() => max + 8)}
+        >
+          Show more
+        </button>
+      )}
+    </section>
+  );
+
 }
 export default Catalog;
