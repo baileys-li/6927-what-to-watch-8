@@ -1,21 +1,19 @@
 import { Route, Redirect } from 'react-router-dom';
 import { RouteProps } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
+import useUserData from '../../hooks/useUserData';
 
-type PrivateRouteProps = RouteProps & {
-  authorizationStatus: AuthorizationStatus;
-};
+type PrivateRouteProps = RouteProps;
 
 function PrivateRoute({
-  exact,
-  path,
-  authorizationStatus,
-  component,
   children,
+  ...props
 }: PrivateRouteProps): JSX.Element {
+  const { status } = useUserData();
+
   return (
-    <Route exact={exact} path={path} component={component}>
-      {authorizationStatus === AuthorizationStatus.Auth ? (
+    <Route {...props}>
+      {status === AuthorizationStatus.Auth ? (
         children
       ) : (
         <Redirect to={AppRoute.SignIn} />

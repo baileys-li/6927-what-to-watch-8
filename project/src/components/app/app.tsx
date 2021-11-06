@@ -10,15 +10,11 @@ import Player from '../pages/player/player';
 import DebugPage from '../pages/debug-page/debug-page';
 import Page404 from '../pages/page404/page404';
 
-import { AppRoute, AuthorizationStatus } from '../../const';
-
+import { AppRoute } from '../../const';
 
 import '../../sass/global.scss';
 
-
 function App(): JSX.Element {
-
-
   return (
     <BrowserRouter>
       <Switch>
@@ -34,11 +30,7 @@ function App(): JSX.Element {
           <ReviewPage />
         </Route>
 
-        <PrivateRoute
-          exact
-          path={AppRoute.MyList}
-          authorizationStatus={AuthorizationStatus.Auth}
-        >
+        <PrivateRoute exact path={AppRoute.MyList}>
           <MyList />
         </PrivateRoute>
 

@@ -1,6 +1,5 @@
 type CatalogType = {
-  genres?: Array<string>;
+  genres?: boolean;
   similar?: boolean;
-  path: string;
 };
 export default CatalogType;

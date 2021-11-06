@@ -1,15 +1,18 @@
 import Footer from '../../footer/footer';
 import PromoFilm from '../../promo-film/promo-film';
 import Catalog from '../../catalog/catalog';
-
-import GENRES from '../../../mock/genres';
+import { useDispatch } from 'react-redux';
+import { getAllMovies } from '../../../store/actions/filmsActions';
 
 function MainPage(): JSX.Element {
+  const dispatch = useDispatch();
+  dispatch(getAllMovies());
+
   return (
     <>
       <PromoFilm />
       <div className='page-content'>
-        <Catalog genres={GENRES} path='/films' />
+        <Catalog genres />
         <Footer />
       </div>
     </>

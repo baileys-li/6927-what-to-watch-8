@@ -18,10 +18,21 @@ export const enum AuthorizationStatus {
 }
 
 
+export const enum UserActionType {
+  Login = 'SIGN IN',
+  Logout = 'SIGN OUT'
+}
+
+export const enum Genre {
+  Initial = 'All genres',
+}
+
+
 export const enum EndPoint {
   Base = 'https://8.react.pages.academy/wtw',
   Films = '/films',
   Promo = '/promo',
   Favorite = '/favorite',
-
+  Login = '/login',
+  Logout = '/logout'
 }

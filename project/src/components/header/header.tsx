@@ -11,7 +11,6 @@ type HeaderType = {
   breadcrumbs?: Array<LinkType>;
   headline: string;
   hiddenHeadline?: boolean;
-  authenticated?: boolean;
   hideAuth?: boolean;
 };
 
@@ -20,7 +19,6 @@ function Header({
   breadcrumbs,
   headline,
   hiddenHeadline = false,
-  authenticated = true,
   hideAuth = false,
 }: HeaderType): JSX.Element {
   return (
@@ -38,7 +36,7 @@ function Header({
         {headline}
       </h1>
 
-      {!hideAuth && <UserBlock authenticated={authenticated} />}
+      {!hideAuth && <UserBlock className={style.user} />}
     </header>
   );
 }

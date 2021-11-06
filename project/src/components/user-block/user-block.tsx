@@ -1,39 +1,57 @@
-import { Link, useLocation } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import { MouseEvent } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useLocation, useHistory } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import useUserData from '../../hooks/useUserData';
+import { checkAuthAction, logoutAction } from '../../store/actions/authorizationActions';
 import style from './user-block.module.scss';
 
-type UserBlockType = {
-  authenticated?: boolean;
+type UserBlockProps = {
+  className?: string;
 };
 
-function UserBlock({ authenticated = false }: UserBlockType): JSX.Element {
-  const avatar = (
-    <img src='img/avatar.jpg' alt='User avatar' width='63' height='63' />
-  );
+function UserBlock({ className }: UserBlockProps): JSX.Element {
   const { pathname } = useLocation();
+  const history = useHistory();
+  const { status, avatarURL } = useUserData();
+  const dispatch = useDispatch();
 
-  return (
-    <div className={style.wrapper}>
-      {authenticated &&
-        (pathname === AppRoute.MyList ? (
-          <picture className={style.avatar}>{avatar}</picture>
+  if (status === AuthorizationStatus.Unknown) {
+    dispatch(checkAuthAction());
+  }
+
+  if (status === AuthorizationStatus.Auth) {
+    const handleLogOut = (evt: MouseEvent<HTMLButtonElement>) => {
+      evt.preventDefault();
+      dispatch(logoutAction());
+
+      history.push(AppRoute.Main);
+    };
+    const avatarMarkUp = avatarURL && (
+      <img src={avatarURL} alt='User avatar' width='63' height='63' />
+    );
+
+    return (
+      <div className={[style.wrapper, className].join(' ')}>
+        {pathname === AppRoute.MyList ? (
+          <picture className={style.avatar}>{avatarMarkUp}</picture>
         ) : (
           <Link to={AppRoute.MyList} className={style.avatar}>
-            {avatar}
+            {avatarMarkUp}
           </Link>
-        ))}
-
-      {authenticated ? (
-        <Link to={AppRoute.SignIn} className={style.link}>
+        )}
+        <button className={style.link} onClick={handleLogOut} type='button'>
           Sign out
-        </Link>
-      ) : (
-        <Link to={AppRoute.SignIn} className={style.link}>
-          Sign in
-        </Link>
-      )}
-    </div>
-  );
+        </button>
+      </div>
+    );
+  } else {
+    return (
+      <Link to={AppRoute.SignIn} className={[style.link, className].join(' ')}>
+        Sign in
+      </Link>
+    );
+  }
 }
 
 export default UserBlock;

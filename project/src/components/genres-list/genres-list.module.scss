@@ -1,0 +1,37 @@
+.wrapper {
+  padding: 15px 0 25px;
+  margin: 0 -10px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  margin: 10px;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.link {
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  display: block;
+  color: #dfcf77;
+  text-decoration: none;
+
+  padding: 0 0 15px;
+  margin: 0;
+  transition: font-weight;
+
+  &[aria-selected='true'] {
+    font-weight: bold;
+  }
+  &[aria-selected='true'],
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 18px;
+  }
+}
