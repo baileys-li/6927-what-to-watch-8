@@ -2,21 +2,24 @@ import Logo from '../logo/logo';
 import { Link } from 'react-router-dom';
 import style from './breadcrumbs.module.scss';
 
-import type LinkType from '../../types/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers';
 
 type BreadcrumbsType = {
-  links: Array<LinkType>;
+  // links: Array<LinkType>;
   className?: string;
 };
 
-function Breadcrumbs({ links, className }: BreadcrumbsType): JSX.Element {
+function Breadcrumbs({ className }: BreadcrumbsType): JSX.Element {
+  const { list } = useSelector((state: RootState) => state.breadcrumbs);
+
   return (
     <nav className={`${style.nav} ${className}`}>
       <ul className={style.list}>
         <li className={style.logo}>
           <Logo />
         </li>
-        {links.map((link) => (
+        {list?.map((link) => (
           <li className={style.item} key={link.text}>
             {link.href ? (
               <Link to={link.href} className={style.link}>

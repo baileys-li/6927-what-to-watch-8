@@ -1,6 +1,7 @@
 import Footer from '../../footer/footer';
 import PromoFilm from '../../promo-film/promo-film';
 import Catalog from '../../catalog/catalog';
+import Header from '../../header/header';
 
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
@@ -16,6 +17,11 @@ function MoviePage(): JSX.Element {
 
   return (
     <>
+      <Header
+        headline='What to Watch'
+        className='app__header'
+        hiddenHeadline
+      />
       <PromoFilm full />
       <div className='page-content'>
         <Catalog similar />

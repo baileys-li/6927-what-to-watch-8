@@ -1,4 +1,3 @@
-import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import Overview from './overview';
 import MovieRating from './movie-rating/movie-rating';
@@ -10,8 +9,9 @@ import MovieReviews from './movie-reviews/movie-reviews';
 import style from './promo-film.module.scss';
 
 import type LinkType from '../../types/link';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers';
+import { rewriteLinksAction } from '../../store/actions/breadcrumbsAction';
 
 type PromoFilmProps = {
   full?: boolean;
@@ -26,13 +26,20 @@ function PromoFilm({
 }: PromoFilmProps): JSX.Element {
 
   const { selected: movie } = useSelector((state: RootState) => state.movies);
+  const dispatch = useDispatch();
 
   if (movie) {
 
-    const breadcrumbs: Array<LinkType> = [
-      { href: `/films/${movie.id}`, text: movie.name },
-      { text: 'Add review' },
-    ];
+    if (review) {
+      const breadcrumbs: Array<LinkType> = [
+        { href: `/films/${movie.id}`, text: movie.name },
+        { text: 'Add review' },
+      ];
+
+      dispatch(rewriteLinksAction(breadcrumbs));
+    }
+
+
     const description = (
       <MovieDescription
         movie={movie}
@@ -66,13 +73,7 @@ function PromoFilm({
       >
         {review && (
           <>
-            <div className={style.overlay}>
-              <Header
-                headline='What to Watch'
-                className={style.head}
-                breadcrumbs={breadcrumbs}
-                hiddenHeadline
-              />
+            <div className={[style.overlay, style.review].join(' ')}>
               {poster}
             </div>
             <ReviewForm />
@@ -81,11 +82,6 @@ function PromoFilm({
         {full && (
           <>
             <div className={`${style.hero} ${style.overlay}`}>
-              <Header
-                headline='What to Watch'
-                className={style.head}
-                hiddenHeadline
-              />
               <div className={style['film-card__wrap']}>{description}</div>
             </div>
             <div
@@ -115,18 +111,11 @@ function PromoFilm({
         )}
 
         {!(full || review) && (
-          <>
-            <Header
-              headline='What to Watch'
-              className={style.head}
-              hiddenHeadline
-            />
-            <div className={style['film-card__wrap']}>
-              {poster}
+          <div className={style['film-card__wrap']}>
+            {poster}
 
-              {description}
-            </div>
-          </>
+            {description}
+          </div>
         )}
       </section>
     );

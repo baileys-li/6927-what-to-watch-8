@@ -4,11 +4,9 @@ import Breadcrumbs from '../breadcrumbs/breadcrumbs';
 
 import style from './header.module.scss';
 
-import type LinkType from '../../types/link';
-
 type HeaderType = {
   className?: string;
-  breadcrumbs?: Array<LinkType>;
+  breadcrumbs?: boolean;
   headline: string;
   hiddenHeadline?: boolean;
   hideAuth?: boolean;
@@ -23,11 +21,10 @@ function Header({
 }: HeaderType): JSX.Element {
   return (
     <header
-      className={`${style.wrapper} ${className}
-    ${hideAuth && style['wrapper--full']}`}
+      className={[style.wrapper, hideAuth ? style['wrapper--full'] : '', className].join(' ')}
     >
       {breadcrumbs ? (
-        <Breadcrumbs links={breadcrumbs} className={style.breadcrumbs} />
+        <Breadcrumbs className={style.breadcrumbs} />
       ) : (
         <Logo />
       )}
