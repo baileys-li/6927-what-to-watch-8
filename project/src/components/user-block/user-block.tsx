@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
@@ -15,9 +15,11 @@ function UserBlock({ className }: UserBlockProps): JSX.Element {
   const { status, avatarURL } = useUserData();
   const dispatch = useDispatch();
 
-  if (status === AuthorizationStatus.Unknown) {
-    dispatch(checkAuthAction());
-  }
+  useEffect(() => {
+    if (status === AuthorizationStatus.Unknown) {
+      dispatch(checkAuthAction());
+    }
+  }, [dispatch, status]);
 
   if (status === AuthorizationStatus.Auth) {
     const handleLogOut = (evt: MouseEvent<HTMLButtonElement>) => {

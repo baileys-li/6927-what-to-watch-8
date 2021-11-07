@@ -7,13 +7,16 @@ import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { getMovie, getMoviesList } from '../../../store/actions/filmsActions';
 import { EndPoint } from '../../../const';
+import { useEffect } from 'react';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  dispatch(getMovie(`${EndPoint.Films}/${id}`));
-  dispatch(getMoviesList(`${EndPoint.Films}/${id}/similar`));
+  useEffect(() => {
+    dispatch(getMovie(`${EndPoint.Films}/${id}`));
+    dispatch(getMoviesList(`${EndPoint.Films}/${id}/similar`));
+  }, [dispatch, id]);
 
   return (
     <>

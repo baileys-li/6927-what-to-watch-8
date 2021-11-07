@@ -5,11 +5,15 @@ import { useDispatch } from 'react-redux';
 import { getAllMovies, getMovie } from '../../../store/actions/filmsActions';
 import { EndPoint } from '../../../const';
 import Header from '../../header/header';
+import { useEffect } from 'react';
 
 function MainPage(): JSX.Element {
   const dispatch = useDispatch();
-  dispatch(getMovie(EndPoint.Promo));
-  dispatch(getAllMovies());
+
+  useEffect(() => {
+    dispatch(getMovie(EndPoint.Promo));
+    dispatch(getAllMovies());
+  }, [dispatch]);
 
   return (
     <>
