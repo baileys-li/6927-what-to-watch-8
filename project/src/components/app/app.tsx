@@ -18,21 +18,11 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path={AppRoute.Main}>
-          <MainPage />
-        </Route>
+        <Route exact path={AppRoute.Main} component={MainPage} />
+        <Route exact path={AppRoute.Film} component={MoviePage} />
+        <Route path={AppRoute.AddReview} component={ReviewPage} />
 
-        <Route exact path={AppRoute.Film}>
-          <MoviePage />
-        </Route>
-
-        <Route path={AppRoute.AddReview}>
-          <ReviewPage />
-        </Route>
-
-        <PrivateRoute exact path={AppRoute.MyList}>
-          <MyList />
-        </PrivateRoute>
+        <PrivateRoute exact path={AppRoute.MyList} component={MyList} />
 
         <Route path={AppRoute.Player} component={Player} />
         <Route path={AppRoute.SignIn} component={Login} />
