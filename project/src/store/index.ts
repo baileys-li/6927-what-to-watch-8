@@ -1,14 +1,20 @@
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { applyMiddleware, createStore } from 'redux';
 import rootReducer from './reducers';
-import thunk from 'redux-thunk';
 import { createAPI } from '../services/api';
 import { requireLogout } from './actions/authorizationActions';
+import { configureStore } from '@reduxjs/toolkit';
 
 const api = createAPI(
   () => store.dispatch(requireLogout()),
 );
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk.withExtraArgument(api))));
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: {
+        extraArgument: api,
+      },
+    }),
+});
 
 export default store;

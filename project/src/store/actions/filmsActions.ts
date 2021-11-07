@@ -1,3 +1,4 @@
+import { createAction } from '@reduxjs/toolkit';
 import { EndPoint, Genre } from '../../const';
 import { GenresType } from '../../types/genre-type';
 import MovieType, { ServerResponseMovieType } from '../../types/movie-type';
@@ -19,29 +20,11 @@ export type FilmsActions =
   | ReturnType<typeof updateGenres>;
 
 /* Simple Actions for Reducer */
-export const updateSelected = (movie: MovieType) =>
-  ({
-    type: FilmsActionsType.Selected,
-    payload: movie,
-  } as const);
+export const updateSelected = createAction<MovieType>(FilmsActionsType.Selected);
+export const updateList = createAction<MovieType[]>(FilmsActionsType.List);
+export const updateFilter = createAction<string>(FilmsActionsType.Filter);
+export const updateGenres = createAction<GenresType>(FilmsActionsType.Genres);
 
-export const updateList = (movies: MovieType[]) =>
-  ({
-    type: FilmsActionsType.List,
-    payload: movies,
-  } as const);
-
-export const updateFilter = (filter: string) =>
-  ({
-    type: FilmsActionsType.Filter,
-    payload: filter,
-  } as const);
-
-export const updateGenres = (genres: GenresType) =>
-  ({
-    type: FilmsActionsType.Genres,
-    payload: genres,
-  } as const);
 
 /* Async Actions */
 export const getAllMovies =

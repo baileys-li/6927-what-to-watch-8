@@ -5,21 +5,14 @@ import { dropToken, saveToken } from '../../services/token';
 import { AuthData } from '../../types/auth-data';
 import LoginResponse from '../../types/loginResponse';
 import { ThunkActionResult } from '../../types/thunk-action';
+import { createAction } from '@reduxjs/toolkit';
 
 export type UserActions =
   | ReturnType<typeof requireAuthorization>
   | ReturnType<typeof requireLogout>;
 
-export const requireAuthorization = (authData: UserState) =>
-  ({
-    type: UserActionType.Login,
-    payload: authData,
-  } as const);
-
-export const requireLogout = () =>
-  ({
-    type: UserActionType.Logout,
-  } as const);
+export const requireAuthorization = createAction<UserState>(UserActionType.Login);
+export const requireLogout = createAction(UserActionType.Logout);
 
 /* Async Actions */
 export const checkAuthAction =
