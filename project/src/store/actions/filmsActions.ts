@@ -61,12 +61,22 @@ export const getAllMovies =
       });
   };
 
+
+export const getMoviesList =
+  (endPoint: string): ThunkActionResult => async (dispatch, _getState, api) => {
+    await api
+      .get<ServerResponseMovieType[]>(endPoint)
+      .then(({ data }) => {
+        const newArray: MovieType[] = [];
+        data.map((movie) => newArray.push(adaptFromSnakeToCamel(movie)));
+        dispatch(updateList(newArray));
+      });
+  };
+
 export const getMovie =
   (endPoint: string): ThunkActionResult =>
     async (dispatch, _getState, api) => {
       await api.get<ServerResponseMovieType>(endPoint).then(({ data }) => {
-        // console.log(data);
-
         dispatch(updateSelected(adaptFromSnakeToCamel(data)));
       });
     };
