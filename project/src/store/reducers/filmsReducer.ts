@@ -7,7 +7,6 @@ type FilmsState = {
   selected: MovieType | null,
   list: Array<MovieType> | null;
   filter: string;
-  loadingSelected: boolean;
   genres: GenresType | null
 }
 
@@ -15,14 +14,13 @@ const InitialState = {
   selected: null,
   list: null,
   filter: Genre.Initial,
-  loadingSelected: true,
   genres: null,
 };
 
 function filmsReducer(state: FilmsState = InitialState, action: FilmsActions) : FilmsState {
   switch (action.type) {
     case FilmsActionsType.Selected:
-      return {...state, selected: action.payload, loadingSelected: false};
+      return {...state, selected: action.payload};
 
     case FilmsActionsType.List:
       return {...state, list: action.payload};
