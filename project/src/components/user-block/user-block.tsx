@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import useUserData from '../../hooks/useUserData';
 import { checkAuthAction, logoutAction } from '../../store/actions/authorizationActions';
@@ -12,7 +12,6 @@ type UserBlockProps = {
 
 function UserBlock({ className }: UserBlockProps): JSX.Element {
   const { pathname } = useLocation();
-  const navigate = useNavigate();
   const { status, avatarURL } = useUserData();
   const dispatch = useDispatch();
 
@@ -24,8 +23,6 @@ function UserBlock({ className }: UserBlockProps): JSX.Element {
     const handleLogOut = (evt: MouseEvent<HTMLButtonElement>) => {
       evt.preventDefault();
       dispatch(logoutAction());
-
-      navigate(AppRoute.Main);
     };
     const avatarMarkUp = avatarURL && (
       <img src={avatarURL} alt='User avatar' width='63' height='63' />
