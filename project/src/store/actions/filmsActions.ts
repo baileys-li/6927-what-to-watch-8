@@ -80,3 +80,12 @@ export const getMovie =
         dispatch(updateSelected(adaptFromSnakeToCamel(data)));
       });
     };
+
+
+export const changeIsFavorite =
+    (id: number, status: number): ThunkActionResult =>
+      async (dispatch, _getState, api) => {
+        await api.post<ServerResponseMovieType>(`${EndPoint.Favorite}/${id}/${status}`).then(({ data }) => {
+          dispatch(updateSelected(adaptFromSnakeToCamel(data)));
+        });
+      };
