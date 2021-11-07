@@ -4,8 +4,11 @@ import Button from '../../button/button';
 import SpriteIcon from '../../sprite-icon/sprite-icon';
 
 import type MovieType from '../../../types/movie-type';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { changeIsFavorite } from '../../../store/actions/filmsActions';
+import { RootState } from '../../../store/reducers';
+import { AppRoute, AuthorizationStatus } from '../../../const';
+import { useHistory } from 'react-router';
 
 type MovieDescriptionType = {
   className?: string;
@@ -18,11 +21,20 @@ function MovieDescription({
   movie,
   review = false,
 }: MovieDescriptionType): JSX.Element {
+  const { status } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const changeStatus = () => {
-    const endPointStatus = movie.isFavorite ? 0 : 1;
-    dispatch(changeIsFavorite(movie.id, endPointStatus));
+    const isAuth = status === AuthorizationStatus.Auth;
+
+    if (isAuth) {
+      const endPointStatus = movie.isFavorite ? 0 : 1;
+      dispatch(changeIsFavorite(movie.id, endPointStatus));
+    } else {
+      history.push(AppRoute.SignIn);
+    }
+
   };
 
   return (
