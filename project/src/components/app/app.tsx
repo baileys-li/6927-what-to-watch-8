@@ -1,4 +1,4 @@
-import { Switch, Route, BrowserRouter, Redirect } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import PrivateRoute from '../private-route/private-route';
 
 import MainPage from '../pages/main-page/main-page';
@@ -17,23 +17,28 @@ import '../../sass/global.scss';
 function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path={AppRoute.Main} component={MainPage} />
-        <Route exact path={AppRoute.Film} component={MoviePage} />
-        <Route path={AppRoute.AddReview} component={ReviewPage} />
+      <Routes>
+        <Route path={AppRoute.Main} element={<MainPage />} />
+        <Route path={AppRoute.Film} element={<MoviePage />} />
+        <Route path={AppRoute.AddReview} element={<ReviewPage />} />
 
-        <PrivateRoute exact path={AppRoute.MyList} component={MyList} />
+        <Route
+          path={AppRoute.MyList}
+          element={
+            <PrivateRoute>
+              <MyList />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path={AppRoute.Player} component={Player} />
-        <Route path={AppRoute.SignIn} component={Login} />
+        <Route path={AppRoute.Player} element={<Player />} />
+        <Route path={AppRoute.SignIn} element={<Login />} />
 
-        <Route path={AppRoute.Debug} component={DebugPage} />
+        <Route path={AppRoute.Debug} element={<DebugPage />} />
 
-        <Route path={AppRoute.NoMatch} component={Page404} />
-        <Route>
-          <Redirect to={AppRoute.NoMatch} />
-        </Route>
-      </Switch>
+        <Route path={AppRoute.NoMatch} element={<Page404 />} />
+        <Route path={'/*'} element={<Navigate to={AppRoute.NoMatch} />} />
+      </Routes>
     </BrowserRouter>
   );
 }

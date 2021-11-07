@@ -4,14 +4,14 @@ import style from './login.module.scss';
 import { FormEvent, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginAction } from '../../../store/actions/authorizationActions';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 import { AppRoute } from '../../../const';
 
 function Login(): JSX.Element {
   const message = '';
 
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -26,7 +26,7 @@ function Login(): JSX.Element {
 
     dispatch(loginAction(authData));
 
-    history.push(AppRoute.Main);
+    navigate(AppRoute.Main);
   };
   return (
     <div className='user-page'>

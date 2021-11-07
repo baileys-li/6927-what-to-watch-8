@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeIsFavorite } from '../../../store/actions/filmsActions';
 import { RootState } from '../../../store/reducers';
 import { AppRoute, AuthorizationStatus } from '../../../const';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router';
 
 type MovieDescriptionType = {
   className?: string;
@@ -23,7 +23,7 @@ function MovieDescription({
 }: MovieDescriptionType): JSX.Element {
   const { status } = useSelector((state: RootState) => state.user);
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const changeStatus = () => {
     const isAuth = status === AuthorizationStatus.Auth;
@@ -32,7 +32,7 @@ function MovieDescription({
       const endPointStatus = movie.isFavorite ? 0 : 1;
       dispatch(changeIsFavorite(movie.id, endPointStatus));
     } else {
-      history.push(AppRoute.SignIn);
+      navigate(AppRoute.SignIn);
     }
 
   };
