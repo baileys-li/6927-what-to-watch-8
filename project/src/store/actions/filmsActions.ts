@@ -19,38 +19,54 @@ export type FilmsActions =
   | ReturnType<typeof updateGenres>;
 
 /* Simple Actions for Reducer */
-export const updateSelected = (movie: MovieType) => ({
-  type: FilmsActionsType.Selected,
-  payload: movie,
-} as const);
+export const updateSelected = (movie: MovieType) =>
+  ({
+    type: FilmsActionsType.Selected,
+    payload: movie,
+  } as const);
 
-export const updateList = (movies: MovieType[]) => ({
-  type: FilmsActionsType.List,
-  payload: movies,
-} as const);
+export const updateList = (movies: MovieType[]) =>
+  ({
+    type: FilmsActionsType.List,
+    payload: movies,
+  } as const);
 
-export const updateFilter = (filter: string) => ({
-  type: FilmsActionsType.Filter,
-  payload: filter,
-} as const);
+export const updateFilter = (filter: string) =>
+  ({
+    type: FilmsActionsType.Filter,
+    payload: filter,
+  } as const);
 
-export const updateGenres = (genres: GenresType) => ({
-  type: FilmsActionsType.Genres,
-  payload: genres,
-} as const);
+export const updateGenres = (genres: GenresType) =>
+  ({
+    type: FilmsActionsType.Genres,
+    payload: genres,
+  } as const);
 
 /* Async Actions */
 export const getAllMovies =
   (): ThunkActionResult => async (dispatch, _getState, api) => {
-    await api.get<ServerResponseMovieType[]>(EndPoint.Films).then(({data}) => {
-      const newArray: MovieType[] = [];
-      const genres: GenresType = new Set([Genre.Initial]);
-      data.map((movie) => {
-        genres.add(movie.genre);
-        return newArray.push(adaptFromSnakeToCamel(movie));
-      });
+    await api
+      .get<ServerResponseMovieType[]>(EndPoint.Films)
+      .then(({ data }) => {
+        const newArray: MovieType[] = [];
+        const genres: GenresType = new Set([Genre.Initial]);
+        data.map((movie) => {
+          genres.add(movie.genre);
+          return newArray.push(adaptFromSnakeToCamel(movie));
+        });
 
-      dispatch(updateList(newArray));
-      dispatch(updateGenres(genres));
-    });
+        dispatch(updateList(newArray));
+        dispatch(updateGenres(genres));
+      });
   };
+
+export const getMovie =
+  (endPoint: string): ThunkActionResult =>
+    async (dispatch, _getState, api) => {
+      await api.get<ServerResponseMovieType>(endPoint).then(({ data }) => {
+        // console.log(data);
+
+        dispatch(updateSelected(adaptFromSnakeToCamel(data)));
+      });
+    };

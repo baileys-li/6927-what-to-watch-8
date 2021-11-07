@@ -1,6 +1,3 @@
-import { useParams } from 'react-router';
-import useData from '../../hooks/useData';
-
 import Header from '../header/header';
 import ReviewForm from '../review-form/review-form';
 import Overview from './overview';
@@ -13,11 +10,8 @@ import MovieReviews from './movie-reviews/movie-reviews';
 import style from './promo-film.module.scss';
 
 import type LinkType from '../../types/link';
-import type MovieType from '../../types/movie-type';
-import type RouteParams from '../../types/route-params-type';
-
-import { EndPoint } from '../../const';
-import { adaptFromSnakeToCamel } from '../../utils/adapter';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/reducers';
 
 type PromoFilmProps = {
   full?: boolean;
@@ -30,20 +24,10 @@ function PromoFilm({
   full = false,
   review = false,
 }: PromoFilmProps): JSX.Element {
-  const { id } = useParams<RouteParams>();
 
-  const target = id === undefined ? EndPoint.Promo : `/films/${id}`;
+  const { selected: movie } = useSelector((state: RootState) => state.movies);
 
-  const { isLoaded, error, response } = useData<MovieType>(target);
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
-  if (!isLoaded) {
-    return <div>Loading...</div>;
-  } else {
-    const movie = adaptFromSnakeToCamel(response);
+  if (movie) {
 
     const breadcrumbs: Array<LinkType> = [
       { href: `/films/${movie.id}`, text: movie.name },
@@ -71,8 +55,7 @@ function PromoFilm({
 
     return (
       <section
-        className={`${style.wrapper} ${
-          full || review ? style['wrapper--full'] : style.overlay
+        className={`${style.wrapper} ${full || review ? style['wrapper--full'] : style.overlay
         }`}
         style={
           {
@@ -147,6 +130,8 @@ function PromoFilm({
         )}
       </section>
     );
+  } else {
+    return (<div>Loading...</div>);
   }
 }
 
