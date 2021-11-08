@@ -1,18 +1,11 @@
-import { UserActionType } from '../../const';
 import UserState from '../../types/userState';
 import { AuthorizationStatus, EndPoint } from '../../const';
 import { dropToken, saveToken } from '../../services/token';
 import { AuthData } from '../../types/auth-data';
 import LoginResponse from '../../types/loginResponse';
 import { ThunkActionResult } from '../../types/thunk-action';
-import { createAction } from '@reduxjs/toolkit';
+import { requireAuthorization, requireLogout } from '../slice/userStore';
 
-export type UserActions =
-  | ReturnType<typeof requireAuthorization>
-  | ReturnType<typeof requireLogout>;
-
-export const requireAuthorization = createAction<UserState>(UserActionType.Login);
-export const requireLogout = createAction(UserActionType.Logout);
 
 /* Async Actions */
 export const checkAuthAction =

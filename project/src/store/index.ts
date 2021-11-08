@@ -1,6 +1,6 @@
 import rootReducer from './reducers';
 import { createAPI } from '../services/api';
-import { requireLogout } from './actions/authorizationActions';
+import { requireLogout } from './slice/userStore';
 import { configureStore } from '@reduxjs/toolkit';
 
 const api = createAPI(

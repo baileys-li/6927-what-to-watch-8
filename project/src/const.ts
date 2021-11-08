@@ -17,12 +17,6 @@ export const enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-
-export const enum UserActionType {
-  Login = 'SIGN IN',
-  Logout = 'SIGN OUT'
-}
-
 export const enum Genre {
   Initial = 'All genres',
 }
