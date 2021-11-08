@@ -1,10 +1,10 @@
 import rootReducer from './reducers';
 import { createAPI } from '../services/api';
-import { requireLogout } from './slice/userStore';
+import { logout } from './slice/userStore';
 import { configureStore } from '@reduxjs/toolkit';
 
 const api = createAPI(
-  () => store.dispatch(requireLogout()),
+  () => store.dispatch(logout()),
 );
 
 const store = configureStore({

@@ -11,7 +11,7 @@ import style from './promo-film.module.scss';
 import type LinkType from '../../types/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers';
-import { rewriteLinksAction } from '../../store/actions/breadcrumbsAction';
+import { rewriteAll } from '../../store/slice/breadcrumbsStore';
 
 type PromoFilmProps = {
   full?: boolean;
@@ -36,7 +36,7 @@ function PromoFilm({
         { text: 'Add review' },
       ];
 
-      dispatch(rewriteLinksAction(breadcrumbs));
+      dispatch(rewriteAll(breadcrumbs));
     }
 
 

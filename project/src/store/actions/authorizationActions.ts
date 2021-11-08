@@ -4,14 +4,14 @@ import { dropToken, saveToken } from '../../services/token';
 import { AuthData } from '../../types/auth-data';
 import LoginResponse from '../../types/loginResponse';
 import { ThunkActionResult } from '../../types/thunk-action';
-import { requireAuthorization, requireLogout } from '../slice/userStore';
+import { authorization, logout } from '../slice/userStore';
 
 
 /* Async Actions */
 export const checkAuthAction =
   (): ThunkActionResult => async (dispatch, _getState, api) => {
     await api.get<LoginResponse>(EndPoint.Login).then((response) => {
-      response.data && dispatch(requireAuthorization(adaptLoginResponse(response.data)));
+      response.data && dispatch(authorization(adaptLoginResponse(response.data)));
     });
   };
 
@@ -24,14 +24,14 @@ export const loginAction =
       });
       saveToken(data.token);
 
-      dispatch(requireAuthorization(adaptLoginResponse(data)));
+      dispatch(authorization(adaptLoginResponse(data)));
     };
 
 export const logoutAction =
   (): ThunkActionResult => async (dispatch, _getState, api) => {
     api.delete(EndPoint.Logout);
     dropToken();
-    dispatch(requireLogout());
+    dispatch(logout());
   };
 
 /* Utils */

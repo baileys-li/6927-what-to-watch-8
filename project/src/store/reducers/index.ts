@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import breadcrumbsReducer from './breadcrumbsReducer';
+import breadcrumbsReducer from '../slice/breadcrumbsStore';
 import filmsReducer from './filmsReducer';
 import userReducer from '../slice/userStore';
 

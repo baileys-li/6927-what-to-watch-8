@@ -10,10 +10,10 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    requireAuthorization: (_state, action: PayloadAction<UserState>) => action.payload,
-    requireLogout: (state) => {state.status = AuthorizationStatus.NoAuth;},
+    authorization: (_state, action: PayloadAction<UserState>) => action.payload,
+    logout: (state) => state = { status: AuthorizationStatus.NoAuth },
   },
 });
 
-export const { requireAuthorization, requireLogout } = userSlice.actions;
+export const { authorization, logout } = userSlice.actions;
 export default userSlice.reducer;
