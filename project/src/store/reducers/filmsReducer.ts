@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { Genre } from '../../const';
-import { GenresType } from '../../types/genre-type';
+import GenreType from '../../types/genre-type';
 import MovieType from '../../types/movie-type';
 import { updateFilter, updateGenres, updateList, updateSelected } from '../actions/filmsActions';
 
@@ -8,7 +8,7 @@ type FilmsState = {
   selected: MovieType | null,
   list: Array<MovieType> | null;
   filter: string;
-  genres: GenresType | null
+  genres: GenreType[] | null
 }
 
 const InitialState : FilmsState  = {

@@ -10,7 +10,7 @@ function GenresList(): JSX.Element {
 
   return (
     <ul className={style.wrapper}>
-      {genres && Array.from(genres).map((genre) => (
+      {genres && genres.map((genre) => (
         <li className={style.item} key={genre}>
           <button
             className={style.link}

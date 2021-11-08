@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { adaptFromSnakeToCamel } from '../../utils/adapter';
 
 import s from './small-film-card.module.scss';
 
@@ -12,8 +11,7 @@ type SmallFilmCardProps = {
 };
 
 function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
-  const { id, name, previewImage, previewVideoLink }: MovieType =
-    adaptFromSnakeToCamel(movie);
+  const { id, name, previewImage, previewVideoLink } = movie;
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setPlaying] = useState<boolean>(false);

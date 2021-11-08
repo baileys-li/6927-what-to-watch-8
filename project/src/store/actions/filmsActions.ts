@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { EndPoint, Genre } from '../../const';
-import { GenresType } from '../../types/genre-type';
+import GenreType from '../../types/genre-type';
 import MovieType, { ServerResponseMovieType } from '../../types/movie-type';
 import { ThunkActionResult } from '../../types/thunk-action';
 import { adaptFromSnakeToCamel } from '../../utils/adapter';
@@ -23,7 +23,7 @@ export type FilmsActions =
 export const updateSelected = createAction<MovieType>(FilmsActionsType.Selected);
 export const updateList = createAction<MovieType[]>(FilmsActionsType.List);
 export const updateFilter = createAction<string>(FilmsActionsType.Filter);
-export const updateGenres = createAction<GenresType>(FilmsActionsType.Genres);
+export const updateGenres = createAction<GenreType[]>(FilmsActionsType.Genres);
 
 
 /* Async Actions */
@@ -33,14 +33,14 @@ export const getAllMovies =
       .get<ServerResponseMovieType[]>(EndPoint.Films)
       .then(({ data }) => {
         const newArray: MovieType[] = [];
-        const genres: GenresType = new Set([Genre.Initial]);
+        const genres: Set<GenreType> = new Set([Genre.Initial]);
         data.map((movie) => {
           genres.add(movie.genre);
           return newArray.push(adaptFromSnakeToCamel(movie));
         });
 
         dispatch(updateList(newArray));
-        dispatch(updateGenres(genres));
+        dispatch(updateGenres(Array.from(genres)));
       });
   };
 
