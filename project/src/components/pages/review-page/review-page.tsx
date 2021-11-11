@@ -10,7 +10,7 @@ function ReviewPage(): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(dispatch(getMovieByID(id as string)));
+    dispatch(getMovieByID(id as string));
   }, [dispatch, id]);
 
 
