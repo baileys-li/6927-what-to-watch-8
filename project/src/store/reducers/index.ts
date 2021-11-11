@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import breadcrumbsReducer from '../slice/breadcrumbsStore';
-import filmsReducer from './filmsReducer';
+import filmsReducer from '../slice/filmsStore';
 import userReducer from '../slice/userStore';
 
 const rootReducers = combineReducers({

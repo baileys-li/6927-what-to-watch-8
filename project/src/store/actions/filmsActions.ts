@@ -1,30 +1,10 @@
-import { createAction } from '@reduxjs/toolkit';
 import { EndPoint, Genre } from '../../const';
 import GenreType from '../../types/genre-type';
 import MovieType, { ServerResponseMovieType } from '../../types/movie-type';
 import { ThunkActionResult } from '../../types/thunk-action';
 import { adaptFromSnakeToCamel } from '../../utils/adapter';
 
-/* TypeScript Requirements */
-export const enum FilmsActionsType {
-  Selected = 'SET_SELECTED_MOVIE',
-  List = 'SET_MOVIE_LIST',
-  Filter = 'SET_FILTER',
-  Genres = 'SET_GENRES',
-}
-
-export type FilmsActions =
-  | ReturnType<typeof updateSelected>
-  | ReturnType<typeof updateList>
-  | ReturnType<typeof updateFilter>
-  | ReturnType<typeof updateGenres>;
-
-/* Simple Actions for Reducer */
-export const updateSelected = createAction<MovieType>(FilmsActionsType.Selected);
-export const updateList = createAction<MovieType[]>(FilmsActionsType.List);
-export const updateFilter = createAction<string>(FilmsActionsType.Filter);
-export const updateGenres = createAction<GenreType[]>(FilmsActionsType.Genres);
-
+import { setList, setGenres, setMovie } from '../slice/filmsStore';
 
 /* Async Actions */
 export const getAllMovies =
@@ -39,8 +19,8 @@ export const getAllMovies =
           return newArray.push(adaptFromSnakeToCamel(movie));
         });
 
-        dispatch(updateList(newArray));
-        dispatch(updateGenres(Array.from(genres)));
+        dispatch(setList(newArray));
+        dispatch(setGenres(Array.from(genres)));
       });
   };
 
@@ -56,7 +36,7 @@ export const getMoviesList =
       .then(({ data }) => {
         const newArray: MovieType[] = [];
         data.map((movie) => newArray.push(adaptFromSnakeToCamel(movie)));
-        dispatch(updateList(newArray));
+        dispatch(setList(newArray));
       });
   };
 
@@ -69,7 +49,7 @@ export const getMovie =
   (endPoint: string): ThunkActionResult =>
     async (dispatch, _getState, api) => {
       await api.get<ServerResponseMovieType>(endPoint).then(({ data }) => {
-        dispatch(updateSelected(adaptFromSnakeToCamel(data)));
+        dispatch(setMovie(adaptFromSnakeToCamel(data)));
       });
     };
 
@@ -78,6 +58,6 @@ export const changeIsFavorite =
     (id: number, status: number): ThunkActionResult =>
       async (dispatch, _getState, api) => {
         await api.post<ServerResponseMovieType>(`${EndPoint.Favorite}/${id}/${status}`).then(({ data }) => {
-          dispatch(updateSelected(adaptFromSnakeToCamel(data)));
+          dispatch(setMovie(adaptFromSnakeToCamel(data)));
         });
       };

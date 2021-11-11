@@ -1,7 +1,7 @@
 import style from './genres-list.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducers';
-import { updateFilter } from '../../store/actions/filmsActions';
+import { setFilter } from '../../store/slice/filmsStore';
 
 function GenresList(): JSX.Element {
   const { filter, genres } = useSelector((state: RootState) => state.movies);
@@ -16,7 +16,7 @@ function GenresList(): JSX.Element {
             className={style.link}
             role="tab"
             aria-selected={genre === filter}
-            onClick={() => dispatch(updateFilter(genre))}
+            onClick={() => dispatch(setFilter(genre))}
           >
             {genre}
           </button>
