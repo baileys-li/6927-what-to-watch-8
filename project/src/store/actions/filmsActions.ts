@@ -44,6 +44,10 @@ export const getAllMovies =
       });
   };
 
+export const getSimilarMoviesList = (id: number | string): ThunkActionResult => getMoviesList(`${EndPoint.Films}/${id}/similar`);
+
+export const getFavorites = (): ThunkActionResult => getMoviesList(EndPoint.Favorite);
+
 
 export const getMoviesList =
   (endPoint: string): ThunkActionResult => async (dispatch, _getState, api) => {
@@ -55,6 +59,11 @@ export const getMoviesList =
         dispatch(updateList(newArray));
       });
   };
+
+
+export const getPromoMovie = (): ThunkActionResult => getMovie(EndPoint.Promo);
+export const getMovieByID = (id: number | string): ThunkActionResult => getMovie(`${EndPoint.Films}/${id}`);
+
 
 export const getMovie =
   (endPoint: string): ThunkActionResult =>

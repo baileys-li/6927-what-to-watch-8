@@ -21,7 +21,6 @@ export const enum Genre {
   Initial = 'All genres',
 }
 
-
 export const enum EndPoint {
   Base = 'https://8.react.pages.academy/wtw',
   Films = '/films',
