@@ -3,7 +3,7 @@ import SmallFilmCard, { SmallFilmCardSkeleton } from '../small-film-card';
 import CatalogType from '../../types/catalog-type';
 import GenresList from '../genres-list/genres-list';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/reducers';
+import { RootState } from '../../store/reducer';
 import { useEffect, useState } from 'react';
 import MovieType from '../../types/movie-type';
 import { Genre } from '../../const';

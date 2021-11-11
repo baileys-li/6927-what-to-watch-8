@@ -10,7 +10,7 @@ import style from './promo-film.module.scss';
 
 import type LinkType from '../../types/link';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/reducers';
+import { RootState } from '../../store/reducer';
 import { rewriteAll } from '../../store/slice/breadcrumbsStore';
 
 type PromoFilmProps = {

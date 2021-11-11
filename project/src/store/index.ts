@@ -1,4 +1,4 @@
-import rootReducer from './reducers';
+import rootReducer from './reducer';
 import { createAPI } from '../services/api';
 import { logout } from './slice/userStore';
 import { configureStore } from '@reduxjs/toolkit';

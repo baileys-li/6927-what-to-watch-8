@@ -6,7 +6,7 @@ import SpriteIcon from '../../sprite-icon/sprite-icon';
 import type MovieType from '../../../types/movie-type';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeIsFavorite } from '../../../store/actions/filmsActions';
-import { RootState } from '../../../store/reducers';
+import { RootState } from '../../../store/reducer';
 import { AppRoute, AuthorizationStatus } from '../../../const';
 import { useNavigate } from 'react-router';
 

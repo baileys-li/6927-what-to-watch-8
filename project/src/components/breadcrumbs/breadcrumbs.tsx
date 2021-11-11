@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import style from './breadcrumbs.module.scss';
 
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/reducers';
+import { RootState } from '../../store/reducer';
 
 type BreadcrumbsType = {
   // links: Array<LinkType>;

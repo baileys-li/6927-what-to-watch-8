@@ -1,6 +1,6 @@
 import style from './genres-list.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../store/reducers';
+import { RootState } from '../../store/reducer';
 import { setFilter } from '../../store/slice/filmsStore';
 
 function GenresList(): JSX.Element {
