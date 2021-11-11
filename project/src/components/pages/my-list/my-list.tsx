@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 function MyList(): JSX.Element {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getFavorites);
+    dispatch(getFavorites());
   }, [dispatch]);
 
   return (

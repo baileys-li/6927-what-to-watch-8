@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../store/reducer';
 
 type BreadcrumbsType = {
-  // links: Array<LinkType>;
   className?: string;
 };
 
