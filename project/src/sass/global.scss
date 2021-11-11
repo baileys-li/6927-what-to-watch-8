@@ -25,7 +25,7 @@ body {
 .app {
   &__header {
     position: absolute;
-    top: 0;
+    inset: 0 0 auto 0;
     width: 100%;
     z-index: 2;
   }
