@@ -12,8 +12,9 @@ const userSlice = createSlice({
   reducers: {
     authorization: (_state, action: PayloadAction<UserState>) => action.payload,
     logout: (state) => state = { status: AuthorizationStatus.NoAuth },
+    setError: (state, action: PayloadAction<string | undefined>) => { state.error = action.payload; },
   },
 });
 
-export const { authorization, logout } = userSlice.actions;
+export const { authorization, logout, setError } = userSlice.actions;
 export default userSlice.reducer;

@@ -2,7 +2,8 @@ import { AuthorizationStatus } from '../const';
 import LoginResponse from './loginResponse';
 
 export type UserStatus = {
-  status: AuthorizationStatus
+  status: AuthorizationStatus,
+  error?: string;
 }
 
 export type UserFullState = Omit<LoginResponse, 'token' | 'avatar_url'>

@@ -4,27 +4,34 @@ import { dropToken, saveToken } from '../../services/token';
 import { AuthData } from '../../types/auth-data';
 import LoginResponse from '../../types/loginResponse';
 import { ThunkActionResult } from '../../types/thunk-action';
-import { authorization, logout } from '../slice/userStore';
-
+import { authorization, logout, setError } from '../slice/userStore';
 
 /* Async Actions */
 export const checkAuthAction =
   (): ThunkActionResult => async (dispatch, _getState, api) => {
     await api.get<LoginResponse>(EndPoint.Login).then((response) => {
-      response.data && dispatch(authorization(adaptLoginResponse(response.data)));
+      response.data &&
+        dispatch(authorization(adaptLoginResponse(response.data)));
     });
   };
 
 export const loginAction =
-  ({ login: email, password }: AuthData): ThunkActionResult =>
+  (credentials: AuthData): ThunkActionResult =>
     async (dispatch, _getState, api) => {
-      const { data } = await api.post<LoginResponse>(EndPoint.Login, {
-        email,
-        password,
-      });
-      saveToken(data.token);
+      await api
+        .post<LoginResponse>(EndPoint.Login, credentials)
+        .then(({ data }) => {
+          saveToken(data.token);
 
-      dispatch(authorization(adaptLoginResponse(data)));
+          dispatch(authorization(adaptLoginResponse(data)));
+        })
+        .catch((_error) =>
+          dispatch(
+            setError(
+              'We can’t recognize this email and password combination. Please try again.',
+            ),
+          ),
+        );
     };
 
 export const logoutAction =
