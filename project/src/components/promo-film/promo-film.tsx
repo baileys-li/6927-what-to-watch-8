@@ -104,7 +104,7 @@ function PromoFilm({
                 </>
                 <MovieDetails movie={movie} />
 
-                <MovieReviews id={movie.id} />
+                <MovieReviews />
               </Tabs>
             </div>
           </>

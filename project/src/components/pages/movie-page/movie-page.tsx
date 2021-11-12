@@ -7,6 +7,7 @@ import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { getMovieByID, getSimilarMoviesList } from '../../../store/actions/filmsActions';
 import { useEffect } from 'react';
+import { getReviewsByID } from '../../../store/actions/reviewsAction';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
@@ -15,6 +16,7 @@ function MoviePage(): JSX.Element {
   useEffect(() => {
     dispatch(getMovieByID(id as string));
     dispatch(getSimilarMoviesList(id as string));
+    dispatch(getReviewsByID(id as string));
   }, [dispatch, id]);
 
   return (
