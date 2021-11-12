@@ -5,37 +5,26 @@
 }
 
 .stars {
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   justify-content: center;
-  flex-direction: row-reverse;
   margin-bottom: 15px;
+  gap: 5px;
 }
 
 .star {
-  appearance: none;
+  font-size: 32px;
+  line-height: 36px;
+  color: rgba(56, 44, 42, 0.36);
+  transition: color 0.2s;
+  cursor: pointer;
 
-  &:checked ~ &__label::after {
+  &--selected {
     color: rgba(56, 44, 42, 0.7);
   }
 
-  &__label {
-    font-size: 0;
-    line-height: 0;
-    display: block;
-    padding-right: 10px;
-    cursor: pointer;
-
-    &:first-child {
-      padding-right: 0;
-    }
-    &::after {
-      content: '★';
-      display: block;
-      font-size: 32px;
-      line-height: 36px;
-      color: rgba(56, 44, 42, 0.36);
-      transition: color 0.2s;
-    }
+  input {
+    appearance: none;
   }
 }
 

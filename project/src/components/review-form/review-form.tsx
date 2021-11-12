@@ -1,24 +1,30 @@
+import { useState } from 'react';
 import style from './review-form.module.scss';
 
-const STARS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].reverse();
+const STARS = [...Array(11).keys()].slice(1);
+
 function ReviewForm(): JSX.Element {
+  const [rating, setRating] = useState<number>(8);
+  const [comment, setComment] = useState<string>('');
+
   return (
     <form className={style.form} action='#'>
       <div className={style.stars}>
         {STARS.map((star) => (
-          <>
+          <label
+            key={star}
+            aria-label={`Rating ${star}`}
+            className={[style.star, star <= rating ? style['star--selected'] : ''].join(' ')}
+          >
             <input
-              className={style.star}
-              id={`star-${star}`}
               type='radio'
               name='rating'
               value={star}
-              defaultChecked={star === 8}
+              onInput={() => setRating(star)}
+              defaultChecked={star === rating}
             />
-            <label className={style.star__label} htmlFor={`star-${star}`}>
-              Rating {star}
-            </label>
-          </>
+            ★
+          </label>
         ))}
       </div>
 
@@ -28,6 +34,8 @@ function ReviewForm(): JSX.Element {
           name='review-text'
           id='review-text'
           placeholder='Review text'
+          onInput={(evt) => setComment(evt.currentTarget.value)}
+          value={comment}
         />
 
         <button className={style.button} type='submit'>
