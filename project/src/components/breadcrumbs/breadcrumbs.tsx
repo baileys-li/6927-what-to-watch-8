@@ -18,7 +18,7 @@ function Breadcrumbs({ className }: BreadcrumbsType): JSX.Element {
         <li className={style.logo}>
           <Logo />
         </li>
-        {list?.map((link) => (
+        {list && list.map((link) => (
           <li className={style.item} key={link.text}>
             {link.href ? (
               <Link to={link.href} className={style.link}>

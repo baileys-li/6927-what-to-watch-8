@@ -12,6 +12,7 @@ import type LinkType from '../../types/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducer';
 import { rewriteAll } from '../../store/slice/breadcrumbsStore';
+import { useEffect } from 'react';
 
 type PromoFilmProps = {
   full?: boolean;
@@ -28,17 +29,17 @@ function PromoFilm({
   const { selected: movie } = useSelector((state: RootState) => state.movies);
   const dispatch = useDispatch();
 
-  if (movie) {
-
-    if (review) {
+  useEffect(() => {
+    if (movie && review) {
       const breadcrumbs: Array<LinkType> = [
         { href: `/films/${movie.id}`, text: movie.name },
         { text: 'Add review' },
       ];
-
       dispatch(rewriteAll(breadcrumbs));
     }
+  }, [dispatch, movie, review]);
 
+  if (movie) {
 
     const description = (
       <MovieDescription
