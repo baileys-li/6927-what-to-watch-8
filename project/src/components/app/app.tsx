@@ -20,7 +20,14 @@ function App(): JSX.Element {
       <Routes>
         <Route path={AppRoute.Main} element={<MainPage />} />
         <Route path={AppRoute.Film} element={<MoviePage />} />
-        <Route path={AppRoute.AddReview} element={<ReviewPage />} />
+        <Route
+          path={AppRoute.AddReview}
+          element={
+            <PrivateRoute>
+              <ReviewPage />
+            </PrivateRoute>
+          }
+        />
 
         <Route
           path={AppRoute.MyList}
