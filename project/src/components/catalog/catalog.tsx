@@ -1,33 +1,15 @@
-import style from './catalog.module.scss';
 import SmallFilmCard, { SmallFilmCardSkeleton } from '../small-film-card';
 import CatalogType from '../../types/catalog-type';
 import GenresList from '../genres-list/genres-list';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/reducer';
-import { useEffect, useState } from 'react';
-import MovieType from '../../types/movie-type';
-import { Genre } from '../../const';
+import useCatalog from '../../hooks/useCatalog';
+
+import style from './catalog.module.scss';
 
 function Catalog({
   genres = false,
   similar = false,
 }: CatalogType): JSX.Element {
-  const { list, filter } = useSelector(
-    (state: RootState) => state.movies,
-  );
-
-  const [filteredList, setFilteredList] = useState<MovieType[] | null>(null);
-  const [max, setMax] = useState<number>(8);
-
-  useEffect(() => {
-    list &&
-      setFilteredList(
-        filter === Genre.Initial
-          ? list
-          : list.filter((movie) => movie.genre === filter),
-      );
-  }, [filter, list]);
-
+  const [list, limit, setLimit] = useCatalog();
 
   return (
     <section
@@ -40,25 +22,25 @@ function Catalog({
       {genres && <GenresList />}
 
       <div className={style.list}>
-        {filteredList ?
-          filteredList.map(
+        {list
+          ? list.map(
             (movie, index) =>
-              index < max && <SmallFilmCard movie={movie} key={movie.id} />,
-          ) :
-          [...Array(4).keys()].map((key) => <SmallFilmCardSkeleton key={key} />)}
+              index < limit && (<SmallFilmCard movie={movie} key={movie.id} />))
+          : [...Array(4).keys()].map((key) => (
+            <SmallFilmCardSkeleton key={key} />
+          ))}
       </div>
 
-      {filteredList && filteredList.length >= max + 1 && (
+      {list && list.length >= limit + 1 && (
         <button
           className={style.button}
           type='button'
-          onClick={() => setMax(() => max + 8)}
+          onClick={() => setLimit(() => limit + 8)}
         >
           Show more
         </button>
       )}
     </section>
   );
-
 }
 export default Catalog;
