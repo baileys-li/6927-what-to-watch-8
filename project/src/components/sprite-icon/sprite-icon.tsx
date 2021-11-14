@@ -1,8 +1,7 @@
-type SpriteIconType = {
+import { SVGAttributes } from 'react';
+
+type SpriteIconType = SVGAttributes<SVGElement> & {
   id: string;
-  width?: number | string;
-  height?: number | string;
-  fill?: string;
 };
 
 function SpriteIcon({
@@ -10,6 +9,7 @@ function SpriteIcon({
   width = '1em',
   height = width,
   fill = 'currentColor',
+  ...other
 }: SpriteIconType): JSX.Element {
   return (
     <svg
@@ -18,6 +18,7 @@ function SpriteIcon({
       fill={fill}
       aria-hidden='true'
       focusable='false'
+      {...other}
     >
       <use href={`sprite.svg#${id}`} />
     </svg>

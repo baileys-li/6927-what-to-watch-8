@@ -27,3 +27,17 @@ export function formatRunTime(time: number): string {
 
   return result;
 }
+
+export function formatTime(timeInSeconds: number) : string {
+  let result = '';
+
+  const hours = Math.floor(timeInSeconds / 3600);
+  result += hours ? `${hours}:` : '';
+
+  const minutes = Math.floor(timeInSeconds / 60) - hours * 60;
+  result +=  minutes ? `${minutes}:` : '';
+
+  const seconds = Math.floor(timeInSeconds) - minutes * 60 - hours * 3600;
+  result += `${seconds}`;
+  return result;
+}
