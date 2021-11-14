@@ -4,21 +4,21 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/reducer';
 
 function MovieReviews(): JSX.Element {
-  const response = useSelector((state: RootState) => state.reviews.list);
+  const list = useSelector((state: RootState) => state.reviews.list);
 
-  const listMiddle = response.length / 2;
+  const listMiddle = list.length / 2;
 
   const reviews =
     listMiddle < 1
-      ? [response]
+      ? [list]
       : [
-        response.slice(0, Math.floor(listMiddle)),
-        response.slice(Math.round(listMiddle)),
+        list.slice(0, Math.round(listMiddle)),
+        list.slice(Math.round(listMiddle)),
       ];
 
   return (
     <div className={style.wrapper}>
-      {response.length === 0
+      {list.length === 0
         ? 'No reviews'
         : reviews.map((column) => (
           <div className={style.column} key={column[0].id}>
