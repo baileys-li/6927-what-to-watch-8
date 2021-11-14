@@ -51,7 +51,10 @@ function MovieDescription({
           Play
         </Button>
         {movie.isFavorite ? (
-          <Button onClick={changeStatus}>In My List</Button>
+          <Button onClick={changeStatus}>
+            <SpriteIcon id='in-list' width='18' height='14' />
+            My List
+          </Button>
         ) : (
           <Button onClick={changeStatus}>
             <SpriteIcon id='add' width='19' height='20' />
