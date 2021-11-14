@@ -7,8 +7,7 @@ import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { getMovieByID, getSimilarMoviesList } from '../../../store/actions/filmsActions';
 import { useEffect } from 'react';
-// import { getReviewsByID } from '../../../store/actions/reviewsAction';
-import { getReviews } from '../../../store/slice/reviewsReducer';
+import { getReviews } from '../../../store/actions/reviewsActions';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();
