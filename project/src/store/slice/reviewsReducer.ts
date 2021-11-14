@@ -1,40 +1,69 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AxiosInstance, AxiosError, AxiosResponse } from 'axios';
 import ReviewType from '../../types/review-type';
+import SendReview from '../../types/send-review';
 
-type NewReviewStatus = {
-  isLoading: boolean,
-  isSuccess: boolean,
-  error?: string | undefined,
-}
+export const getReviews = createAsyncThunk('reviews/getReviews',
+  async (id: number | string, {extra, rejectWithValue}) => {
+
+    const result = await (extra as AxiosInstance).get<ReviewType[]>(`/comments/${id}`)
+      .then(({data}) => data)
+      .catch((error: AxiosError) => error);
+
+    if ((result as AxiosError).isAxiosError) {
+      return rejectWithValue((result as AxiosError).response?.statusText);
+    }
+    return result;
+  });
+
+
+export const publishReview = createAsyncThunk('reviews/publishReviews',
+  async (sendData: SendReview, {extra, rejectWithValue}) => {
+    const result = await (extra as AxiosInstance).post<ReviewType[]>(`/comments/${sendData.id}`, sendData.body)
+      .then(({data}: AxiosResponse) => ({isAxiosError: false, data}))
+      .catch(({isAxiosError, response} : AxiosError) => ({isAxiosError, data: response?.statusText}));
+
+    if (result.isAxiosError) {
+      return rejectWithValue(result.data);
+    }
+    return result.data;
+  });
 
 type ReviewsState = {
   list: ReviewType[],
-  status?: NewReviewStatus,
+  isLoading: boolean,
+  isSuccess: boolean,
+  error: string | undefined,
   }
 
-const newReviewInitialStatus = {
+const initialState: ReviewsState = {
+  list: [],
   isLoading: false,
   isSuccess: false,
   error: undefined,
 };
 
-const initialState: ReviewsState = {
-  list: [],
-};
-
 const reviewsSlice = createSlice({
   name: 'reviews',
   initialState,
-  reducers: {
-    setReviews: (state, action: PayloadAction<ReviewType[]>) => {
+  reducers: {},
+  extraReducers: {
+    [String(getReviews.fulfilled)]: (state, action: PayloadAction<ReviewType[]>) => {
       state.list = action.payload;
-      state.status = newReviewInitialStatus;
+      state.isSuccess = false;
     },
-    changeStatus: (state, action: PayloadAction<NewReviewStatus>) => {
-      state.status = action.payload;
+    [String(publishReview.pending)]: (state) => {
+      state.isLoading = true;
+    },
+    [String(publishReview.fulfilled)]: (state) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+    },
+    [String(publishReview.rejected)]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
     },
   },
-});
+} );
 
-export const { setReviews, changeStatus } = reviewsSlice.actions;
 export default reviewsSlice.reducer;

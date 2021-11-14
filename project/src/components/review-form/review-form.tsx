@@ -1,8 +1,8 @@
 import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
-import { publishReview } from '../../store/actions/reviewsAction';
 import { RootState } from '../../store/reducer';
+import { publishReview } from '../../store/slice/reviewsReducer';
 import style from './review-form.module.scss';
 
 const STARS = [...Array(11).keys()].slice(1);
@@ -10,21 +10,20 @@ const STARS = [...Array(11).keys()].slice(1);
 function ReviewForm(): JSX.Element {
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>('');
-  const status = useSelector((state: RootState) => state.reviews.status);
+  const { isLoading, isSuccess, error } = useSelector((state: RootState) => state.reviews);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
 
-
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(publishReview({ rating, comment }));
+    dispatch(publishReview({ id: id as string, body: {rating, comment} }));
   };
 
   useEffect(() => {
-    status?.isSuccess &&
+    isSuccess &&
       navigate(`/films/${id}`);
-  }, [status, id, navigate]);
+  }, [isSuccess, id, navigate]);
 
   return (
     <form className={style.form} action='#' onSubmit={handleSubmit}>
@@ -36,14 +35,14 @@ function ReviewForm(): JSX.Element {
             className={[
               style.star,
               star <= rating ? style['star--selected'] : '',
-              status?.isLoading ? style['star--disabled'] : '',
+              isLoading ? style['star--disabled'] : '',
             ].join(' ')}
           >
             <input
               type='radio'
               name='rating'
               value={star}
-              disabled={status?.isLoading}
+              disabled={isLoading}
               onInput={() => setRating(star)}
               defaultChecked={star === rating}
             />
@@ -58,7 +57,7 @@ function ReviewForm(): JSX.Element {
           name='review-text'
           id='review-text'
           placeholder='Review text'
-          disabled={status?.isLoading}
+          disabled={isLoading}
           onInput={(evt) => setComment(evt.currentTarget.value)}
           minLength={50}
           maxLength={400}
@@ -75,7 +74,7 @@ function ReviewForm(): JSX.Element {
           Post
         </button>
       </div>
-      {status?.error && <p>{status.error}</p>}
+      {error && <p>{error}</p>}
     </form>
   );
 }
