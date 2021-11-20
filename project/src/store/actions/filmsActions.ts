@@ -4,7 +4,8 @@ import MovieType, { ServerResponseMovieType } from '../../types/movie-type';
 import { ThunkActionResult } from '../../types/thunk-action';
 import { adaptFromSnakeToCamel } from '../../utils/adapter';
 
-import { setList, setGenres, setMovie } from '../slice/filmsStore';
+import { setList, setGenres } from '../slice/filmsStore';
+import { setMovie } from '../slice/promoMovieStore';
 
 /* Async Actions */
 export const getAllMovies =

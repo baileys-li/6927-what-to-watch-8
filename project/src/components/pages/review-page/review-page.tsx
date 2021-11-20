@@ -8,7 +8,7 @@ import { RootState } from '../../../store/reducer';
 
 function ReviewPage(): JSX.Element {
   const { id } = useParams();
-  const selectedID = useSelector((state: RootState) => state.movies.selected?.id);
+  const selectedID = useSelector((state: RootState) => state.promo.movie?.id);
   const dispatch = useDispatch();
 
   useEffect(() => {

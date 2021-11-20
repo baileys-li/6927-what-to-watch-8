@@ -4,10 +4,8 @@ import ReviewType from '../../types/review-type';
 import SendReview from '../../types/send-review';
 
 export const getReviews = createAsyncThunk<
-  ReviewType[],
-  number | string,
-  { extra: AxiosInstance }
->('reviews/getReviews', async (id, { extra, rejectWithValue, getState }) => {
+  ReviewType[], number | string, { extra: AxiosInstance }
+>('reviews/getReviews', async (id, { extra, rejectWithValue }) => {
   const result = await extra
     .get(`/comments/${id}`)
     .then(({ data }) => data)
@@ -20,9 +18,7 @@ export const getReviews = createAsyncThunk<
 });
 
 export const publishReview = createAsyncThunk<
-  ReviewType[],
-  SendReview,
-  { extra: AxiosInstance }
+  ReviewType[], SendReview, { extra: AxiosInstance }
 >('reviews/publishReviews', async (sendData, { extra, rejectWithValue }) => {
   const result = await extra
     .post(`/comments/${sendData.id}`, sendData.body)

@@ -26,7 +26,7 @@ function PromoFilm({
   review = false,
 }: PromoFilmProps): JSX.Element {
 
-  const { selected: movie } = useSelector((state: RootState) => state.movies);
+  const { movie } = useSelector((state: RootState) => state.promo);
   const dispatch = useDispatch();
 
   useEffect(() => {

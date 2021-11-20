@@ -11,7 +11,7 @@ import SpriteIcon from '../../sprite-icon/sprite-icon';
 import style from './style/player.module.scss';
 
 function Player(): JSX.Element {
-  const movie = useSelector((state: RootState) => state.movies.selected);
+  const movie = useSelector((state: RootState) => state.promo.movie);
   const { id } = useParams();
   const dispatch = useDispatch();
   const videoRef = useRef<HTMLVideoElement>(null);
