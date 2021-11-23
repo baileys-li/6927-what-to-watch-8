@@ -87,11 +87,13 @@ function Player(): JSX.Element {
           style={{ '--time': `${currentPercent()}%` } as CSSProperties}
           onInput={handleTimeline}
         />
-        {duration && currentTime && (
-          <div className={style.time__value}>
-            -{formatTime(duration - currentTime)} / {formatTime(duration)}
-          </div>
-        )}
+
+        <div className={style.time__value}>
+          {duration && currentTime && (
+            `-${formatTime(duration - currentTime)} / ${formatTime(duration)}`
+          )}
+        </div>
+
 
         <button
           type='button'
