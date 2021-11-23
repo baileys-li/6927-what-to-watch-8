@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { CSSProperties, FormEvent, SyntheticEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router';
 import { AppRoute } from '../../../const';
 import { getMovieByID } from '../../../store/actions/filmsActions';
 import { RootState } from '../../../store/reducer';
@@ -15,23 +14,18 @@ function Player(): JSX.Element {
   const { id } = useParams();
   const dispatch = useDispatch();
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [duration, setDuration] = useState<number>(70);
-  const [timeLeft, setTimeLeft] = useState<number>(70);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [duration, setDuration] = useState<number | undefined>(undefined);
+  const [currentTime, setCurrentTime] = useState<number | undefined>(undefined);
   const [play, setPlay] = useState<boolean>(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!movie || Number(id) !== movie.id) {
       id && dispatch(getMovieByID(id));
     }
   }, [movie, id, dispatch]);
-
-  useEffect(() => {
-    videoRef.current && setDuration(videoRef.current.duration);
-  }, [videoRef.current?.duration]);
-
-  useEffect(() => {
-    videoRef.current && setTimeLeft(videoRef.current.duration - videoRef.current.currentTime);
-  }, [videoRef.current?.currentTime]);
 
   const changePlaying = () => {
     if (play) {
@@ -43,50 +37,87 @@ function Player(): JSX.Element {
     }
   };
 
+  const currentPercent = () => (currentTime && duration) ?
+    (currentTime * 100) / duration : 0;
+
+  const updateTime = ({ currentTarget }: SyntheticEvent<HTMLVideoElement>) =>
+    setCurrentTime(currentTarget.currentTime);
+
+  const updateDuration = ({
+    currentTarget,
+  }: SyntheticEvent<HTMLVideoElement>) => setDuration(currentTarget.duration);
+
+  const handleTimeline = ({ currentTarget }: FormEvent<HTMLInputElement>) => {
+    if (duration && videoRef.current) {
+      const newCurrentTime = Number(currentTarget.value) * duration / 100;
+      setCurrentTime(newCurrentTime);
+      videoRef.current.currentTime = newCurrentTime;
+    }
+  };
+
   return (
-    <div className={style.root}>
+    <article className={style.root} ref={rootRef}>
       <video
         className={style.video}
-        src={movie?.videoLink} poster={movie?.backgroundImage}
+        src={movie?.videoLink}
+        poster={movie?.backgroundImage}
         autoPlay
         ref={videoRef}
+        onTimeUpdate={updateTime}
+        onDurationChange={updateDuration}
       />
 
-      <Link to={AppRoute.Main} className={style.exit} style={{ textDecoration: 'none' }}>
+      <button
+        onClick={() => window.history.length === 1 ? navigate(AppRoute.Main) : navigate(-1)}
+        className={style.exit}
+        style={{ textDecoration: 'none' }}
+      >
         Exit
-      </Link>
+      </button>
 
       <div className={style.controls}>
-        <div className={style.controls__row}>
-          <div className={style.time}>
-            <progress className={style.progress} value='30' max='100' />
-            <div className={style.toggler} style={{ left: '30%' }}>
-              Toggler
-            </div>
-          </div>
+
+        <input
+          className={style.timeline}
+          type='range'
+          name='time'
+          value={currentPercent()}
+          min={0}
+          max={100}
+          style={{ '--time': `${currentPercent()}%` } as CSSProperties}
+          onInput={handleTimeline}
+        />
+        {duration && currentTime && (
           <div className={style.time__value}>
-            -{formatTime(timeLeft)} / {formatTime(duration)}
+            -{formatTime(duration - currentTime)} / {formatTime(duration)}
           </div>
-        </div>
+        )}
 
-        <div className={style.controls__row}>
-          <button
-            type='button'
-            className={[style.control, style.play].join(' ')}
-            aria-label={play ? 'Pause' : 'Play'}
-            onClick={changePlaying}
-          >
-            <SpriteIcon id={play ? 'pause' : 'play-s'} width={19} />
-          </button>
-          <div className={style.name}>{movie?.name}</div>
+        <button
+          type='button'
+          className={[style.control, style.play].join(' ')}
+          aria-label={play ? 'Pause' : 'Play'}
+          onClick={changePlaying}
+        >
+          <SpriteIcon id={play ? 'pause' : 'play-s'} width={19} />
+        </button>
+        <div className={style.name}>{movie?.name}</div>
 
-          <button type='button' className={[style.control, style['full-screen']].join(' ')} aria-label='Full screen'>
-            <SpriteIcon id='full-screen' width={27} />
-          </button>
-        </div>
+        <button
+          type='button'
+          className={[style.control, style['full-screen']].join(' ')}
+          aria-label='Full screen'
+          onClick={() => {
+            document.fullscreenElement === rootRef.current
+              ? document.exitFullscreen()
+              : rootRef.current?.requestFullscreen();
+          }}
+        >
+          <SpriteIcon id='full-screen' width={27} />
+        </button>
+
       </div>
-    </div>
+    </article >
   );
 }
-
 export default Player;

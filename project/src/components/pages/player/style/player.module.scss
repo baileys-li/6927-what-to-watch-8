@@ -2,6 +2,7 @@
   position: fixed;
   z-index: 1;
   inset: 0;
+
   &::after {
     content: "";
     position: absolute;
@@ -41,48 +42,14 @@
   z-index: 2;
   inset: auto 0 0;
   padding: 25px;
-
-  &__row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-.time {
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-  margin-right: 20px;
-  position: relative;
-}
-
-.progress {
-  appearance: none;
-  width: 100%;
-  background: rgba(255, 251, 231, 0.35);
-  border-radius: 1px;
-  border: none;
-  height: 4px;
-  display: block;
-
-  &::-moz-progress-bar {
-    background: #d9cd8d;
-  }
-  &::-webkit-progress-bar {
-    background: rgba(255, 251, 231, 0.35);
-  }
-  &::-webkit-progress-value {
-    background: #d9cd8d;
-  }
+  display: grid;
+  grid-template-columns: 26px 1fr auto;
+  gap: 15px 20px;
+  align-items: center;
 }
 
 .time__value {
-  width: 60px;
+  min-width: 60px;
   -ms-flex-negative: 0;
   flex-shrink: 0;
   text-align: right;
@@ -94,26 +61,11 @@
   margin-left: auto;
 }
 
-.toggler {
-  display: block;
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  background: #d9cd8d;
-  font-size: 0;
-  cursor: pointer;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-
 .control {
   all: unset;
   display: grid;
   place-content: center;
-  color: #EEE5B5;
+  color: #eee5b5;
   opacity: 0.7;
   cursor: pointer;
   transition: 0.2s transform;
@@ -123,14 +75,15 @@
     vertical-align: top;
   }
 
-  &:focus, &:hover {
+  &:focus,
+  &:hover {
     opacity: 1;
     transform: scale(1.1);
   }
 }
 
 .play {
-  width: 26px;
+  width: 100%;
   height: 26px;
 }
 
@@ -139,9 +92,54 @@
   line-height: 20px;
   font-weight: bold;
   color: #b3ae98;
-  margin: 0 30px;
+  margin: 0 10px;
 }
 
 .full-screen {
-  margin-left: auto;
+  justify-self: end;
+}
+
+@mixin thumb {
+  appearance: none;
+  background-color: #d9cd8d;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 0;
+  width: 17px;
+  height: 17px;
+}
+
+@mixin track {
+  background: none;
+  height: 100%;
+  width: 100%;
+}
+
+.timeline {
+  --time: 0%;
+  appearance: none;
+  background-color: transparent;
+  background-image: linear-gradient(to right, #d9cd8d var(--time), rgba(255, 251, 231, 0.35) var(--time));
+
+  background-size: 100% 4px;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  grid-column-end: span 2;
+
+  &::-webkit-slider-runnable-track {
+    @include track;
+  }
+
+  &::-moz-range-track {
+    @include track;
+  }
+
+  &::-webkit-slider-thumb {
+    @include thumb;
+  }
+
+  &::-moz-range-thumb {
+    @include thumb;
+  }
 }

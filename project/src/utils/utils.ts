@@ -32,12 +32,16 @@ export function formatTime(timeInSeconds: number) : string {
   let result = '';
 
   const hours = Math.floor(timeInSeconds / 3600);
-  result += hours ? `${hours}:` : '';
+  result += hours ? `${addZeroToDigit(hours)}:` : '';
 
   const minutes = Math.floor(timeInSeconds / 60) - hours * 60;
-  result +=  minutes ? `${minutes}:` : '';
+  result += `${addZeroToDigit(minutes)}:`;
 
   const seconds = Math.floor(timeInSeconds) - minutes * 60 - hours * 3600;
-  result += `${seconds}`;
+  result += addZeroToDigit(seconds);
   return result;
+}
+
+function addZeroToDigit(number: number) : number | string {
+  return number > 9 ? number : `0${number}`;
 }
