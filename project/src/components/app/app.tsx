@@ -1,5 +1,4 @@
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
-import PrivateRoute from '../private-route/private-route';
 
 import MainPage from '../pages/main-page/main-page';
 import MyList from '../pages/my-list/my-list';
@@ -10,11 +9,21 @@ import Player from '../pages/player/player';
 import DebugPage from '../pages/debug-page/debug-page';
 import Page404 from '../pages/page404/page404';
 
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 
 import '../../sass/global.scss';
+import useUserData from '../../hooks/useUserData';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { checkAuthAction } from '../../store/actions/authorizationActions';
 
 function App(): JSX.Element {
+  const { status } = useUserData();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    status === AuthorizationStatus.Unknown && dispatch(checkAuthAction());
+  }, [status, dispatch]);
+
   return (
     <BrowserRouter>
       <Routes>
@@ -22,24 +31,18 @@ function App(): JSX.Element {
         <Route path={AppRoute.Film} element={<MoviePage />} />
         <Route
           path={AppRoute.AddReview}
-          element={
-            <PrivateRoute>
-              <ReviewPage />
-            </PrivateRoute>
-          }
+          element={status === AuthorizationStatus.Auth ? <ReviewPage /> : <Login />}
         />
 
         <Route
           path={AppRoute.MyList}
-          element={
-            <PrivateRoute>
-              <MyList />
-            </PrivateRoute>
-          }
+          element={status === AuthorizationStatus.Auth ? <MyList /> : <Login />}
         />
 
         <Route path={AppRoute.Player} element={<Player />} />
-        <Route path={AppRoute.SignIn} element={<Login />} />
+        <Route path={AppRoute.SignIn}
+          element={status === AuthorizationStatus.NoAuth ? <Login /> : <MainPage />}
+        />
 
         <Route path={AppRoute.Debug} element={<DebugPage />} />
 

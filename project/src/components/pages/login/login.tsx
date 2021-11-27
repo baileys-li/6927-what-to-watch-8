@@ -1,13 +1,14 @@
 import Header from '../../header/header';
 import Footer from '../../footer/footer';
 import style from './login.module.scss';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../../store/actions/authorizationActions';
 import { useNavigate } from 'react-router';
-import { AppRoute } from '../../../const';
 import { RootState } from '../../../store/reducer';
 import { setError } from '../../../store/slice/userStore';
+import useUserData from '../../../hooks/useUserData';
+import { AppRoute, AuthorizationStatus } from '../../../const';
 
 function Login(): JSX.Element {
   const error = useSelector((state: RootState) => state.user.error);
@@ -17,12 +18,13 @@ function Login(): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const { status } = useUserData();
+
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   function handleSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     dispatch(loginAction({ email, password }));
-    !error && navigate(AppRoute.Main);
   }
 
   function handleEmailInput({ currentTarget }: FormEvent<HTMLInputElement>) {
@@ -32,6 +34,10 @@ function Login(): JSX.Element {
       ? dispatch(setError(undefined))
       : dispatch(setError('Please enter a valid email address'));
   }
+
+  useEffect(() => {
+    status === AuthorizationStatus.Auth && navigate(AppRoute.Main);
+  }, [status, navigate]);
 
   return (
     <div className='user-page'>
@@ -59,7 +65,8 @@ function Login(): JSX.Element {
             <label>
               <span className='visually-hidden'>Password</span>
               <input
-                onInput={({ currentTarget }) => setPassword(currentTarget.value)}
+                onInput={({ currentTarget }) =>
+                  setPassword(currentTarget.value)}
                 className={style.input}
                 type='password'
                 placeholder='Password'
