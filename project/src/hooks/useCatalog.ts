@@ -15,10 +15,10 @@ const filteredMovieListSelector = createSelector([moviesSelector], ({filter, lis
   }
 });
 
-function useCatalog() : [MovieType[] | null, number, Dispatch<SetStateAction<number>>] {
+function useCatalog(initialLimit: number) : [MovieType[] | null, number, Dispatch<SetStateAction<number>>] {
   const filteredList = useSelector(filteredMovieListSelector);
 
-  const [limit, setLimit] = useState<number>(8);
+  const [limit, setLimit] = useState<number>(initialLimit);
 
   return [filteredList, limit, setLimit];
 }

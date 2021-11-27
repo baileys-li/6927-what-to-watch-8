@@ -9,7 +9,7 @@ function Catalog({
   genres = false,
   similar = false,
 }: CatalogType): JSX.Element {
-  const [list, limit, setLimit] = useCatalog();
+  const [list, limit, setLimit] = useCatalog(similar ? 4 : 8);
 
   return (
     <section
@@ -31,7 +31,7 @@ function Catalog({
           ))}
       </div>
 
-      {list && list.length >= limit + 1 && (
+      {list && list.length >= limit + 1 && !similar && (
         <button
           className={style.button}
           type='button'
