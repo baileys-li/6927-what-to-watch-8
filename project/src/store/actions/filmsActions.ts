@@ -13,14 +13,14 @@ export const getAllMovies =
     await api
       .get<ServerResponseMovieType[]>(EndPoint.Films)
       .then(({ data }) => {
-        const newArray: MovieType[] = [];
+        const movies: MovieType[] = [];
         const genres: Set<GenreType> = new Set([Genre.Initial]);
         data.map((movie) => {
           genres.add(movie.genre);
-          return newArray.push(adaptFromSnakeToCamel(movie));
+          return movies.push(adaptFromSnakeToCamel(movie));
         });
 
-        dispatch(setList(newArray));
+        dispatch(setList(movies));
         dispatch(setGenres(Array.from(genres)));
       });
   };
@@ -35,9 +35,9 @@ export const getMoviesList =
     await api
       .get<ServerResponseMovieType[]>(endPoint)
       .then(({ data }) => {
-        const newArray: MovieType[] = [];
-        data.map((movie) => newArray.push(adaptFromSnakeToCamel(movie)));
-        dispatch(setList(newArray));
+        const movies: MovieType[] = [];
+        data.map((movie) => movies.push(adaptFromSnakeToCamel(movie)));
+        dispatch(setList(movies));
       });
   };
 

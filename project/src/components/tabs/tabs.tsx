@@ -10,7 +10,7 @@ type TabsType = {
 };
 
 function Tabs({ children, navigation, className }: TabsType): JSX.Element {
-  const normalizedNav = navigation.map(normalizeTextToID);
+  const normalizedNavItems = navigation.map(normalizeTextToID);
   const selectedPanel = useRef<HTMLElement | null>(null);
 
   const navigationRef = useRef<HTMLUListElement | null>(null);
@@ -26,7 +26,7 @@ function Tabs({ children, navigation, className }: TabsType): JSX.Element {
         break;
 
       case 'ArrowRight':
-        if (selected !== normalizedNav.length - 1) {
+        if (selected !== normalizedNavItems.length - 1) {
           const target: number = selected + 1;
           switchTab(target);
         }
@@ -51,7 +51,7 @@ function Tabs({ children, navigation, className }: TabsType): JSX.Element {
   return (
     <article className={className}>
       <ul role='tablist' ref={navigationRef} className={style.nav}>
-        {normalizedNav.map((tab, index) => (
+        {normalizedNavItems.map((tab, index) => (
           <li key={tab} role='presentation'>
             <button
               type='button'
@@ -68,7 +68,7 @@ function Tabs({ children, navigation, className }: TabsType): JSX.Element {
           </li>
         ))}
       </ul>
-      {normalizedNav.map((tab, index) => (
+      {normalizedNavItems.map((tab, index) => (
         <section
           key={`${tab}_panel`}
           ref={index === selected ? selectedPanel : null}
