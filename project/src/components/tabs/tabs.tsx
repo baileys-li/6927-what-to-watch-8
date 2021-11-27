@@ -16,7 +16,7 @@ function Tabs({ children, navigation, className }: TabsType): JSX.Element {
   const navigationRef = useRef<HTMLUListElement | null>(null);
   const [selected, setSelected] = useState(0);
 
-  function navigateByKeys(evt: KeyboardEvent) {
+  function handleTabKeydown(evt: KeyboardEvent) {
     switch (evt.key) {
       case 'ArrowLeft':
         if (selected !== 0) {
@@ -59,7 +59,7 @@ function Tabs({ children, navigation, className }: TabsType): JSX.Element {
               role='tab'
               aria-selected={index === selected}
               onClick={() => setSelected(index)}
-              onKeyDown={navigateByKeys}
+              onKeyDown={handleTabKeydown}
               tabIndex={index === selected ? 0 : -1}
               className={style.link}
             >

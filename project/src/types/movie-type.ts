@@ -1,10 +1,10 @@
 type MovieBase = {
   id: number,
   name: string,
-  description: string | Array<string>,
+  description: string,
   rating: number,
   director: string,
-  starring: Array<string>,
+  starring: string[],
   genre: string,
   released: number,
 }

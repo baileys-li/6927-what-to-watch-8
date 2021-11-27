@@ -6,6 +6,9 @@ type OverviewProps = {
   starring: Array<string>;
 };
 
+const enum Actor {
+  MaxCount = 4
+}
 function Overview({
   description,
   starring,
@@ -25,8 +28,8 @@ function Overview({
 
       <p className={style['film-card__starring']}>
         <strong>
-          Starring: {starring.slice(0, 4).join(', ')}
-          {starring.length > 4 && ' and other'}
+          Starring: {starring.slice(0, Actor.MaxCount).join(', ')}
+          {starring.length > Actor.MaxCount && ' and other'}
         </strong>
       </p>
     </div>

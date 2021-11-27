@@ -5,11 +5,16 @@ import useCatalog from '../../hooks/useCatalog';
 
 import style from './catalog.module.scss';
 
+const enum CatalogData {
+  SimilarLimit = 4,
+  DefaultLimit = 8
+}
+
 function Catalog({
   genres = false,
   similar = false,
 }: CatalogType): JSX.Element {
-  const [list, limit, setLimit] = useCatalog(similar ? 4 : 8);
+  const [list, limit, setLimit] = useCatalog(similar ? CatalogData.SimilarLimit : CatalogData.DefaultLimit);
 
   return (
     <section

@@ -7,6 +7,11 @@ import style from './review-form.module.scss';
 
 const STARS = [...Array(11).keys()].slice(1);
 
+const enum TextArea {
+  MaxLength = 400,
+  MinLength = 50
+}
+
 function ReviewForm(): JSX.Element {
   const [rating, setRating] = useState<number>(0);
   const [comment, setComment] = useState<string>('');
@@ -59,8 +64,8 @@ function ReviewForm(): JSX.Element {
           placeholder='Review text'
           disabled={isLoading}
           onInput={(evt) => setComment(evt.currentTarget.value)}
-          minLength={50}
-          maxLength={400}
+          minLength={TextArea.MinLength}
+          maxLength={TextArea.MaxLength}
           value={comment}
         />
 
@@ -68,7 +73,7 @@ function ReviewForm(): JSX.Element {
           className={style.button}
           type='submit'
           disabled={
-            comment.length < 50 || comment.length > 400 || !rating
+            comment.length < TextArea.MinLength || comment.length > TextArea.MaxLength || !rating
           }
         >
           Post

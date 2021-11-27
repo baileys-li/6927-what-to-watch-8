@@ -4,7 +4,7 @@ import GenreType from '../../types/genre-type';
 import MovieType from '../../types/movie-type';
 
 type FilmsState = {
-  list: Array<MovieType> | null;
+  list: MovieType[] | null;
   filter: string;
   genres: GenreType[] | null
 }
