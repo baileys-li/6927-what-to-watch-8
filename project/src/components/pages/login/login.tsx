@@ -1,7 +1,14 @@
 import Header from '../../header/header';
 import Footer from '../../footer/footer';
 import style from './login.module.scss';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import {
+  Dispatch,
+  FormEvent,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../../store/actions/authorizationActions';
 import { useNavigate } from 'react-router';
@@ -27,13 +34,28 @@ function Login(): JSX.Element {
     dispatch(loginAction({ email, password }));
   }
 
-  function handleEmailInput({ currentTarget }: FormEvent<HTMLInputElement>) {
-    setEmail(currentTarget.value);
-
-    currentTarget.checkValidity()
+  function handleInput(
+    input: HTMLInputElement,
+    setter: Dispatch<SetStateAction<string>>,
+    message: string,
+  ) {
+    setter(input.value);
+    input.checkValidity()
       ? dispatch(setError(undefined))
-      : dispatch(setError('Please enter a valid email address'));
+      : dispatch(setError(message));
   }
+
+  const handleEmailInput = ({ currentTarget }: FormEvent<HTMLInputElement>) =>
+    handleInput(currentTarget, setEmail, 'Please enter a valid email address');
+
+  const handlePasswordInput = ({
+    currentTarget,
+  }: FormEvent<HTMLInputElement>) =>
+    handleInput(
+      currentTarget,
+      setPassword,
+      'Password must contain at least 1 letter and 1 number',
+    );
 
   useEffect(() => {
     status === AuthorizationStatus.Auth && navigate(AppRoute.Main);
@@ -65,12 +87,12 @@ function Login(): JSX.Element {
             <label>
               <span className='visually-hidden'>Password</span>
               <input
-                onInput={({ currentTarget }) =>
-                  setPassword(currentTarget.value)}
+                onInput={handlePasswordInput}
                 className={style.input}
                 type='password'
                 placeholder='Password'
                 name='user-password'
+                pattern='^(?=.*[a-zA-Z])(?=.*[\d]).{2,}$'
                 required
                 ref={passwordRef}
                 value={password}
