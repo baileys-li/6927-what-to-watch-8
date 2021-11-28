@@ -27,7 +27,7 @@ function Player(): JSX.Element {
     }
   }, [movie, id, dispatch]);
 
-  const changePlaying = () => {
+  const handlePlayChange = () => {
     if (play) {
       setPlay(false);
       videoRef.current?.pause();
@@ -37,17 +37,17 @@ function Player(): JSX.Element {
     }
   };
 
-  const currentPercent = () => (currentTime && duration) ?
+  const calcPercent = () => (currentTime && duration) ?
     (currentTime * 100) / duration : 0;
 
-  const updateTime = ({ currentTarget }: SyntheticEvent<HTMLVideoElement>) =>
+  const handleTimeUpdate = ({ currentTarget }: SyntheticEvent<HTMLVideoElement>) =>
     setCurrentTime(currentTarget.currentTime);
 
-  const updateDuration = ({
+  const handleDurationChange = ({
     currentTarget,
   }: SyntheticEvent<HTMLVideoElement>) => setDuration(currentTarget.duration);
 
-  const handleTimeline = ({ currentTarget }: FormEvent<HTMLInputElement>) => {
+  const handleTimelineChange = ({ currentTarget }: FormEvent<HTMLInputElement>) => {
     if (duration && videoRef.current) {
       const newCurrentTime = Number(currentTarget.value) * duration / 100;
       setCurrentTime(newCurrentTime);
@@ -63,8 +63,8 @@ function Player(): JSX.Element {
         poster={movie?.backgroundImage}
         autoPlay
         ref={videoRef}
-        onTimeUpdate={updateTime}
-        onDurationChange={updateDuration}
+        onTimeUpdate={handleTimeUpdate}
+        onDurationChange={handleDurationChange}
       />
 
       <button
@@ -81,11 +81,11 @@ function Player(): JSX.Element {
           className={style.timeline}
           type='range'
           name='time'
-          value={currentPercent()}
+          value={calcPercent()}
           min={0}
           max={100}
-          style={{ '--time': `${currentPercent()}%` } as CSSProperties}
-          onInput={handleTimeline}
+          style={{ '--time': `${calcPercent()}%` } as CSSProperties}
+          onInput={handleTimelineChange}
         />
 
         <div className={style.time__value}>
@@ -99,7 +99,7 @@ function Player(): JSX.Element {
           type='button'
           className={[style.control, style.play].join(' ')}
           aria-label={play ? 'Pause' : 'Play'}
-          onClick={changePlaying}
+          onClick={handlePlayChange}
         >
           <SpriteIcon id={play ? 'pause' : 'play-s'} width={19} />
         </button>
