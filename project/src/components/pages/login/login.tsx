@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router';
 import { RootState } from '../../../store/reducer';
 import { setError } from '../../../store/slice/userStore';
 import useUserData from '../../../hooks/useUserData';
-import { AppRoute, AuthorizationStatus } from '../../../const';
+import { AppRoute, AuthorizationStatus, RegExpSample } from '../../../const';
 
 function Login(): JSX.Element {
   const error = useSelector((state: RootState) => state.user.error);
@@ -78,7 +78,7 @@ function Login(): JSX.Element {
                 type='email'
                 placeholder='Email address'
                 name='user-email'
-                pattern='[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'
+                pattern={RegExpSample.Email}
                 required
                 value={email}
               />
@@ -92,7 +92,7 @@ function Login(): JSX.Element {
                 type='password'
                 placeholder='Password'
                 name='user-password'
-                pattern='^(?=.*[a-zA-Z])(?=.*[\d]).{2,}$'
+                pattern={RegExpSample.Password}
                 required
                 ref={passwordRef}
                 value={password}

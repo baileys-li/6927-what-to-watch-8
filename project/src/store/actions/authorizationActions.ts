@@ -43,7 +43,7 @@ export const logoutAction =
 
 /* Utils */
 
-function adaptLoginResponse(data: LoginResponse): UserState {
+export function adaptLoginResponse(data: LoginResponse): UserState {
   const adaptedData: any = {
     ...data,
     avatarURL: data['avatar_url'],

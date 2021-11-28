@@ -1,4 +1,4 @@
-const AUTH_TOKEN_KEY_NAME = 'what-to-watch';
+export const AUTH_TOKEN_KEY_NAME = 'what-to-watch';
 
 export type Token = string;
 

@@ -29,3 +29,8 @@ export const enum EndPoint {
   Login = '/login',
   Logout = '/logout'
 }
+
+export const enum RegExpSample {
+  Email = '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$',
+  Password = '^(?=.*[a-zA-Z])(?=.*[0-9]).{2,}$',
+}
