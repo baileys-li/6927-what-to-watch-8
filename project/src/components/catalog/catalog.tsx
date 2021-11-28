@@ -14,7 +14,8 @@ function Catalog({
   genres = false,
   similar = false,
 }: CatalogType): JSX.Element {
-  const [list, limit, setLimit] = useCatalog(similar ? CatalogData.SimilarLimit : CatalogData.DefaultLimit);
+  const initialLimit = similar ? CatalogData.SimilarLimit : CatalogData.DefaultLimit;
+  const [list, limit, setLimit] = useCatalog(initialLimit);
 
   return (
     <section
@@ -31,7 +32,7 @@ function Catalog({
           ? list.map(
             (movie, index) =>
               index < limit && (<SmallFilmCard movie={movie} key={movie.id} />))
-          : [...Array(4).keys()].map((key) => (
+          : [...Array(initialLimit).keys()].map((key) => (
             <SmallFilmCardSkeleton key={key} />
           ))}
       </div>

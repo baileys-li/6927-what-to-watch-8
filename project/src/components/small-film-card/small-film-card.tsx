@@ -36,7 +36,7 @@ function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
 
   return (
     <article
-      className={`${s.wrapper} ${className}`}
+      className={[s.wrapper, className].join(' ')}
       onMouseEnter={playVideo}
       onMouseLeave={stopVideo}
       onFocus={playVideo}
