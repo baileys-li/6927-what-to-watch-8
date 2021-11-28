@@ -4,11 +4,11 @@ import { RootState } from '../store/reducer';
 
 const moviesSelector = (state: RootState) => state.movies;
 
-export const filteredMovieListSelector = createSelector([moviesSelector], ({filter, list}) => {
+export const filteredMovieListSelector = createSelector([moviesSelector], ({filter, list: movies}) => {
   switch (filter) {
     case Genre.Initial:
-      return list;
+      return movies;
     default:
-      return list && list.filter((movie) => movie.genre === filter);
+      return movies && movies.filter((movie) => movie.genre === filter);
   }
 });
