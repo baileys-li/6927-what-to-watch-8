@@ -5,7 +5,7 @@ export function normalizeTextToID(text: string): string {
 export function normalizeDateTime(dateTime: string): string {
   const date = new Date(dateTime);
 
-  return date.toLocaleDateString('default', { month: 'long', day: 'numeric', year: 'numeric' });
+  return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
 export function transformSnakeToCamelCase(snake: string): string {
@@ -22,8 +22,11 @@ export function transformSnakeToCamelCase(snake: string): string {
 
 export function formatRunTime(time: number): string {
   const hours = Math.floor(time / 60);
-  let result = hours ? `${hours}h ` : '';
-  result += `${time % 60}m`;
+  let result = hours ? `${hours}h` : '';
+  const minutes = time % 60;
+
+  result += hours && minutes ? ' ' : '';
+  result += minutes ? `${minutes}m` : '';
 
   return result;
 }
