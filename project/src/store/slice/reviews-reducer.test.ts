@@ -26,6 +26,16 @@ describe('Reducer: reviews', () => {
     ).toEqual({...initialState, list: payload });
   });
 
+  it('should simulate pending new review', () => {
+    const payload = 'Fake error';
+    expect(
+      reducer(undefined, {
+        type: String(publishReview.pending),
+        payload,
+      }),
+    ).toEqual({...initialState, isLoading: true });
+  });
+
   it('should simulate rejected new reviews', () => {
     const payload = 'Fake error';
     expect(
