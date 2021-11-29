@@ -14,40 +14,36 @@ export const initialState: PromoMovieState = {
   movie: null,
 };
 
+function setMovie(state: PromoMovieState, action: PayloadAction<MovieType>) {
+  state.isLoading = false;
+  state.error = null;
+  state.movie = action.payload;
+}
+
+function setLoading(state: PromoMovieState) {
+  state.isLoading = true;
+  state.error = null;
+}
+
 const PromoMovieStore = createSlice({
   name: 'promo',
   initialState,
   reducers: {},
   extraReducers: {
-    [String(getPromoMovie.pending)]: (state) => {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [String(getPromoMovie.fulfilled)]: (state, action: PayloadAction<MovieType>) => {
-      state.isLoading = false;
-      state.error = null;
-      state.movie = action.payload;
-    },
+    [String(getPromoMovie.pending)]: setLoading,
+    [String(getPromoMovie.fulfilled)]: setMovie,
 
-    [String(getMovieByID.pending)]: (state) => {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [String(getMovieByID.fulfilled)]: (state, action: PayloadAction<MovieType>) => {
-      state.isLoading = false;
-      state.movie = action.payload;
-    },
+    [String(getMovieByID.pending)]: setLoading,
+    [String(getMovieByID.fulfilled)]: setMovie,
 
     [String(getMovieByID.rejected)]: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
 
-    [String(changeIsFavorite.fulfilled)]: (state, action: PayloadAction<MovieType>) => {
-      state.movie = action.payload;
-    },
+    [String(changeIsFavorite.fulfilled)]: setMovie,
 
-    [String(changeIsFavorite.rejected)]: (state, action: PayloadAction<MovieType>) => {
+    [String(changeIsFavorite.rejected)]: (state) => {
       state.error = 'No Auth';
     },
   },
