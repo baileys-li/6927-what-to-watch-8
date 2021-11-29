@@ -37,7 +37,7 @@ export const getMoviesList =
         const movies: MovieType[] = [];
         data.map((movie) => movies.push(adaptFromSnakeToCamel(movie)));
         dispatch(setList(movies));
-      }).catch((error) => {
+      }).catch((_error) => {
         dispatch(setList([]));
       });
   };
