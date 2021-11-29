@@ -3,7 +3,6 @@ import { createAPI } from '../../services/api';
 import MockAdapter from 'axios-mock-adapter';
 import thunk, { ThunkDispatch } from 'redux-thunk';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { State } from '../../types/state';
 import { AuthorizationStatus, EndPoint } from '../../const';
 import { checkAuthAction, loginAction } from './authorizationActions';
 import { authorization } from '../slice/userStore';
@@ -21,7 +20,7 @@ describe('Async authorization actions', () => {
   const mockStore = configureMockStore<
     RootState,
     Action,
-    ThunkDispatch<State, typeof api, Action>
+    ThunkDispatch<RootState, typeof api, Action>
   >(middlewares);
 
   it('should authorization is "auth" when server return 200', async () => {
@@ -30,7 +29,7 @@ describe('Async authorization actions', () => {
     mockAPI.onGet(EndPoint.Login).reply(200, fakeResponse);
 
     expect(store.getActions()).toEqual([]);
-    await store.dispatch(checkAuthAction() as any);
+    await store.dispatch(checkAuthAction());
 
     expect(store.getActions()).toEqual([
       authorization({
@@ -51,7 +50,7 @@ describe('Async authorization actions', () => {
 
     const store = mockStore();
     Storage.prototype.setItem = jest.fn();
-    await store.dispatch(loginAction(fakeUser) as any);
+    await store.dispatch(loginAction(fakeUser));
 
     expect(store.getActions()).toEqual(
       [authorization({
