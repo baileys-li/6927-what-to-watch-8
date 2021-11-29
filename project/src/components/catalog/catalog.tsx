@@ -2,7 +2,7 @@ import SmallFilmCard, { SmallFilmCardSkeleton } from '../small-film-card';
 import CatalogType from '../../types/catalog-type';
 import GenresList from '../genres-list/genres-list';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { filteredMovieListSelector } from '../../utils/filtered-movie-selector';
 import style from './catalog.module.scss';
 
@@ -19,6 +19,13 @@ function Catalog({
 
   const filteredMovies = useSelector(filteredMovieListSelector);
   const [limit, setLimit] = useState<number>(initialLimit);
+
+  /*
+    Are u glad? 😡
+    This behavior sucks
+  */
+
+  useEffect(() => setLimit(initialLimit), [filteredMovies]);
 
   return (
     <section
