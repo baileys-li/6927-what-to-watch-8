@@ -5,9 +5,10 @@ import Header from '../../header/header';
 
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { getMovieByID, getSimilarMoviesList } from '../../../store/actions/filmsActions';
+import { getSimilarMoviesList } from '../../../store/actions/filmsActions';
 import { useEffect } from 'react';
 import { getReviews } from '../../../store/actions/reviewsActions';
+import { getMovieByID } from '../../../store/actions/promoMovieActions';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();

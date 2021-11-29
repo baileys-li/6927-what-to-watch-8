@@ -2,7 +2,7 @@ import PromoFilm from '../../promo-film/promo-film';
 import Header from '../../header/header';
 import { useParams } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovieByID } from '../../../store/actions/filmsActions';
+import { getMovieByID } from '../../../store/actions/promoMovieActions';
 import { useEffect } from 'react';
 import { RootState } from '../../../store/reducer';
 

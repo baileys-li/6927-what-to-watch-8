@@ -2,9 +2,10 @@ import Footer from '../../footer/footer';
 import PromoFilm from '../../promo-film/promo-film';
 import Catalog from '../../catalog/catalog';
 import { useDispatch } from 'react-redux';
-import { getAllMovies, getPromoMovie } from '../../../store/actions/filmsActions';
+import { getAllMovies } from '../../../store/actions/filmsActions';
 import Header from '../../header/header';
 import { useEffect } from 'react';
+import { getPromoMovie } from '../../../store/actions/promoMovieActions';
 
 function MainPage(): JSX.Element {
   const dispatch = useDispatch();

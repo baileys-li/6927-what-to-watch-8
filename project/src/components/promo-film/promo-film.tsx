@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducer';
 import { rewriteAll } from '../../store/slice/breadcrumbsStore';
 import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 
 type PromoFilmProps = {
   full?: boolean;
@@ -25,8 +26,9 @@ function PromoFilm({
   full = false,
   review = false,
 }: PromoFilmProps): JSX.Element {
-
-  const { movie } = useSelector((state: RootState) => state.promo);
+  const { movie, error, isLoading } = useSelector(
+    (state: RootState) => state.promo,
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,8 +41,13 @@ function PromoFilm({
     }
   }, [dispatch, movie, review]);
 
-  if (movie) {
+  if (error) {
+    return <Navigate to='/404' />;
+  }
 
+  if (isLoading || movie === null) {
+    return <div>Loading...</div>;
+  } else {
     const description = (
       <MovieDescription
         movie={movie}
@@ -63,8 +70,7 @@ function PromoFilm({
 
     return (
       <section
-        className={`${style.wrapper} ${full || review ? style['wrapper--full'] : style.overlay
-        }`}
+        className={`${style.wrapper} ${full || review ? style['wrapper--full'] : style.overlay}`}
         style={
           {
             '--back-image': `url(${movie.backgroundImage})`,
@@ -89,7 +95,6 @@ function PromoFilm({
               className={`${style['film-card__wrap']} ${style['film-card__wrap--full']}`}
             >
               {poster}
-
               <Tabs navigation={NAV_ITEMS}>
                 <>
                   <MovieRating
@@ -120,8 +125,6 @@ function PromoFilm({
         )}
       </section>
     );
-  } else {
-    return (<div>Loading...</div>);
   }
 }
 

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import MovieType from '../../types/movie-type';
+import { getPromoMovie, getMovieByID } from '../actions/promoMovieActions';
 
 type PromoMovieState = {
   isLoading: boolean,
@@ -18,6 +19,33 @@ const PromoMovieStore = createSlice({
   initialState,
   reducers: {
     setMovie: (state, action: PayloadAction<MovieType>) => { state.movie = action.payload; },
+  },
+  extraReducers: {
+    [String(getPromoMovie.pending)]: (state) => {
+      state.isLoading = true;
+    },
+    [String(getPromoMovie.fulfilled)]: (state, action: PayloadAction<MovieType>) => {
+      state.isLoading = false;
+      state.movie = action.payload;
+    },
+
+    [String(getPromoMovie.rejected)]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    [String(getMovieByID.pending)]: (state) => {
+      state.isLoading = true;
+    },
+    [String(getMovieByID.fulfilled)]: (state, action: PayloadAction<MovieType>) => {
+      state.isLoading = false;
+      state.movie = action.payload;
+    },
+
+    [String(getMovieByID.rejected)]: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
   },
 });
 

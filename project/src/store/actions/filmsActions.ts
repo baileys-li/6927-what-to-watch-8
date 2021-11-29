@@ -41,20 +41,6 @@ export const getMoviesList =
       });
   };
 
-
-export const getPromoMovie = (): ThunkActionResult => getMovie(EndPoint.Promo);
-export const getMovieByID = (id: number | string): ThunkActionResult => getMovie(`${EndPoint.Films}/${id}`);
-
-
-export const getMovie =
-  (endPoint: string): ThunkActionResult =>
-    async (dispatch, _getState, api) => {
-      await api.get<ServerResponseMovieType>(endPoint).then(({ data }) => {
-        dispatch(setMovie(adaptFromSnakeToCamel(data)));
-      });
-    };
-
-
 export const changeIsFavorite =
     (id: number, status: number): ThunkActionResult =>
       async (dispatch, _getState, api) => {
