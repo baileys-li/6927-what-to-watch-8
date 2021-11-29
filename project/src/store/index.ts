@@ -1,6 +1,6 @@
 import rootReducer from './reducer';
 import { createAPI } from '../services/api';
-import { logout } from './slice/userStore';
+import { logout } from './slice/user-store';
 import { configureStore } from '@reduxjs/toolkit';
 
 const api = createAPI(

@@ -2,10 +2,10 @@ import Footer from '../../footer/footer';
 import PromoFilm from '../../promo-film/promo-film';
 import Catalog from '../../catalog/catalog';
 import { useDispatch } from 'react-redux';
-import { getAllMovies } from '../../../store/actions/filmsActions';
+import { getAllMovies } from '../../../store/actions/films-actions';
 import Header from '../../header/header';
 import { useEffect } from 'react';
-import { getPromoMovie } from '../../../store/actions/promoMovieActions';
+import { getPromoMovie } from '../../../store/actions/promo-movie-actions';
 
 function MainPage(): JSX.Element {
   const dispatch = useDispatch();

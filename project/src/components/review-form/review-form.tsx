@@ -2,7 +2,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import { RootState } from '../../store/reducer';
-import { publishReview } from '../../store/actions/reviewsActions';
+import { publishReview } from '../../store/actions/reviews-actions';
 import style from './review-form.module.scss';
 
 const STARS = [...Array(11).keys()].slice(1);

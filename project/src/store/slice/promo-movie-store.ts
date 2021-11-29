@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import MovieType from '../../types/movie-type';
-import { getPromoMovie, getMovieByID } from '../actions/promoMovieActions';
+import { getPromoMovie, getMovieByID, changeIsFavorite } from '../actions/promo-movie-actions';
 
 type PromoMovieState = {
   isLoading: boolean,
@@ -8,7 +8,7 @@ type PromoMovieState = {
   movie: MovieType | null
 };
 
-const initialState: PromoMovieState = {
+export const initialState: PromoMovieState = {
   isLoading: false,
   error: null,
   movie: null,
@@ -17,25 +17,21 @@ const initialState: PromoMovieState = {
 const PromoMovieStore = createSlice({
   name: 'promo',
   initialState,
-  reducers: {
-    setMovie: (state, action: PayloadAction<MovieType>) => { state.movie = action.payload; },
-  },
+  reducers: {},
   extraReducers: {
     [String(getPromoMovie.pending)]: (state) => {
       state.isLoading = true;
+      state.error = null;
     },
     [String(getPromoMovie.fulfilled)]: (state, action: PayloadAction<MovieType>) => {
       state.isLoading = false;
+      state.error = null;
       state.movie = action.payload;
-    },
-
-    [String(getPromoMovie.rejected)]: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
     },
 
     [String(getMovieByID.pending)]: (state) => {
       state.isLoading = true;
+      state.error = null;
     },
     [String(getMovieByID.fulfilled)]: (state, action: PayloadAction<MovieType>) => {
       state.isLoading = false;
@@ -46,8 +42,15 @@ const PromoMovieStore = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+
+    [String(changeIsFavorite.fulfilled)]: (state, action: PayloadAction<MovieType>) => {
+      state.movie = action.payload;
+    },
+
+    [String(changeIsFavorite.rejected)]: (state, action: PayloadAction<MovieType>) => {
+      state.error = 'No Auth';
+    },
   },
 });
 
-export const { setMovie } = PromoMovieStore.actions;
 export default PromoMovieStore.reducer;

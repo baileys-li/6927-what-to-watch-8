@@ -2,7 +2,7 @@ import Header from '../../header/header';
 import Catalog from '../../catalog/catalog';
 import Footer from '../../footer/footer';
 import { useDispatch } from 'react-redux';
-import { getFavorites } from '../../../store/actions/filmsActions';
+import { getFavorites } from '../../../store/actions/films-actions';
 import { useEffect } from 'react';
 
 

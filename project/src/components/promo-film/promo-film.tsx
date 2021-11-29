@@ -11,7 +11,7 @@ import style from './promo-film.module.scss';
 import type LinkType from '../../types/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducer';
-import { rewriteAll } from '../../store/slice/breadcrumbsStore';
+import { rewriteAll } from '../../store/slice/breadcrumbs-store';
 import { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 

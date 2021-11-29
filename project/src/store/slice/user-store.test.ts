@@ -1,6 +1,6 @@
 import faker from 'faker';
 import { AuthorizationStatus } from '../../const';
-import reducer, { initialState } from './userStore';
+import reducer, { initialState } from './user-store';
 
 describe('Reducer: user', () => {
   it('without any parameters should return initial state', () => {

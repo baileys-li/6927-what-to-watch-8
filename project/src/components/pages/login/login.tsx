@@ -10,10 +10,10 @@ import {
   useState
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginAction } from '../../../store/actions/authorizationActions';
+import { loginAction } from '../../../store/actions/authorization-actions';
 import { useNavigate } from 'react-router';
 import { RootState } from '../../../store/reducer';
-import { setError } from '../../../store/slice/userStore';
+import { setError } from '../../../store/slice/user-store';
 import useUserData from '../../../hooks/useUserData';
 import { AppRoute, AuthorizationStatus, LoginFormRegExps } from '../../../const';
 

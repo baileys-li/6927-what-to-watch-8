@@ -4,7 +4,7 @@ import { dropToken, saveToken } from '../../services/token';
 import { AuthData } from '../../types/auth-data';
 import LoginResponse from '../../types/loginResponse';
 import { ThunkActionResult } from '../../types/thunk-action';
-import { authorization, logout, setError } from '../slice/userStore';
+import { authorization, logout, setError } from '../slice/user-store';
 
 /* Async Actions */
 export const checkAuthAction =

@@ -4,8 +4,7 @@ import MovieType, { ServerResponseMovieType } from '../../types/movie-type';
 import { ThunkActionResult } from '../../types/thunk-action';
 import { adaptFromSnakeToCamel } from '../../utils/adapter';
 
-import { setList, setGenres } from '../slice/filmsStore';
-import { setMovie } from '../slice/promoMovieStore';
+import { setList, setGenres } from '../slice/films-store';
 
 /* Async Actions */
 export const getAllMovies =
@@ -38,13 +37,9 @@ export const getMoviesList =
         const movies: MovieType[] = [];
         data.map((movie) => movies.push(adaptFromSnakeToCamel(movie)));
         dispatch(setList(movies));
+      }).catch((error) => {
+        dispatch(setList([]));
       });
   };
 
-export const changeIsFavorite =
-    (id: number, status: number): ThunkActionResult =>
-      async (dispatch, _getState, api) => {
-        await api.post<ServerResponseMovieType>(`${EndPoint.Favorite}/${id}/${status}`).then(({ data }) => {
-          dispatch(setMovie(adaptFromSnakeToCamel(data)));
-        });
-      };
+

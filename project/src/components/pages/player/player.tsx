@@ -2,7 +2,7 @@ import { CSSProperties, FormEvent, SyntheticEvent, useEffect, useRef, useState }
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router';
 import { AppRoute } from '../../../const';
-import { getMovieByID } from '../../../store/actions/promoMovieActions';
+import { getMovieByID } from '../../../store/actions/promo-movie-actions';
 import { RootState } from '../../../store/reducer';
 import { formatTime } from '../../../utils/utils';
 import SpriteIcon from '../../sprite-icon/sprite-icon';

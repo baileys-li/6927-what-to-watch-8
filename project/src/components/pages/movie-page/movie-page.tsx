@@ -5,10 +5,10 @@ import Header from '../../header/header';
 
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { getSimilarMoviesList } from '../../../store/actions/filmsActions';
+import { getSimilarMoviesList } from '../../../store/actions/films-actions';
 import { useEffect } from 'react';
-import { getReviews } from '../../../store/actions/reviewsActions';
-import { getMovieByID } from '../../../store/actions/promoMovieActions';
+import { getReviews } from '../../../store/actions/reviews-actions';
+import { getMovieByID } from '../../../store/actions/promo-movie-actions';
 
 function MoviePage(): JSX.Element {
   const { id } = useParams();

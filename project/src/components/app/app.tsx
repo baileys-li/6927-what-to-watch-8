@@ -15,7 +15,7 @@ import '../../sass/global.scss';
 import useUserData from '../../hooks/useUserData';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { checkAuthAction } from '../../store/actions/authorizationActions';
+import { checkAuthAction } from '../../store/actions/authorization-actions';
 
 function App(): JSX.Element {
   const { status } = useUserData();

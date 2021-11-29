@@ -6,10 +6,10 @@ import MovieType from '../../types/movie-type';
 type FilmsState = {
   list: MovieType[] | null;
   filter: string;
-  genres: GenreType[] | null
+  genres: GenreType[] | null,
 }
 
-const initialState: FilmsState = {
+export const initialState: FilmsState = {
   list: null,
   filter: Genre.Initial,
   genres: null,

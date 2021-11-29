@@ -5,7 +5,7 @@ type NavigationState = {
   list: LinkType[] | null;
 }
 
-const initialState: NavigationState = {
+export const initialState: NavigationState = {
   list: null,
 };
 

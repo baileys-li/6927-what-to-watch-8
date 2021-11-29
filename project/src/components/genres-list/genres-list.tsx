@@ -1,7 +1,7 @@
 import style from './genres-list.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../store/reducer';
-import { setFilter } from '../../store/slice/filmsStore';
+import { setFilter } from '../../store/slice/films-store';
 
 function GenresList(): JSX.Element {
   const { filter, genres } = useSelector((state: RootState) => state.movies);

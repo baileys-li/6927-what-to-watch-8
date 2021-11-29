@@ -6,7 +6,7 @@ import { configureMockStore } from '@jedmao/redux-mock-store';
 import { RootState } from '../reducer';
 import generateMockReview from '../../mock/review-mock';
 import faker from 'faker';
-import { getReviews, publishReview } from './reviewsActions';
+import { getReviews, publishReview } from './reviews-actions';
 
 describe('Async get reviews action', () => {
   const onFakeUnathorized = jest.fn();

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import ReviewType from '../../types/review-type';
-import { getReviews, publishReview } from '../actions/reviewsActions';
+import { getReviews, publishReview } from '../actions/reviews-actions';
 
 type ReviewsState = {
   list: ReviewType[];
@@ -9,7 +9,7 @@ type ReviewsState = {
   error: string | undefined;
 };
 
-const initialState: ReviewsState = {
+export const initialState: ReviewsState = {
   list: [],
   isLoading: false,
   isSuccess: false,
