@@ -26,21 +26,21 @@ function SmallFilmCard({ movie, className }: SmallFilmCardProps): JSX.Element {
     };
   }, [isPlaying]);
 
-  function playVideo() {
+  function handlePlayVideo() {
     setPlaying(true);
   }
 
-  function stopVideo() {
+  function handleStopVideo() {
     setPlaying(false);
   }
 
   return (
     <article
       className={[s.wrapper, className].join(' ')}
-      onMouseEnter={playVideo}
-      onMouseLeave={stopVideo}
-      onFocus={playVideo}
-      onBlur={stopVideo}
+      onMouseEnter={handlePlayVideo}
+      onMouseLeave={handleStopVideo}
+      onFocus={handlePlayVideo}
+      onBlur={handleStopVideo}
     >
       <video
         className={s.image}

@@ -18,7 +18,7 @@ export default function generateMockMovie(): MovieType {
     backgroundImage: faker.random.image(),
     backgroundColor: '#fff',
     videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
-    previewVideoLink: faker.random.image(),
+    previewVideoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     scoresCount: faker.datatype.number(200),
     runTime: faker.datatype.number(200),
     isFavorite: faker.datatype.boolean(),
